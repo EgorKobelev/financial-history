@@ -1,0 +1,20 @@
+.categories__container {
+    padding: 24px 32px 16px 32px;
+    background-color: white;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+}
+
+.categories__title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.categories__card_container {
+    display: flex;
+    flex-wrap: wrap;
+}

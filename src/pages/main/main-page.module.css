@@ -1,0 +1,15 @@
+.main_page__container {
+    min-width: 717px;
+    max-width: 717px;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    background: #99bcff;
+    padding: 16px;
+    margin-bottom: 50px;
+    margin-right: 16px;
+}
+
+.main_page__operations {
+    width: 100%;
+}

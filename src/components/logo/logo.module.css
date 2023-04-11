@@ -1,0 +1,16 @@
+.logo {
+  padding: 16px;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  border: var(--border);
+  border-radius: 12px;
+  width: 157px;
+  display: flex;
+  justify-content: center;
+}
+
+.logo__text {
+  font-size: 16px;
+  line-height: 20px;
+  user-select: none;
+}

@@ -1,0 +1,36 @@
+.operations__container {
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    background-color: white;
+    border: var(--border);
+}
+
+.operations__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-bottom: solid black 2px;
+}
+
+.list__text {
+    display: block;
+    width: 75%;
+}
+
+.list__images {
+    cursor: pointer;
+}
+
+.operations__list_item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.list__images__first_image {
+    margin-right: 10px;
+}

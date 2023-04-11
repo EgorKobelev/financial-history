@@ -1,0 +1,20 @@
+.active {
+    background: #dcdcdc;
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+    font-weight: 600;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+        "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    cursor: pointer;
+}
+
+.inactive {
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+    font-weight: 600;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+        "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    cursor: pointer;
+}

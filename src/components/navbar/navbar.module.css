@@ -1,0 +1,16 @@
+.navbar__container {
+    padding: 16px;
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    border: var(--border);
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    width: 157px;
+    margin-right: 16px;
+}
+
+.navbar__item:not(:last-child) {
+    margin-bottom: 8px;
+}

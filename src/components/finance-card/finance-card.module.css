@@ -1,0 +1,30 @@
+.card__container {
+    padding: 16px;
+    border: 1px solid #cccccc;
+    box-shadow: var(--box-shadow);
+    width: 184px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.card__title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 32px;
+}
+
+.card__balance {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.card__desc {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #767676;
+    text-align: center;
+}

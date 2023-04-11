@@ -1,0 +1,22 @@
+.profile_link__container {
+    padding: 8px 12px;
+    box-shadow: var(--box-shadow);
+    background-color: white;
+    border: var(--border);
+    border-radius: 12px;
+    display: flex;
+}
+
+.avatar__container {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: lightgray;
+    margin-right: 8px;
+}
+
+.profile_link__user {
+    margin-right: 48px;
+    display: flex;
+    align-items: center;
+}
