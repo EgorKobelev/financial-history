@@ -6,6 +6,11 @@
     border-radius: 15px;
     cursor: pointer;
     margin-bottom: 8px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.card__container:hover {
+    background-color: var(--dark-hover-background);
 }
 
 .card__title {

@@ -3,11 +3,16 @@ import styles from "./register-page.module.css";
 import isValidEmail from "../../utils/validEmail";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux"
+import {register} from "../../services/actions/user";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
+        dispatch(register({email: values.email, password: values.password, name: values.name }))
+
     };
     const handleLogin = () => {
         navigate("/login");

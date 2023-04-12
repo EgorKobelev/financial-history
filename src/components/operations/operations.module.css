@@ -29,7 +29,15 @@
     font-weight: 600;
     font-size: 14px;
     line-height: 17px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
 }
+
+.operations__list_item:hover {
+    background-color: var(--dark-hover-background);
+}
+
+
 
 .list__images__first_image {
     margin-right: 10px;

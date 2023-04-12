@@ -5,6 +5,14 @@
     border: var(--border);
     border-radius: 12px;
     display: flex;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+
+}
+
+
+.profile_link__container:hover {
+    background-color: var(--dark-hover-background);
 }
 
 .avatar__container {

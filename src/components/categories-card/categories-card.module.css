@@ -9,6 +9,11 @@
     border-radius: 15px;
     cursor: pointer;
     margin: 0 18px 8px 0;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.categories_card__container:hover {
+    background-color: var(--dark-hover-background);
 }
 
 .categories_card__container:nth-child(4n) {

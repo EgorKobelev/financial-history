@@ -7,8 +7,17 @@
   width: 157px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+  "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  transition: background-color 0.2s ease-in-out;
 }
 
+.logo:hover {
+  background-color: var(--dark-hover-background);
+
+}
 .logo__text {
   font-size: 16px;
   line-height: 20px;
