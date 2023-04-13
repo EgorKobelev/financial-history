@@ -15,9 +15,10 @@ const userSlice = createSlice({
     reducers: {
         clearUser(state) {
             state.user = null
-        },
-        updateUser(state, action) {
-            state.user = action.payload;
+            state.status =   {
+                isLoading: false,
+                fetchUserFailed: false,
+            }
         },
     },
     extraReducers: (builder) => {
@@ -58,6 +59,6 @@ const userSlice = createSlice({
     }
 });
 
-export const { fetchUserLoading, fetchUserSucces, clearUser, updateUser } = userSlice.actions;
+export const { clearUser } = userSlice.actions;
 
 export default userSlice.reducer;
