@@ -19,8 +19,8 @@ export class AuthService {
     }
 
     static async tokenLogin() {
-        return await $api.post("signinWithAccess")
+        return await $api.post("signinWithAccess", null, {withCredentials: true})
     }
 
     static async logout() {
-        return await $api.post("signout"), {}, {withCredentials: true}}}
+        return await $api.post("signout"), null, {withCredentials: true}}}

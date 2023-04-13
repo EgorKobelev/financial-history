@@ -7,16 +7,14 @@ import RegisterPage from "../../pages/register/register-page";
 import LoginPage from "../../pages/login-page/login-page";
 import Profile from "../../pages/profile/profile";
 import {useDispatch} from "react-redux";
-import {AuthService} from "../../utils/auth-service";
 import ProtectedRoute from "../protected-route/protected-route";
+import {loginWithToken} from "../../services/actions/user";
 
 const App = () => {
     const dispatch = useDispatch()
-    const g =  async () => {
-        // const b = await AuthService.tokenLogin()
-        // console.log(b)
-    }
-    React.useEffect(() => {g()}, [])
+    React.useEffect(() => {
+        dispatch(loginWithToken())
+    }, [])
     return (
         <ErrorBoundary>
             <Routes>

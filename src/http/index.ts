@@ -5,7 +5,7 @@ export const API_URL = 'http://localhost:5216/api/v1/public/Authorize/'
 
 const $api = axios.create(
     {
-        //withCredentials: true,
+        // withCredentials: true,
     baseURL: API_URL,
     headers: {
         Accept: 'application/json'
@@ -15,7 +15,7 @@ const $api = axios.create(
 )
 
  $api.interceptors.request.use((config) => {
-    config.headers.token = (localStorage.getItem('accessToken') || ' ')
+    config.headers.token = localStorage.getItem('accessToken')
     return config
  })
 

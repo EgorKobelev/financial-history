@@ -21,7 +21,6 @@ export const login = createAsyncThunk(
     'userReducer/login',
     async function (form, { rejectWithValue, dispatch }) {
         const { email, password } = form
-        console.log(email, password)
         try {
             const { data } = await AuthService.login(email, password)
             localStorage.setItem('accessToken', data.accessToken)
@@ -36,7 +35,6 @@ export const logout = createAsyncThunk(
     'userReducer/logout',
     async function (ars,{ rejectWithValue, dispatch }) {
         try {
-            console.log(123)
             await AuthService.logout()
             dispatch(clearUser())
             localStorage.clear()
@@ -51,7 +49,6 @@ export const loginWithToken = createAsyncThunk(
     async function (ars, { rejectWithValue, dispatch }) {
         try {
             const { data } = await AuthService.tokenLogin()
-            console.log(123)
             localStorage.setItem('accessToken', data.accessToken)
             return {name: data.name,email:  data.email}
         } catch (e) {
