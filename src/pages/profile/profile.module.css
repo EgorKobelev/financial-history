@@ -92,6 +92,7 @@
 .profile__button__exit {
     color: black;
     background-color: white;
+    cursor: pointer;
 }
 
 .profile__text_cocntainer {

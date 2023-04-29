@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {register, login, loginWithToken} from "../actions/user";
+import { register, login, loginWithToken } from "../actions/user";
 
 const initialState = {
-    user: null,
+    user: "Егор",
     status: {
         isLoading: false,
         fetchUserFailed: false,
@@ -14,17 +14,17 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         clearUser(state) {
-            state.user = null
-            state.status =   {
+            state.user = null;
+            state.status = {
                 isLoading: false,
                 fetchUserFailed: false,
-            }
+            };
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(register.pending, (state) => {
-                state.status.isLoading = true
+                state.status.isLoading = true;
             })
             .addCase(register.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -35,7 +35,7 @@ const userSlice = createSlice({
                 state.status.isLoading = false;
             })
             .addCase(login.pending, (state) => {
-                state.status.isLoading = true
+                state.status.isLoading = true;
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -46,7 +46,7 @@ const userSlice = createSlice({
                 state.status.isLoading = false;
             })
             .addCase(loginWithToken.pending, (state) => {
-                state.status.isLoading = true
+                state.status.isLoading = true;
             })
             .addCase(loginWithToken.fulfilled, (state, action) => {
                 state.user = action.payload;
@@ -55,8 +55,8 @@ const userSlice = createSlice({
             .addCase(loginWithToken.rejected, (state, action) => {
                 state.status.fetchUserFailed = true;
                 state.status.isLoading = false;
-            })
-    }
+            });
+    },
 });
 
 export const { clearUser } = userSlice.actions;

@@ -6,24 +6,26 @@ import MainPage from "../../pages/main/main-page";
 import RegisterPage from "../../pages/register/register-page";
 import LoginPage from "../../pages/login-page/login-page";
 import Profile from "../../pages/profile/profile";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import ProtectedRoute from "../protected-route/protected-route";
-import {loginWithToken} from "../../services/actions/user";
+import { loginWithToken } from "../../services/actions/user";
+import StatisticPage from "../../pages/statistic-page/statistic-page";
 
 const App = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(loginWithToken())
-    }, [])
+        dispatch(loginWithToken());
+    }, []);
     return (
         <ErrorBoundary>
             <Routes>
-                <Route path="/" element={<ProtectedRoute anonymous={false} element={<Base />}/>}>
+                <Route path="/" element={<Base />}>
                     <Route index element={<MainPage />} />
                     <Route path="profile" element={<Profile />} />
                 </Route>
-                <Route path="/register"  element={<ProtectedRoute anonymous={true} element={<RegisterPage />}/>} />
-                <Route path="/login" element={<ProtectedRoute anonymous={true} element={<LoginPage />}/>} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/statistics" element={<StatisticPage />} />
             </Routes>
         </ErrorBoundary>
     );

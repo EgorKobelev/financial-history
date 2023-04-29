@@ -3,15 +3,22 @@ import styles from "./profile.module.css";
 import { useForm } from "../../hooks/useForm";
 import isValidEmail from "../../utils/validEmail";
 
+const initialValues = {
+    email: "",
+    password: "",
+    name: "",
+};
+
 const Profile = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
     };
-    const { values, handleChange } = useForm({
-        email: "",
-        password: "",
-        name: "",
-    });
+    const { values, handleChange, setValues } = useForm({ ...initialValues });
+
+    const handleDisable = () => {
+        setValues({ ...initialValues });
+    };
+
     return (
         <div className={styles.profile__container}>
             <h2 className={styles.profile__title}>Профиль</h2>
@@ -45,14 +52,19 @@ const Profile = () => {
                     name="password"
                 />
                 <div>
-                    <button className={`${styles.profile__button} ${styles.profile__button__exit}`}>Отменить</button>
+                    <button
+                        onClick={handleDisable}
+                        className={`${styles.profile__button} ${styles.profile__button__exit}`}
+                    >
+                        Отменить
+                    </button>
                     <button
                         className={`${styles.profile__button} ${
                             values.email.length > 0 &&
                             values.name.length > 1 &&
                             isValidEmail(values.email) &&
                             values.password.length > 6
-                                ? styles.login__button_active
+                                ? styles.profile__button_active
                                 : null
                         }`}
                         type="submit"

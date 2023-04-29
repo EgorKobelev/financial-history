@@ -1,0 +1,18 @@
+.statistic__slider {
+    height: 200px;
+    width: 1200px;
+    background-color: white;
+    margin: 0 auto;
+    background-color: lightblue;
+}
+
+.pagination {
+    background-color: darkgoldenrod;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.swiper-pagination-bullet {
+    background-color: red;
+}
