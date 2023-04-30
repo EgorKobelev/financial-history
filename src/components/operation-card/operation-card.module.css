@@ -1,22 +1,3 @@
-.operations__container {
-    box-shadow: var(--box-shadow);
-    border-radius: 15px;
-    background-color: white;
-    border: var(--border);
-}
-
-.operations__container:not(:last-child) {
-    margin-bottom: 44px;
-}
-
-.operations__header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border-bottom: solid black 2px;
-}
-
 .list__text {
     display: block;
     width: 75%;

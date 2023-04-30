@@ -18,7 +18,7 @@ const CategoriesCard = ({ title, image }) => {
             </div>
             {modalActive && (
                 <Modal title={title} handleToggleModal={handleToggleModal}>
-                    <CategoryOperationModal image={image} />
+                    <CategoryOperationModal isCreateNewCategory={true} image={image} />
                 </Modal>
             )}
         </>

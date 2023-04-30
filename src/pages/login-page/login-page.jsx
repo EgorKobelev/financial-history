@@ -2,16 +2,14 @@ import React from "react";
 import styles from "./login-page.module.css";
 import isValidEmail from "../../utils/validEmail";
 import { useForm } from "../../hooks/useForm";
-import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {login} from "../../services/actions/user";
+import { useDispatch } from "react-redux";
+import { login } from "../../services/actions/user";
 
 const LoginPage = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(login(values))
+        dispatch(login(values));
     };
     const { values, handleChange } = useForm({
         email: "",

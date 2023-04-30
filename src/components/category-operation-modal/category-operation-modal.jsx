@@ -2,19 +2,18 @@ import React, { FC } from "react";
 import styles from "./category-operation-modal.module.css";
 import { useForm } from "../../hooks/useForm";
 
-const initialValues = {
-    sum: "",
-    date: "",
-};
-
-const CategoryOperationModal = ({ image }) => {
+const CategoryOperationModal = ({ image, isCreateNewCategory = false, sum = "", date = "" }) => {
     const { values, handleChange, setValues } = useForm({
-        ...initialValues,
+        sum: sum,
+        date: date,
     });
 
     const handleDisable = (e) => {
         e.preventDefault();
-        setValues({ ...initialValues });
+        setValues({
+            sum: sum,
+            date: date,
+        });
     };
 
     return (
@@ -34,7 +33,7 @@ const CategoryOperationModal = ({ image }) => {
                     className={styles.categories_card__input}
                     onChange={handleChange}
                     value={values.date}
-                    placeholder="Введите Сумму"
+                    placeholder="Введите Дату"
                     type="date"
                     name="date"
                 />
@@ -47,7 +46,9 @@ const CategoryOperationModal = ({ image }) => {
                     </button>
                     <button
                         className={`${styles.categories_card__button} ${
-                            values.sum !== "" && values.date !== "" ? styles.categories_card__button_active : null
+                            /^\d+$/.test(values.sum) && parseInt(values.sum) > 0 && values.date !== ""
+                                ? styles.categories_card__button_active
+                                : null
                         }`}
                         type="submit"
                     >

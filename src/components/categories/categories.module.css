@@ -4,7 +4,7 @@
     border: var(--border);
     box-shadow: var(--box-shadow);
     border-radius: 15px;
-    overflow-y: scroll;
+    overflow-y: auto;
     scrollbar-width: thin;
     height: 460px;
 }
@@ -31,11 +31,11 @@
     width: 140px;
     border-radius: 15px;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
 .categories__card_container:hover {
-    background-color: var(--dark-hover-background);
+    transform: scale(1.1);
 }
 
 .categories__card_image {

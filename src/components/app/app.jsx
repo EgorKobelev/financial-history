@@ -19,13 +19,20 @@ const App = () => {
     return (
         <ErrorBoundary>
             <Routes>
-                <Route path="/" element={<Base />}>
+                <Route path="/" element={<ProtectedRoute anonymous={false} element={<Base />} />}>
+                    <Route index element={<MainPage />} />
+                    <Route path="profile" element={<Profile />} />
+                </Route>
+                <Route path="/register" element={<ProtectedRoute anonymous={true} element={<RegisterPage />} />} />
+                <Route path="/login" element={<ProtectedRoute anonymous={true} element={<LoginPage />} />} />
+
+                {/* <Route path="/" element={<Base />}>
                     <Route index element={<MainPage />} />
                     <Route path="profile" element={<Profile />} />
                 </Route>
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/statistics" element={<StatisticPage />} />
+                <Route path="/statistics" element={<StatisticPage />} /> */}
             </Routes>
         </ErrorBoundary>
     );

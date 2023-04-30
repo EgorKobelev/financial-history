@@ -27,7 +27,7 @@ const AddingCategoryModal = () => {
                     className={styles.categories_card__input}
                     onChange={handleChange}
                     value={values.sum}
-                    placeholder="Введите Сумму"
+                    placeholder="Введите Название"
                     type="text"
                     name="sum"
                 />
