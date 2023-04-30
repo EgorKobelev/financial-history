@@ -2,30 +2,32 @@ import React from "react";
 import styles from "./categories.module.css";
 import CategoriesCard from "../categories-card/categories-card";
 import icon from "../../images/categories/circle.svg";
+import Modal from "../modal/modal";
+import addButton from "../../images/add-button.svg";
+import AddingCategoryModal from "../adding-category-modal/adding-category-modal";
 
-const data = [
-    { title: "Продукты" },
-    { title: "Развлечения" },
-    { title: "Еда вне дома" },
-    { title: "Транспорт" },
-    { title: "Образование" },
-    { title: "Спорт" },
-    { title: "Подарки" },
-    { title: "Здоровье" },
-    { title: "Покупки" },
-    { title: "ЖКХ" },
-    { title: "Связь" },
-];
+const Categories = ({ data, title }) => {
+    const [modalActive, setModalActive] = React.useState(false);
+    const handleToggleModal = () => {
+        setModalActive(!modalActive);
+    };
 
-const Categories = () => {
     return (
         <div className={styles.categories__container}>
-            <h2 className={styles.categories__title}>Категории</h2>
-            <div className={styles.categories__card_container}>
+            <h2 className={styles.categories__title}>{title}</h2>
+            <div className={styles.categories__cards_container}>
                 {data.map((element, index) => (
                     <CategoriesCard key={index} title={element.title} image={icon} />
                 ))}
+                <div onClick={handleToggleModal} className={styles.categories__card_container}>
+                    <img src={addButton} className={styles.categories__card_image} alt="Категория" />
+                </div>
             </div>
+            {modalActive && (
+                <Modal title={"Добавить категорию"} handleToggleModal={handleToggleModal}>
+                    <AddingCategoryModal />
+                </Modal>
+            )}
         </div>
     );
 };

@@ -31,6 +31,10 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.login__input:focus {
+    background-color: lightgray;
+}
+
 .login__input:not(:last-child) {
     margin-bottom: 24px;
 }
@@ -63,14 +67,23 @@
     cursor: pointer;
 }
 
+.login__button_active:hover {
+    background-color: var(--hover-background-color-button);
+}
+
 .login__text_cocntainer {
-    width: 240px;
+    max-width: 240px;
     font-weight: 400;
     font-size: 15px;
     line-height: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+}
+
+.login__text_cocntainer:hover {
+    border-bottom: solid 1px black;
 }
 
 .login__link {

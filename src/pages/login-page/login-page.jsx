@@ -2,12 +2,14 @@ import React from "react";
 import styles from "./login-page.module.css";
 import isValidEmail from "../../utils/validEmail";
 import { useForm } from "../../hooks/useForm";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../services/actions/user";
 
 const LoginPage = () => {
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
+        dispatch(login(values));
     };
     const { values, handleChange } = useForm({
         email: "",
@@ -35,7 +37,7 @@ const LoginPage = () => {
                 />
                 <button
                     className={`${styles.login__button} ${
-                        values.email.length > 0 && isValidEmail(values.email) && values.password.length > 6
+                        values.email.length > 0 && isValidEmail(values.email) && values.password.length > 5
                             ? styles.login__button_active
                             : null
                     }`}

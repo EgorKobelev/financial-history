@@ -92,6 +92,7 @@
 .profile__button__exit {
     color: black;
     background-color: white;
+    cursor: pointer;
 }
 
 .profile__text_cocntainer {
@@ -109,4 +110,15 @@
     padding: 0;
     font-weight: 600;
     cursor: pointer;
+}
+
+.profile__edit_image {
+    position: absolute;
+    top: 25%;
+    cursor: pointer;
+    right: 5%;
+}
+
+.input__container {
+    position: relative;
 }

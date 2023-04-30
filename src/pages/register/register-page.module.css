@@ -31,6 +31,10 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.register__input:focus {
+    background-color: lightgray;
+}
+
 .register__input:not(:last-child) {
     margin-bottom: 24px;
 }
@@ -71,6 +75,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+}
+
+.register__text_cocntainer:hover {
+    border-bottom: solid 1px black;
 }
 
 .register__link {
@@ -78,4 +87,8 @@
     padding: 0;
     font-weight: 600;
     cursor: pointer;
+}
+
+.register__button_active:hover {
+    background-color: var(--hover-background-color-button);
 }
