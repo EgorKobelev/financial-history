@@ -28,9 +28,8 @@ export const update = createAsyncThunk("userReducer/update", async function (for
     const { email, password, currentPassword, name } = form;
     try {
         const { data } = await AuthService.update(email, currentPassword, password, name);
-        console.log(data);
         localStorage.setItem("accessToken", data.accessToken);
-        return { name: data.name, email: data.email };
+        return { name: form.name, email: form.email };
     } catch (e) {
         return rejectWithValue("Ощибка при авторизации");
     }

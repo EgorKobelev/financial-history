@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import ProtectedRoute from "../protected-route/protected-route";
 import { loginWithToken } from "../../services/actions/user";
 import StatisticPage from "../../pages/statistic-page/statistic-page";
+import NotFoundPage from "../../pages/not-found-page/not-found-page";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const App = () => {
                 </Route>
                 <Route path="/register" element={<ProtectedRoute anonymous={true} element={<RegisterPage />} />} />
                 <Route path="/login" element={<ProtectedRoute anonymous={true} element={<LoginPage />} />} />
-
+                <Route path="*" element={<NotFoundPage />} />
                 {/* <Route path="/" element={<Base />}>
                     <Route index element={<MainPage />} />
                     <Route path="profile" element={<Profile />} />

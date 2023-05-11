@@ -1,19 +1,29 @@
 import styles from "./adding-category-modal.module.css";
 import { useForm } from "../../hooks/useForm";
+import { useDispatch } from "react-redux";
+import { createCategory } from "../../services/actions/category";
 
 const initialValues = {
-    sum: "",
-    category: "",
+    name: "",
+    type: "",
 };
 
-const AddingCategoryModal = () => {
+const AddingCategoryModal = ({ handleToggleModal }) => {
     const { values, handleChange, setValues } = useForm({
         ...initialValues,
     });
 
+    const dispatch = useDispatch();
+
     const handleDisable = (e) => {
         e.preventDefault();
         setValues({ ...initialValues });
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createCategory(values));
+        handleToggleModal();
     };
 
     return (
@@ -22,26 +32,26 @@ const AddingCategoryModal = () => {
                 <div className={styles.categories_card__avatar}></div>
                 <button className={styles.categories_card__avatar_button}>Выбрать иконку</button>
             </div>
-            <form>
+            <form onSubmit={onSubmit}>
                 <input
                     className={styles.categories_card__input}
                     onChange={handleChange}
-                    value={values.sum}
+                    value={values.name}
                     placeholder="Введите Название"
                     type="text"
-                    name="sum"
+                    name="name"
                 />
                 <select
                     onChange={(e) => handleChange(e)}
-                    value={values.category}
+                    value={values.type}
                     className={styles.categories_card__select}
-                    name="category"
+                    name="type"
                 >
                     <option value="" disabled selected hidden>
                         Выберите группу
                     </option>
-                    <option value="доходы">Доходы</option>
-                    <option value="расходы">Расходы</option>
+                    <option value="income">Доходы</option>
+                    <option value="expenses">Расходы</option>
                 </select>
                 <div className="flex">
                     <button

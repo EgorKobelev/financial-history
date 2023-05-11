@@ -17,7 +17,7 @@ const Categories = ({ data, title }) => {
             <h2 className={styles.categories__title}>{title}</h2>
             <div className={styles.categories__cards_container}>
                 {data.map((element, index) => (
-                    <CategoriesCard key={index} title={element.title} image={icon} />
+                    <CategoriesCard key={index} title={element.name} image={icon} id={element.id} sum={element.sum} />
                 ))}
                 <div onClick={handleToggleModal} className={styles.categories__card_container}>
                     <img src={addButton} className={styles.categories__card_image} alt="Категория" />
@@ -25,7 +25,7 @@ const Categories = ({ data, title }) => {
             </div>
             {modalActive && (
                 <Modal title={"Добавить категорию"} handleToggleModal={handleToggleModal}>
-                    <AddingCategoryModal />
+                    <AddingCategoryModal handleToggleModal={handleToggleModal} />
                 </Modal>
             )}
         </div>

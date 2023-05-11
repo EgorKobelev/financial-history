@@ -4,14 +4,12 @@ export class CategoryService {
     static async getAllCategories() {
         return await $api.get("/Categories/allCategories");
     }
-    static async createCategory(name) {
-        return await $api.post("/Categories/create", {
-            name: name,
-        });
+    static async createCategory(form) {
+        return await $api.post("/Categories/create", form);
     }
-    static async deleteCategory(name) {
+    static async deleteCategory(id) {
         return await $api.post("/Categories/delete", {
-            name: name,
+            id: id,
         });
     }
 }

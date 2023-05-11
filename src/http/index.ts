@@ -10,7 +10,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-    config.headers.Authorization = localStorage.getItem("accessToken")?.split(" ")[1];
+    config.headers.Authorization = localStorage.getItem("accessToken");
     return config;
 });
 

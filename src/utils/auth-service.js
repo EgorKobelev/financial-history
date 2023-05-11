@@ -18,7 +18,7 @@ export class AuthService {
     }
 
     static async update(email, currentPassword, newPassword, name) {
-        return await $api.post("/Authorize/updateUser", {
+        return await $api.put("/Authorize/updateUser", {
             email: email,
             newPassword: newPassword,
             currentPassword: currentPassword,

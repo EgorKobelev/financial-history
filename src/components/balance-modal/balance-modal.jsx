@@ -1,18 +1,23 @@
+import { useDispatch } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import styles from "./balance-modal.module.css";
+import { createBalance } from "../../services/actions/operation";
 
 const BalanceModal = ({ balance, handleToggleModal }) => {
+    const dispatch = useDispatch();
     const { values, handleChange } = useForm({
         balance: balance,
     });
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createBalance(values.balance));
         handleToggleModal();
     };
 
     return (
         <div className={styles.container}>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     className={styles.finance_card__input}
                     onChange={handleChange}
