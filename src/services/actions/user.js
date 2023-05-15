@@ -25,11 +25,10 @@ export const login = createAsyncThunk("userReducer/login", async function (form,
 });
 
 export const update = createAsyncThunk("userReducer/update", async function (form, { rejectWithValue, dispatch }) {
-    const { email, password, currentPassword, name } = form;
     try {
-        const { data } = await AuthService.update(email, currentPassword, password, name);
+        const { data } = await AuthService.update(form);
         localStorage.setItem("accessToken", data.accessToken);
-        return { name: form.name, email: form.email };
+        return form;
     } catch (e) {
         return rejectWithValue("Ощибка при авторизации");
     }

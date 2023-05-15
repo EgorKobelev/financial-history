@@ -8,8 +8,6 @@ export class CategoryService {
         return await $api.post("/Categories/create", form);
     }
     static async deleteCategory(id) {
-        return await $api.post("/Categories/delete", {
-            id: id,
-        });
+        return await $api.delete(`/Categories/delete${id}`);
     }
 }

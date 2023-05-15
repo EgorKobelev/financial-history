@@ -3,7 +3,7 @@ import {
     getBalance,
     createBalance,
     getSumByTypes,
-    getLastFiveOperationsBothTypeAsync,
+    getAllOperations,
     createOperation,
     updateOperation,
     deleteOperaion,
@@ -70,21 +70,21 @@ const operationSlice = createSlice({
                 state.status.isFailed = true;
                 state.status.isLoading = false;
             })
-            .addCase(getLastFiveOperationsBothTypeAsync.pending, (state) => {
+            .addCase(getAllOperations.pending, (state) => {
                 state.status.isLoading = true;
             })
-            .addCase(getLastFiveOperationsBothTypeAsync.fulfilled, (state, action) => {
+            .addCase(getAllOperations.fulfilled, (state, action) => {
                 state.lastOperations = action.payload;
                 state.status.isLoading = false;
             })
-            .addCase(getLastFiveOperationsBothTypeAsync.rejected, (state) => {
+            .addCase(getAllOperations.rejected, (state) => {
                 state.status.isFailed = true;
                 state.status.isLoading = false;
             })
             .addCase(createOperation.pending, (state) => {
                 state.status.isLoading = true;
             })
-            .addCase(createOperation.fulfilled, (state, action) => {
+            .addCase(createOperation.fulfilled, (state) => {
                 state.status.isLoading = false;
             })
             .addCase(createOperation.rejected, (state) => {
@@ -94,7 +94,7 @@ const operationSlice = createSlice({
             .addCase(updateOperation.pending, (state) => {
                 state.status.isLoading = true;
             })
-            .addCase(updateOperation.fulfilled, (state, action) => {
+            .addCase(updateOperation.fulfilled, (state) => { //менять динамически
                 state.status.isLoading = false;
             })
             .addCase(updateOperation.rejected, (state) => {

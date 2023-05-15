@@ -4,7 +4,7 @@ import { getAllCategories } from "./category";
 
 export const createBalance = createAsyncThunk(
     "opearationReducer/createBalance",
-    async function (newBalance, { rejectWithValue, dispatch }) {
+    async function (newBalance, { rejectWithValue }) {
         try {
             await OperationService.createBalance(newBalance);
             return newBalance;
@@ -14,35 +14,32 @@ export const createBalance = createAsyncThunk(
     }
 );
 
-export const getBalance = createAsyncThunk(
-    "opearationReducer/getBalance",
-    async function (args, { rejectWithValue, dispatch }) {
-        try {
-            const { data } = await OperationService.getBalance();
-            return data;
-        } catch (e) {
-            return rejectWithValue("Не удалось получить баланс");
-        }
+export const getBalance = createAsyncThunk("opearationReducer/getBalance", async function (args, { rejectWithValue }) {
+    try {
+        const { data } = await OperationService.getBalance();
+        return data;
+    } catch (e) {
+        return rejectWithValue("Не удалось получить баланс");
     }
-);
+});
 
 export const getSumByTypes = createAsyncThunk(
     "opearationReducer/getSumByTypes",
-    async function (type, { rejectWithValue, dispatch }) {
+    async function (form, { rejectWithValue }) {
         try {
-            const { data } = await OperationService.getSumByType(type);
-            return { type: type, sum: data.sum };
+            const { data } = await OperationService.getSumByType(form);
+            return { type: form.type, sum: data.sum };
         } catch (e) {
             return rejectWithValue("Не удалось получить доходы и расходы");
         }
     }
 );
 
-export const getLastFiveOperationsBothTypeAsync = createAsyncThunk(
+export const getAllOperations = createAsyncThunk(
     "opearationReducer/getLastFiveOperationsBothTypeAsync",
-    async function (args, { rejectWithValue, dispatch }) {
+    async function (form, { rejectWithValue }) {
         try {
-            const { data } = await OperationService.getLastFiveOperationsBothTypeAsync();
+            const { data } = await OperationService.getOperationsByType(form);
 
             return {
                 expenses: data.operationsExpenses.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)),
@@ -58,13 +55,14 @@ export const createOperation = createAsyncThunk(
     "opearationReducer/createOperation",
     async function (form, { rejectWithValue, dispatch }) {
         try {
-            const { data } = await OperationService.createOperaion(form);
+            await OperationService.createOperaion(form);
+            const date = new Date().toISOString();
             dispatch(getAllCategories());
             dispatch(getBalance());
-            dispatch(getSumByTypes("expenses"));
-            dispatch(getSumByTypes("income"));
-            dispatch(getLastFiveOperationsBothTypeAsync());
-            return data;
+            dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
+            dispatch(getSumByTypes({ type: "income", dateTime: date }));
+            dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
+            return;
         } catch (e) {
             return rejectWithValue("Не удалось создать операцию");
         }
@@ -76,11 +74,13 @@ export const updateOperation = createAsyncThunk(
     async function (form, { rejectWithValue, dispatch }) {
         try {
             const { data } = await OperationService.updateOperaion(form);
+            const date = new Date().toISOString();
             dispatch(getAllCategories());
             dispatch(getBalance());
-            dispatch(getSumByTypes("expenses"));
-            dispatch(getSumByTypes("income"));
-            dispatch(getLastFiveOperationsBothTypeAsync());
+            dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
+            dispatch(getSumByTypes({ type: "income", dateTime: date }));
+            dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
+
             return data;
         } catch (e) {
             return rejectWithValue("Не удалось обновить операцию");
@@ -90,15 +90,17 @@ export const updateOperation = createAsyncThunk(
 
 export const deleteOperaion = createAsyncThunk(
     "opearationReducer/deleteOperation",
-    async function (form, { rejectWithValue, dispatch }) {
+    async function (id, { rejectWithValue, dispatch }) {
         try {
-            await OperationService.deleteOperaion(form);
+            await OperationService.deleteOperaion(id);
+            const date = new Date().toISOString();
             dispatch(getAllCategories());
             dispatch(getBalance());
-            dispatch(getSumByTypes("expenses"));
-            dispatch(getSumByTypes("income"));
-            dispatch(getLastFiveOperationsBothTypeAsync());
-            return form.id;
+            dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
+            dispatch(getSumByTypes({ type: "income", dateTime: date }));
+            dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
+
+            return id;
         } catch (e) {
             return rejectWithValue("Не удалось удалить операцию");
         }

@@ -23,28 +23,29 @@ const OperationCard = ({ element }) => {
     };
 
     const handleDeleteOperation = () => {
-        if (income.find((category) => category.name === element.name)) {
-            dispatch(
-                deleteOperaion({
-                    operationId: element.id,
-                    categoryId: income.find((category) => category.name === element.name).id,
-                })
-            );
-        } else {
-            dispatch(
-                deleteOperaion({
-                    operationId: element.id,
-                    categoryId: expenses.find((category) => category.name === element.name).id,
-                })
-            );
-        }
+        dispatch(deleteOperaion(element.id));
+        // if (income.find((category) => category.name === element.name)) {
+        //     dispatch(
+        //         deleteOperaion({
+        //             operationId: element.id,
+        //             // categoryId: income.find((category) => category.name === element.name).id,
+        //         })
+        //     );
+        // } else {
+        //     dispatch(
+        //         deleteOperaion({
+        //             operationId: element.id,
+        //             // categoryId: expenses.find((category) => category.name === element.name).id,
+        //         })
+        //     );
+        // }
     };
 
     return (
         <div className={styles.operations__list_item_container}>
             <p className={styles.list_item__date}>{moment.utc(element.dateTime).format("DD-MM-YYYY")}</p>
             <li className={styles.operations__list_item}>
-                <p className={styles.list__text}>{`${element.name} - ${element.price} ₽`}</p>
+                <p className={styles.list__text}>{`${element.nameCategory} - ${element.price} ₽`}</p>
                 <div className={styles.list__images}>
                     <img
                         className={styles.list__images__first_image}
@@ -70,9 +71,9 @@ const OperationCard = ({ element }) => {
                         handleToggleModal={handleToggleModal}
                         id={element.id}
                         categoryId={
-                            expenses.find((category) => category.name === element.name)
-                                ? expenses.find((category) => category.name === element.name).id
-                                : income.find((category) => category.name === element.name).id
+                            expenses.find((category) => category.name === element.nameCategory)
+                                ? expenses.find((category) => category.name === element.nameCategory).id
+                                : income.find((category) => category.name === element.nameCategory).id
                         }
                     />
                 </Modal>

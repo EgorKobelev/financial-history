@@ -31,7 +31,7 @@ const userSlice = createSlice({
                 state.user = action.payload;
                 state.status.isLoading = false;
             })
-            .addCase(register.rejected, (state, action) => {
+            .addCase(register.rejected, (state) => {
                 state.status.fetchUserFailed = true;
                 state.status.isLoading = false;
             })
@@ -42,7 +42,7 @@ const userSlice = createSlice({
                 state.user = action.payload;
                 state.status.isLoading = false;
             })
-            .addCase(login.rejected, (state, action) => {
+            .addCase(login.rejected, (state) => {
                 state.status.fetchUserFailed = true;
                 state.status.isLoading = false;
             })
@@ -53,7 +53,7 @@ const userSlice = createSlice({
                 state.user = action.payload;
                 state.status.isLoading = false;
             })
-            .addCase(loginWithToken.rejected, (state, action) => {
+            .addCase(loginWithToken.rejected, (state) => {
                 state.status.fetchUserFailed = true;
                 state.status.isLoading = false;
             })
@@ -61,10 +61,15 @@ const userSlice = createSlice({
                 state.status.isLoading = true;
             })
             .addCase(update.fulfilled, (state, action) => {
-                state.user = action.payload;
+                if (action.payload.name) {
+                    state.user.name = action.payload.name;
+                }
+                if (action.payload.email) {
+                    state.user.email = action.payload.email;
+                }
                 state.status.isLoading = false;
             })
-            .addCase(update.rejected, (state, action) => {
+            .addCase(update.rejected, (state) => {
                 state.status.fetchUserFailed = true;
                 state.status.isLoading = false;
             });

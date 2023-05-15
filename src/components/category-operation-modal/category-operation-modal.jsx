@@ -49,7 +49,6 @@ const CategoryOperationModal = ({
                 dateTime: new Date(formattedDate[0], formattedDate[1] - 1, formattedDate[2]).toISOString(),
                 price: values.sum,
                 oldPrice: oldPrice,
-                type: expenses.find((category) => category.id === categoryId) ? "expenses" : "income",
                 id: id,
             };
             dispatch(updateOperation(form));

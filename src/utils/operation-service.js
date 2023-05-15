@@ -1,17 +1,12 @@
 import $api from "../http";
 
 export class OperationService {
-    static async getLastOperations() {
-        return await $api.get("/Operation/lastOperations");
-    }
-
     static async createOperaion(form) {
         return await $api.post("/Operation/create", form);
     }
 
-    static async deleteOperaion(form) {
-        console.log(form);
-        return await $api.post(`/Operation/delete`, form);
+    static async deleteOperaion(id) {
+        return await $api.delete(`/Operation/delete/${id}`);
     }
 
     static async updateOperaion(form) {
@@ -26,13 +21,19 @@ export class OperationService {
         return await $api.patch("/Operation/createBalance", { newBalance: newBalance });
     }
 
-    static async getSumByType(type) {
-        return await $api.post("/Operation/getSumByType", { type: type });
+    static async getSumByType(form) {
+        const params = {
+            type: form.type,
+            dateTime: form.dateTime,
+        };
+        return await $api.get("/Operation/getSumByType", { params });
     }
 
-    static async getLastFiveOperationsBothTypeAsync() {
-        const date = new Date();
-        date.toISOString();
-        return await $api.post("/Operation/getLastFiveOperationsBothTypeAsync", { dateTime: date });
+    static async getOperationsByType(form) {
+        const params = {
+            dateTime: form.dateTime,
+            quantity: form.quantity,
+        };
+        return await $api.get("/Operation/getOperationsByType", { params });
     }
 }

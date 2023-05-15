@@ -17,13 +17,8 @@ export class AuthService {
         });
     }
 
-    static async update(email, currentPassword, newPassword, name) {
-        return await $api.put("/Authorize/updateUser", {
-            email: email,
-            newPassword: newPassword,
-            currentPassword: currentPassword,
-            name: name,
-        });
+    static async update(form) {
+        return await $api.put("/Authorize/updateUser", form);
     }
 
     static async tokenLogin() {

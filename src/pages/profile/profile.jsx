@@ -10,7 +10,6 @@ import { update } from "../../services/actions/user";
 const initialValues = {
     email: "",
     password: "",
-    currentPassword: "",
     name: "",
 };
 
@@ -20,7 +19,17 @@ const Profile = () => {
     const dispatch = useDispatch();
     const user = useSelector(getUser);
     const handleSubmit = (e) => {
-        dispatch(update(values));
+        const form = {};
+        if (values.name !== user.name) {
+            form["name"] = values.name;
+        }
+        if (values.email !== user.email) {
+            form["email"] = values.email;
+        }
+        if (values.password > 6) {
+            form["password"] = values.password;
+        }
+        dispatch(update(form));
 
         e.preventDefault();
     };
@@ -88,27 +97,6 @@ const Profile = () => {
                     <input
                         className={styles.profile__input}
                         onChange={handleChange}
-                        value={values.currentPassword}
-                        placeholder="Старый Пароль"
-                        type="password"
-                        name="currentPassword"
-                        disabled={true}
-                    />
-                    <img
-                        onClick={(e) => {
-                            const input = e.target.parentElement.children[0];
-                            const disabled = input.disabled;
-                            input.disabled = !disabled;
-                        }}
-                        className={styles.profile__edit_image}
-                        src={editImage}
-                        alt="Отредактировать"
-                    />
-                </div>
-                <div className={styles.input__container}>
-                    <input
-                        className={styles.profile__input}
-                        onChange={handleChange}
                         value={values.password}
                         placeholder="Новый Пароль"
                         type="password"
@@ -139,7 +127,7 @@ const Profile = () => {
                             values.email.length > 0 &&
                             values.name.length > 1 &&
                             isValidEmail(values.email) &&
-                            values.password.length > 6
+                            (values.email !== user.email || values.password.length > 6 || values.name !== user.name)
                                 ? styles.profile__button_active
                                 : null
                         }`}
