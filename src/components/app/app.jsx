@@ -23,9 +23,11 @@ const App = () => {
                 <Route path="/" element={<ProtectedRoute anonymous={false} element={<Base />} />}>
                     <Route index element={<MainPage />} />
                     <Route path="profile" element={<Profile />} />
+                    <Route path="/statistics" element={<StatisticPage />} />
                 </Route>
                 <Route path="/register" element={<ProtectedRoute anonymous={true} element={<RegisterPage />} />} />
                 <Route path="/login" element={<ProtectedRoute anonymous={true} element={<LoginPage />} />} />
+                <Route path="/recover" element={<ProtectedRoute anonymous={true} element={<LoginPage />} />} />
                 <Route path="*" element={<NotFoundPage />} />
                 {/* <Route path="/" element={<Base />}>
                     <Route index element={<MainPage />} />

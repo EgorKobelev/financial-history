@@ -7,6 +7,7 @@ import { register } from "swiper/element/bundle";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "../../services/actions/category";
 import { getAllOperations, getBalance, getSumByTypes } from "../../services/actions/operation";
+import { SLIDER_PARAMS } from "../../utils/constants";
 
 register();
 
@@ -28,43 +29,8 @@ const MainPage = () => {
         dispatch(getSumByTypes({ type: "income", dateTime: date }));
         dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
         const swiperContainer = swiperRef.current;
-        const params = {
-            navigation: true,
-            pagination: true,
-            injectStyles: [
-                `
-              .swiper-button-next,
-              .swiper-button-prev {
-                color: black;
-                width: 8px;
-                background-position: center;
-                background-size: 8px;
-                background-repeat: no-repeat; 
-              }
 
-              .swiper-button-next:after,
-              .swiper-button-prev:after {
-                content: "";
-              }
-
-              .swiper-button-next {
-                background-image: url("../../next.svg");
-              }
-
-              .swiper-button-prev {
-                background-image: url("../../prev.svg");
-              }
-             
-              .swiper-pagination-bullet{
-                width: 8px;
-                height: 8px;
-                background-color: #A39797;
-              }
-          `,
-            ],
-        };
-
-        Object.assign(swiperContainer, params);
+        Object.assign(swiperContainer, SLIDER_PARAMS);
         swiperContainer.initialize();
     }, []);
     return (
@@ -81,8 +47,8 @@ const MainPage = () => {
                 </swiper-container>
             </div>
             <div className={styles.main_page__operations}>
-                {lastOperations.income.length > 0 && <Operations title="Доходы" data={lastOperations.income} />}
-                {lastOperations.expenses.length > 0 && <Operations title="Расходы" data={lastOperations.expenses} />}
+                {lastOperations.income.length > 0 && <Operations title="Доходы" type="income" data={lastOperations.income} />}
+                {lastOperations.expenses.length > 0 && <Operations title="Расходы" type="expenses" data={lastOperations.expenses} />}
             </div>
         </div>
     );

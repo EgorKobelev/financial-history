@@ -1,0 +1,33 @@
+.footer__container {
+    width: 412px;
+    padding: 20px 24px;
+    border: 1px solid #c7c7c7;
+    border-radius: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer__item {
+    display: flex;
+    width: 50%;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.footer__item:nth-child(2n) {
+    margin-bottom: 18px;
+}
+
+.footer__item:last-child {
+    margin-bottom: 0;
+}
+
+.item__circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 8px;
+}

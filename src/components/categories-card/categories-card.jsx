@@ -3,7 +3,7 @@ import styles from "./categories-card.module.css";
 import Modal from "../modal/modal";
 import CategoryOperationModal from "../category-operation-modal/category-operation-modal";
 
-const CategoriesCard = ({ title, image, id, sum }) => {
+const CategoriesCard = ({ title, image, id, sum, type }) => {
     const [modalActive, setModalActive] = React.useState(false);
     const handleToggleModal = () => {
         setModalActive(!modalActive);
@@ -18,12 +18,7 @@ const CategoriesCard = ({ title, image, id, sum }) => {
             </div>
             {modalActive && (
                 <Modal title={title} handleToggleModal={handleToggleModal}>
-                    <CategoryOperationModal
-                        handleToggleModal={handleToggleModal}
-                        isCreateNewCategory={true}
-                        categoryId={id}
-                        image={image}
-                    />
+                    <CategoryOperationModal handleToggleModal={handleToggleModal} isCreateNewCategory={true} categoryId={id} image={image} type={type} />
                 </Modal>
             )}
         </>

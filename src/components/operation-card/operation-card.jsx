@@ -12,7 +12,7 @@ import { deleteOperaion } from "../../services/actions/operation";
 const getExpenses = (store) => store.categoryReducer.expenses;
 const getIncome = (store) => store.categoryReducer.income;
 
-const OperationCard = ({ element }) => {
+const OperationCard = ({ element, type }) => {
     const expenses = useSelector(getExpenses);
     const income = useSelector(getIncome);
     const dispatch = useDispatch();
@@ -24,21 +24,6 @@ const OperationCard = ({ element }) => {
 
     const handleDeleteOperation = () => {
         dispatch(deleteOperaion(element.id));
-        // if (income.find((category) => category.name === element.name)) {
-        //     dispatch(
-        //         deleteOperaion({
-        //             operationId: element.id,
-        //             // categoryId: income.find((category) => category.name === element.name).id,
-        //         })
-        //     );
-        // } else {
-        //     dispatch(
-        //         deleteOperaion({
-        //             operationId: element.id,
-        //             // categoryId: expenses.find((category) => category.name === element.name).id,
-        //         })
-        //     );
-        // }
     };
 
     return (
@@ -47,23 +32,14 @@ const OperationCard = ({ element }) => {
             <li className={styles.operations__list_item}>
                 <p className={styles.list__text}>{`${element.nameCategory} - ${element.price} ₽`}</p>
                 <div className={styles.list__images}>
-                    <img
-                        className={styles.list__images__first_image}
-                        onClick={handleDeleteOperation}
-                        src={deleteImage}
-                        alt="Удалить"
-                    />
-                    <img
-                        className={styles.list__images__second_image}
-                        src={editImage}
-                        alt="Отредактировать"
-                        onClick={handleToggleModal}
-                    />
+                    <img className={styles.list__images__first_image} onClick={handleDeleteOperation} src={deleteImage} alt="Удалить" />
+                    <img className={styles.list__images__second_image} src={editImage} alt="Отредактировать" onClick={handleToggleModal} />
                 </div>
             </li>
             {activeModal && (
                 <Modal handleToggleModal={handleToggleModal} title={element.category}>
                     <CategoryOperationModal
+                        type={type}
                         isCreateNewOperation={false}
                         image={icon}
                         date={moment.utc(element.dateTime).format("YYYY-MM-DD")}

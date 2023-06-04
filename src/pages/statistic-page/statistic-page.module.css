@@ -16,3 +16,18 @@
 .swiper-pagination-bullet {
     background-color: red;
 }
+
+.statistic__container {
+    width: 717px;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    background: #99bcff;
+    padding: 8px;
+    margin-bottom: 50px;
+    margin-right: 16px;
+}
+
+.statistic__operations {
+    width: 100%;
+}

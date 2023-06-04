@@ -4,20 +4,11 @@ import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { createOperation, updateOperation } from "../../services/actions/operation";
 
-const getExpenses = (store) => store.categoryReducer.expenses;
+const getBalance = (store) => store.operationReducer.sum.balance;
 
-const CategoryOperationModal = ({
-    image,
-    handleToggleModal,
-    categoryId,
-    isCreateNewOperation = true,
-    sum = "",
-    date = "",
-    id,
-}) => {
-    console.log(categoryId);
+const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, isCreateNewOperation = true, sum = "", date = "", id }) => {
     const dispatch = useDispatch();
-    const expenses = useSelector(getExpenses);
+    const balance = useSelector(getBalance);
     const { values, handleChange, setValues } = useForm({
         sum: sum,
         date: date,
@@ -43,8 +34,6 @@ const CategoryOperationModal = ({
             };
             dispatch(createOperation(form));
         } else {
-            console.log(categoryId);
-            console.log(expenses.find((category) => category.id === categoryId));
             const form = {
                 dateTime: new Date(formattedDate[0], formattedDate[1] - 1, formattedDate[2]).toISOString(),
                 price: values.sum,
@@ -78,19 +67,20 @@ const CategoryOperationModal = ({
                     name="date"
                 />
                 <div className="flex">
-                    <button
-                        onClick={handleDisable}
-                        className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}
-                    >
+                    <button onClick={handleDisable} className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}>
                         Отменить
                     </button>
                     <button
                         className={`${styles.categories_card__button} ${
-                            /^\d+$/.test(values.sum) && parseInt(values.sum) > 0 && values.date !== ""
+                            /^\d+$/.test(values.sum) &&
+                            parseInt(values.sum) > 0 &&
+                            values.date !== "" &&
+                            ((type === "expenses" && balance > values.sum) || type === "income")
                                 ? styles.categories_card__button_active
                                 : null
                         }`}
                         type="submit"
+                        disabled={!(/^\d+$/.test(values.sum) && parseInt(values.sum) > 0 && values.date !== "")}
                     >
                         Сохранить
                     </button>

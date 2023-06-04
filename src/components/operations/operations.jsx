@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./operations.module.css";
 import OperationCard from "../operation-card/operation-card";
 
-const Operations = ({ data, title }) => {
+const Operations = ({ data, type, title }) => {
     return (
         <div className={styles.operations__container}>
             <div className={styles.operations__header}>
@@ -10,7 +10,7 @@ const Operations = ({ data, title }) => {
             </div>
             <ul className={styles.operations__list}>
                 {data.map((element) => (
-                    <OperationCard key={element.id} element={element} />
+                    <OperationCard key={element.id} type={type} element={element} />
                 ))}
             </ul>
         </div>

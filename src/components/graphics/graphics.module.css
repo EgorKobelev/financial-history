@@ -1,0 +1,36 @@
+.graphics__container {
+    padding: 35px 32px 16px 32px;
+    background-color: white;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    scrollbar-width: thin;
+    min-height: 680px;
+}
+
+.graphics__title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.doughnut__container {
+    width: 240px;
+    height: 228px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 68px;
+    position: relative;
+}
+
+.doughnut__sum {
+    position: absolute;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

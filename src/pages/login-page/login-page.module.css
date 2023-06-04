@@ -71,7 +71,7 @@
     background-color: var(--hover-background-color-button);
 }
 
-.login__text_cocntainer {
+.login__text_container {
     max-width: 240px;
     font-weight: 400;
     font-size: 15px;
@@ -82,13 +82,18 @@
     cursor: pointer;
 }
 
-.login__text_cocntainer:hover {
+.login__text_container:not(:last-child) {
+    margin-bottom: 4px;
+}
+
+.login__text_container:hover {
     border-bottom: solid 1px black;
 }
 
-.login__link {
+.link {
     font-family: "Montserrat", sans-serif;
     padding: 0;
     font-weight: 600;
     cursor: pointer;
+    margin-left: 4px;
 }
