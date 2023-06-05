@@ -7,24 +7,32 @@
     display: flex;
     transition: background-color 0.2s ease-in-out;
     cursor: pointer;
-
+    align-items: center;
 }
 
-
 .profile_link__container:hover {
-    background-color: var(--dark-hover-background);
+    background-color: lightgray;
 }
 
 .avatar__container {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    background-color: lightgray;
+    background-color: gray;
     margin-right: 8px;
+    object-fit: cover;
 }
 
 .profile_link__user {
     margin-right: 48px;
     display: flex;
     align-items: center;
+}
+
+.profile_link__image {
+    fill: black;
+}
+
+.profile_link__image:hover {
+    fill: red;
 }

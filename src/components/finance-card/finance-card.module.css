@@ -9,9 +9,8 @@
     transition: transform 0.2s ease-in-out;
 }
 
-.card__container:hover {
-    /* background-color: var(--dark-hover-background); */
-    transform: scale(1.1);
+.card__container_active:hover {
+    transform: scale(1.05);
 }
 
 .card__title {

@@ -1,6 +1,4 @@
-import React from "react";
-import styles from "./login-page.module.css";
-import isValidEmail from "../../utils/validEmail";
+import isValidEmail from "../../utils/valid-email";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { login } from "../../services/actions/user";
@@ -18,36 +16,30 @@ const LoginPage = () => {
         password: "",
     });
     return (
-        <div className={styles.login__container}>
-            <h2 className={styles.login__title}>Авторизация</h2>
-            <form className={styles.login__form} onSubmit={handleSubmit}>
-                <input className={styles.login__input} onChange={handleChange} value={values.email} placeholder="Введите Почту" type="email" name="email" />
-                <input
-                    className={styles.login__input}
-                    onChange={handleChange}
-                    value={values.password}
-                    placeholder="Введите Пароль"
-                    type="password"
-                    name="password"
-                />
+        <div className="form__container">
+            <h2 className="form__title">Авторизация</h2>
+            <form className="form" onSubmit={handleSubmit}>
+                <input className="form__input" onChange={handleChange} value={values.email} placeholder="Введите Почту" type="email" name="email" />
+                <input className="form__input" onChange={handleChange} value={values.password} placeholder="Введите Пароль" type="password" name="password" />
                 <button
-                    className={`${styles.login__button} ${
-                        values.email.length > 0 && isValidEmail(values.email) && values.password.length > 5 ? styles.login__button_active : null
+                    className={`form__button ${
+                        values.email.length > 0 && isValidEmail(values.email) && values.password.length > 5 ? "form__button_active" : null
                     }`}
+                    disabled={!(values.email.length > 0 && isValidEmail(values.email) && values.password.length > 5)}
                     type="submit"
                 >
                     Войти
                 </button>
             </form>
-            <div className={styles.login__text_container}>
+            <div className="form__text_container">
                 <p>Забыли пароль? </p>
-                <button onClick={() => navigate("/recover")} className={styles.link}>
+                <button onClick={() => navigate("/recover")} className="form__link">
                     Восстановить
                 </button>
             </div>
-            <div className={styles.login__text_container}>
+            <div className="form__text_container">
                 <p>Нет аккаунта? </p>
-                <button onClick={() => navigate("/register")} className={styles.link}>
+                <button onClick={() => navigate("/register")} className="form__link">
                     Создать
                 </button>
             </div>

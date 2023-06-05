@@ -2,8 +2,8 @@ import React from "react";
 import CategoryOperationModal from "../category-operation-modal/category-operation-modal";
 import Modal from "../modal/modal";
 import styles from "./operation-card.module.css";
-import deleteImage from "../../images/delete.svg";
-import editImage from "../../images/edit.svg";
+import { ReactComponent as DeleteIcon } from "../../images/delete.svg";
+import { ReactComponent as EditButton } from "../../images/edit.svg";
 import moment from "moment";
 import icon from "../../images/categories/circle.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,8 +32,8 @@ const OperationCard = ({ element, type }) => {
             <li className={styles.operations__list_item}>
                 <p className={styles.list__text}>{`${element.nameCategory} - ${element.price} ₽`}</p>
                 <div className={styles.list__images}>
-                    <img className={styles.list__images__first_image} onClick={handleDeleteOperation} src={deleteImage} alt="Удалить" />
-                    <img className={styles.list__images__second_image} src={editImage} alt="Отредактировать" onClick={handleToggleModal} />
+                    <DeleteIcon onClick={handleDeleteOperation} className={styles.list__images__first_image} alt="Удалить" />
+                    <EditButton onClick={handleToggleModal} className={styles.list__images__second_image} alt="Отредактировать" />
                 </div>
             </li>
             {activeModal && (

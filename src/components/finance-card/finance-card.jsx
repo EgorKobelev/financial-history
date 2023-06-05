@@ -11,7 +11,10 @@ const FinanceCard = ({ title, balance, desc }) => {
     };
     return (
         <div>
-            <div onClick={title === "Баланс" ? handleToggleModal : null} className={styles.card__container}>
+            <div
+                onClick={title === "Баланс" ? handleToggleModal : null}
+                className={`${styles.card__container} ${title === "Баланс" ? styles.card__container_active : null}`}
+            >
                 <h3 className={styles.card__title}>{title}</h3>
                 {<p className={styles.card__balance}>{`₽ ${balance}`}</p>}
             </div>

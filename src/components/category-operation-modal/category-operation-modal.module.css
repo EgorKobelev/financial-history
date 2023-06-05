@@ -25,13 +25,14 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
-    color: #9c9c9c;
+    color: #505050;
     border: none;
     font-family: "Montserrat", sans-serif;
 }
 
 .categories_card__input:focus {
     background-color: lightgray;
+    color: black;
 }
 
 .categories_card__input:not(:last-child) {

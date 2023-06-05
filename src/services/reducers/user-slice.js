@@ -61,11 +61,15 @@ const userSlice = createSlice({
                 state.status.isLoading = true;
             })
             .addCase(update.fulfilled, (state, action) => {
+                console.log(action.payload);
                 if (action.payload.name) {
                     state.user.name = action.payload.name;
                 }
                 if (action.payload.email) {
                     state.user.email = action.payload.email;
+                }
+                if ("img" in action.payload) {
+                    state.user.img = action.payload.img;
                 }
                 state.status.isLoading = false;
             })

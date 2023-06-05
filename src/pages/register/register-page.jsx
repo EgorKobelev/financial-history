@@ -1,18 +1,15 @@
-import React from "react";
-import styles from "./register-page.module.css";
-import isValidEmail from "../../utils/validEmail";
+import isValidEmail from "../../utils/valid-email";
 import { useForm } from "../../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux"
-import {register} from "../../services/actions/user";
+import { useDispatch } from "react-redux";
+import { register } from "../../services/actions/user";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(register({email: values.email, password: values.password, name: values.name }))
-
+        dispatch(register({ email: values.email, password: values.password, name: values.name }));
     };
     const handleLogin = () => {
         navigate("/login");
@@ -25,35 +22,14 @@ const RegisterPage = () => {
         name: "",
     });
     return (
-        <div className={styles.register__container}>
-            <h2 className={styles.register__title}>Регистрация</h2>
-            <form className={styles.register__form} onSubmit={handleSubmit}>
+        <div className="form__container">
+            <h2 className="form__title">Регистрация</h2>
+            <form className="form" onSubmit={handleSubmit}>
+                <input className="form__input" onChange={handleChange} value={values.name} placeholder="Введите Имя" type="text" name="name" />
+                <input className="form__input" onChange={handleChange} value={values.email} placeholder="Введите Почту" type="email" name="email" />
+                <input className="form__input" onChange={handleChange} value={values.password} placeholder="Введите Пароль" type="password" name="password" />
                 <input
-                    className={styles.register__input}
-                    onChange={handleChange}
-                    value={values.name}
-                    placeholder="Введите Имя"
-                    type="text"
-                    name="name"
-                />
-                <input
-                    className={styles.register__input}
-                    onChange={handleChange}
-                    value={values.email}
-                    placeholder="Введите Почту"
-                    type="email"
-                    name="email"
-                />
-                <input
-                    className={styles.register__input}
-                    onChange={handleChange}
-                    value={values.password}
-                    placeholder="Введите Пароль"
-                    type="password"
-                    name="password"
-                />
-                <input
-                    className={styles.register__input}
+                    className="form__input"
                     onChange={handleChange}
                     value={values.repeatPassword}
                     placeholder="Потворите Пароль"
@@ -61,23 +37,32 @@ const RegisterPage = () => {
                     name="repeatPassword"
                 />
                 <button
-                    className={`${styles.register__button} ${
+                    className={`form__button ${
                         values.email.length > 0 &&
                         isValidEmail(values.email) &&
                         values.password.length > 6 &&
                         values.name.length > 1 &&
                         values.password === values.repeatPassword
-                            ? styles.register__button_active
+                            ? "form__button_active"
                             : null
                     }`}
+                    disabled={
+                        !(
+                            values.email.length > 0 &&
+                            isValidEmail(values.email) &&
+                            values.password.length > 6 &&
+                            values.name.length > 1 &&
+                            values.password === values.repeatPassword
+                        )
+                    }
                     type="submit"
                 >
                     Регистрация
                 </button>
             </form>
-            <div className={styles.register__text_cocntainer}>
-                <p>Уже зарегистрированы?</p>
-                <button onClick={handleLogin} className={styles.register__link}>
+            <div className="form__text_container">
+                <p>Зарегистрированы?</p>
+                <button onClick={handleLogin} className="form__link">
                     Войти
                 </button>
             </div>

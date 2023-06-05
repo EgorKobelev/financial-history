@@ -5,7 +5,7 @@ import Categories from "../../components/categories/categories";
 import Operations from "../../components/operations/operations";
 import { register } from "swiper/element/bundle";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../../services/actions/category";
+import { getAllCategories, getImages } from "../../services/actions/category";
 import { getAllOperations, getBalance, getSumByTypes } from "../../services/actions/operation";
 import { SLIDER_PARAMS } from "../../utils/constants";
 
@@ -28,6 +28,7 @@ const MainPage = () => {
         dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
         dispatch(getSumByTypes({ type: "income", dateTime: date }));
         dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
+        dispatch(getImages());
         const swiperContainer = swiperRef.current;
 
         Object.assign(swiperContainer, SLIDER_PARAMS);

@@ -10,4 +10,8 @@ export class CategoryService {
     static async deleteCategory(id) {
         return await $api.delete(`/Categories/delete${id}`);
     }
+
+    static async getImages() {
+        return await $api.get("/Categories/getUriPicturesForCategories");
+    }
 }
