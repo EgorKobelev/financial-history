@@ -7,7 +7,7 @@ import { update } from "../../services/actions/user";
 import { useRef } from "react";
 import { ReactComponent as EditButton } from "../../images/edit.svg";
 import $api from "../../http";
-import defaultImage from "../../images/default-image.jpg";
+import defaultImage from "../../images/default-image.png";
 import { toast } from "react-toastify";
 
 const initialValues = {
@@ -56,7 +56,7 @@ const Profile = () => {
     });
 
     const handleDisable = (e) => {
-        setValues({ ...initialValues, name: user.name || "", email: user.email || "", img: user.img || "" });
+        setValues({ ...initialValues, name: user.name || "", email: user.email || "", img: user.img || null });
         let inputs = document.querySelectorAll(".form__input--profile");
         inputs.forEach((input) => {
             input.disabled = true;
@@ -79,7 +79,6 @@ const Profile = () => {
             console.warn("Произошла ошибка");
         }
     };
-
     return (
         <div className={styles.profile__container}>
             <h2 className={styles.profile__title}>Профиль</h2>
@@ -88,7 +87,7 @@ const Profile = () => {
                 {values.img && (
                     <button
                         onClick={() => {
-                            setValues({ ...values, img: "" });
+                            setValues({ ...values, img: null });
                         }}
                         className={`${styles.profile__avatar_button} ${styles.profile__avatar_button_delete}`}
                     >
@@ -193,7 +192,10 @@ const Profile = () => {
                             values.email.length > 0 &&
                             values.name.length > 1 &&
                             isValidEmail(values.email) &&
-                            (values.email !== user.email || values.password.length > 6 || values.name !== user.name || values.img !== user.img)
+                            (values.email !== user.email ||
+                                values.password.length > 6 ||
+                                values.name !== user.name ||
+                                (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
                                 ? styles.profile__button_active
                                 : null
                         }`}
@@ -202,7 +204,10 @@ const Profile = () => {
                                 values.email.length > 0 &&
                                 values.name.length > 1 &&
                                 isValidEmail(values.email) &&
-                                (values.email !== user.email || values.password.length > 6 || values.name !== user.name || values.img !== user.img)
+                                (values.email !== user.email ||
+                                    values.password.length > 6 ||
+                                    values.name !== user.name ||
+                                    (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
                             )
                         }
                         type="submit"

@@ -7,10 +7,10 @@
 }
 
 .images__item {
-    width: 39px;
-    height: 39px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
-    margin-right: 24px;
+    margin-right: 36px;
     margin-bottom: 24px;
 }
 

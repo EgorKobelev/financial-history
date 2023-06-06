@@ -28,9 +28,9 @@ const BalanceModal = ({ balance, handleToggleModal }) => {
                 />
                 <button
                     className={`${styles.finance_card__button} ${
-                        typeof /^\d+$/.test(values.balance) && parseInt(values.balance) > 0 ? styles.finance_card__button_active : null
+                        values.balance && values.balance.match(/^\d+$/) && parseInt(values.balance) > 0 ? styles.finance_card__button_active : null
                     }`}
-                    disabled={!(typeof /^\d+$/.test(values.balance) && parseInt(values.balance) > 0)}
+                    disabled={!(values.balance && values.balance.match(/^\d+$/) && parseInt(values.balance) > 0)}
                     type="submit"
                 >
                     Сохранить

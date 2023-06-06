@@ -8,7 +8,9 @@ import ImagesSlide from "../images-slide/images-slide";
 
 const getImages = (store) => store.categoryReducer.images;
 
-const ImagesChoosing = ({ setIsShowImages }) => {
+register();
+
+const ImagesChoosing = ({ setIsShowImages, setImg }) => {
     const swiperRef = useRef(null);
     const images = useSelector(getImages);
     useEffect(() => {
@@ -19,7 +21,7 @@ const ImagesChoosing = ({ setIsShowImages }) => {
     }, []);
 
     return (
-        <div className={styles.images__container}>
+        <>
             <div className={styles.images_button__container}>
                 <CloseButton className={styles.images__close_icon} onClick={setIsShowImages} />
             </div>
@@ -28,11 +30,19 @@ const ImagesChoosing = ({ setIsShowImages }) => {
             </div>
             <swiper-container space-between={30} ref={swiperRef} init="false">
                 <swiper-slide>
-                    <ImagesSlide images={images.slice(0, 16)} />
+                    <ImagesSlide setIsShowImages={setIsShowImages} setImg={setImg} images={images.slice(0, 16)} />
                 </swiper-slide>
-                <swiper-slide>{/* <Categories data={income} title={"Категории доходов"} /> */}</swiper-slide>
+                <swiper-slide>
+                    <ImagesSlide setIsShowImages={setIsShowImages} setImg={setImg} images={images.slice(16, 32)} />
+                </swiper-slide>
+                <swiper-slide>
+                    <ImagesSlide setIsShowImages={setIsShowImages} setImg={setImg} images={images.slice(32, 48)} />
+                </swiper-slide>
+                <swiper-slide>
+                    <ImagesSlide setIsShowImages={setIsShowImages} setImg={setImg} images={images.slice(48, 64)} />
+                </swiper-slide>
             </swiper-container>
-        </div>
+        </>
     );
 };
 

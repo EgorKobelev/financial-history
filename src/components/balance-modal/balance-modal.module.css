@@ -43,3 +43,15 @@
     background-color: #0066ff;
     cursor: pointer;
 }
+
+.finance_card__button_active:focus {
+    outline: 2px solid #3c3c3c;
+}
+
+.finance_card__button_active:hover {
+    background-color: #1e90ff;
+}
+
+.finance_card__button_active:active {
+    background-color: #032861;
+}

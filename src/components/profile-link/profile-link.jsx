@@ -1,10 +1,9 @@
-import React from "react";
 import styles from "./profile-link.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../services/actions/user";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as ExitButton } from "../../images/exit.svg";
-import defaultImage from "../../images/default-image.jpg";
+import defaultImage from "../../images/default-image.png";
 
 const getUser = (store) => store.userReducer.user;
 
