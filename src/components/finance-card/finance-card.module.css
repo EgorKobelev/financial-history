@@ -4,13 +4,13 @@
     box-shadow: var(--box-shadow);
     width: 184px;
     border-radius: 15px;
-    cursor: pointer;
     margin-bottom: 8px;
     transition: transform 0.2s ease-in-out;
 }
 
 .card__container_active:hover {
     transform: scale(1.05);
+    cursor: pointer;
 }
 
 .card__title {

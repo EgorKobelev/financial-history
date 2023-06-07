@@ -18,4 +18,13 @@ export class CategoryService {
     static async getImages() {
         return await $api.get("/Categories/getUriPicturesForCategories");
     }
+
+    static async getAllCategoryFromTo(form) {
+        const params = {
+            FromDateTime: form.fromDate,
+            ToDateTime: form.toDate,
+            Type: form.type,
+        };
+        return await $api.get("/Categories/getAllCategoryFromTo", { params });
+    }
 }

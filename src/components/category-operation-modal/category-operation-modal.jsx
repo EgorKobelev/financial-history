@@ -56,9 +56,10 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                 <img
                     className={styles.categories_card__image}
                     src={
-                        image || type === "expenses"
+                        image ||
+                        (type === "expenses"
                             ? expenses.find((operation) => operation.id === categoryId).img
-                            : income.find((operation) => operation.id === categoryId).img
+                            : income.find((operation) => operation.id === categoryId).img)
                     }
                     alt="Категория"
                 />

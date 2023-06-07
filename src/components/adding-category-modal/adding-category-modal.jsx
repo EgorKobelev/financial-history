@@ -88,7 +88,7 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
                     </div>
                 </form>
             </div>{" "}
-            <div className={styles.images__container} style={{ opacity: isShowImages ? 1 : 0 }}>
+            <div className={styles.images__container} style={{ opacity: isShowImages ? 1 : 0, zIndex: isShowImages ? 100 : -10 }}>
                 <ImagesChoosing setImg={setImg} setIsShowImages={() => setIsShowImages(!isShowImages)} />
             </div>
         </>

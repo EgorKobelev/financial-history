@@ -22,7 +22,7 @@ $api.interceptors.response.use(
         const originalConfig = error.config;
         if (error.response.status === 403) {
             try {
-                const response = await axios.patch(`${API_URL}/Authorize/refreshAccessToken`, null, {
+                const response = await $api.patch(`${API_URL}/Authorize/refreshAccessToken`, null, {
                     withCredentials: true,
                 });
                 localStorage.setItem("accessToken", response.data.accessToken);

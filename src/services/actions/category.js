@@ -65,3 +65,12 @@ export const getImages = createAsyncThunk("categoryReducer/getImages", async fun
         return rejectWithValue("Не удалось удалить категорию");
     }
 });
+
+export const getFromToCategories = createAsyncThunk("categoryReducer/getFromTo", async function (form, { rejectWithValue, dispatch }) {
+    try {
+        const { data } = await CategoryService.getAllCategoryFromTo(form);
+        return { categories: data.categories, type: form.type };
+    } catch (e) {
+        return rejectWithValue("Не удалось удалить категорию");
+    }
+});

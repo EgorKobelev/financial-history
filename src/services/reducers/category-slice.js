@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCategory, getAllCategories, deleteCategory, getImages, updateCategory } from "../actions/category";
+import { createCategory, getAllCategories, deleteCategory, getImages, updateCategory, getFromToCategories } from "../actions/category";
 
 const initialState = {
     expenses: [],
@@ -7,6 +7,13 @@ const initialState = {
     images: [],
 
     status: {
+        isLoading: false,
+        isFailed: false,
+    },
+
+    statisticExpenses: [],
+    statisticIncome: [],
+    statisticStatus: {
         isLoading: false,
         isFailed: false,
     },
@@ -60,6 +67,21 @@ const categorySlice = createSlice({
             .addCase(deleteCategory.rejected, (state) => {
                 state.status.isFailed = true;
                 state.status.isLoading = false;
+            })
+            .addCase(getFromToCategories.pending, (state) => {
+                state.statisticStatus.isLoading = true;
+            })
+            .addCase(getFromToCategories.fulfilled, (state, action) => {
+                if (action.payload.type === "expenses") {
+                    state.statisticExpenses = action.payload.categories;
+                } else {
+                    state.statisticIncome = action.payload.categories;
+                }
+                state.statisticStatus.isLoading = false;
+            })
+            .addCase(getFromToCategories.rejected, (state) => {
+                state.statisticStatus.isFailed = true;
+                state.statisticStatus.isLoading = false;
             })
             .addCase(createCategory.pending, (state) => {
                 state.status.isLoading = true;
