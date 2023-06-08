@@ -1,18 +1,23 @@
+import { useDispatch } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import styles from "./balance-modal.module.css";
+import { createBalance } from "../../services/actions/operation";
 
 const BalanceModal = ({ balance, handleToggleModal }) => {
+    const dispatch = useDispatch();
     const { values, handleChange } = useForm({
         balance: balance,
     });
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createBalance(values.balance));
         handleToggleModal();
     };
 
     return (
         <div className={styles.container}>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     className={styles.finance_card__input}
                     onChange={handleChange}
@@ -23,10 +28,9 @@ const BalanceModal = ({ balance, handleToggleModal }) => {
                 />
                 <button
                     className={`${styles.finance_card__button} ${
-                        typeof /^\d+$/.test(values.balance) && parseInt(values.balance) > 0
-                            ? styles.finance_card__button_active
-                            : null
+                        /^\d+$/.test(values.balance) && Number(values.balance) > 0 ? styles.finance_card__button_active : null
                     }`}
+                    disabled={!(/^\d+$/.test(values.balance) && Number(values.balance) > 0)}
                     type="submit"
                 >
                     Сохранить

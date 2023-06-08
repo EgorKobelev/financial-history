@@ -7,13 +7,18 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 
+html,
+body {
+    scrollbar-gutter: stable;
+}
+
 body {
     margin: 0;
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-        "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    min-height: 85vh;
+    min-height: 100vh;
     width: 100%;
     height: 100%;
     font-weight: 400;
@@ -48,6 +53,10 @@ ul {
     display: flex;
 }
 
+.modal-container {
+    opacity: 0;
+}
+
 .modal-container--active {
     position: fixed;
     top: 0;
@@ -60,6 +69,8 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 1;
+    transition: 0.2s ease-in-out;
 }
 
 #modal-container {
@@ -68,17 +79,138 @@ ul {
 
 ::-webkit-scrollbar {
     width: 8px;
-    border-radius: 15px;
 }
 
 ::-webkit-scrollbar-track {
     background-color: #c3c3ce;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 16px;
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--dark-hover-background);
-    border-radius: 16px;
+}
+
+.form__container {
+    background-color: white;
+    width: 460px;
+    border-radius: 15px;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    padding: 32px 0 48px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 115px auto 0 auto;
+}
+
+.form__title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 40px;
+}
+
+.form__input {
+    width: 265px;
+    background: #e7e7e7;
+    border-radius: 15px;
+    padding: 19px 15px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #505050;
+    border: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+.form__input:focus {
+    background-color: lightgray;
+    color: black;
+}
+
+.form__input:not(:last-child) {
+    margin-bottom: 24px;
+}
+
+.form__input:last-child {
+    margin-bottom: 32px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__button {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #ffffff;
+    padding: 12px 40px;
+    background-color: lightgray;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.form__button_active {
+    background-color: #0066ff;
+    cursor: pointer;
+}
+
+.form__button_active:hover {
+    background-color: #1e90ff;
+}
+
+.form__text_container {
+    max-width: 240px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.form__text_container:not(:last-child) {
+    margin-bottom: 4px;
+}
+
+.form__text_container:hover {
+    border-bottom: solid 1px black;
+}
+
+.form__link {
+    font-family: "Montserrat", sans-serif;
+    padding: 0;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+.button {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #ffffff;
+    padding: 8px 24px;
+    background-color: lightgray;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.button:focus {
+    outline: 2px solid #3c3c3c;
+}
+
+.button:hover {
+    background-color: #1e90ff;
+}
+
+.button:active {
+    background-color: #032861;
 }

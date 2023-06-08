@@ -1,8 +1,8 @@
-import React, { memo, useEffect } from "react";
+import { memo, useEffect } from "react";
 import ReactDOM from "react-dom";
 import styles from "./modal.module.css";
 import ModalOverlay from "../modal-overlay/modal-overlay";
-import closeIcon from "../../images/close.svg";
+import { ReactComponent as CloseButton } from "../../images/close.svg";
 
 const modalContainer = document.getElementById("modal-container");
 const body = document.body;
@@ -22,7 +22,7 @@ const Modal = memo(({ children, handleToggleModal, ...props }) => {
 
     return ReactDOM.createPortal(
         <div
-            className={`${styles.modal} ${props.container} pt-10 pl-10 pb-10 pr-10`}
+            className={`${styles.modal}`}
             onKeyDown={(event) => {
                 if (event.key === "Enter") {
                     handleToggleModal();
@@ -31,12 +31,10 @@ const Modal = memo(({ children, handleToggleModal, ...props }) => {
         >
             <ModalOverlay handleToggleModal={handleToggleModal} />
             <div className={styles.button__container}>
-                <button className={styles.button} onClick={handleToggleModal}>
-                    <img src={closeIcon} alt="закрыть" />
-                </button>
+                <CloseButton className={styles.modal__close_icon} onClick={handleToggleModal} />
             </div>
             <div>
-                <p className={`text text_type_main-large ${styles.title} mr-9`}>{props.title}</p>
+                <p className={`${styles.title}`}>{props.title}</p>
             </div>
             {children}
         </div>,

@@ -6,7 +6,7 @@
     border-radius: 15px;
     overflow-y: auto;
     scrollbar-width: thin;
-    height: 460px;
+    height: 541px;
 }
 
 .categories__title {
@@ -26,18 +26,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 113px;
-    border: 1px solid #cccccc;
+    height: 140px;
+    outline: 1px solid #cccccc;
     width: 140px;
     border-radius: 15px;
     cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .categories__card_container:hover {
-    transform: scale(1.1);
+    background-color: lightgray;
+    /* transform: scale(1.05); */
 }
 
 .categories__card_image {
-    margin-top: -4px;
+    margin-top: 10px;
 }

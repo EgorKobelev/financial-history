@@ -1,50 +1,114 @@
-import React from "react";
 import styles from "./profile.module.css";
 import { useForm } from "../../hooks/useForm";
-import isValidEmail from "../../utils/validEmail";
+import isValidEmail from "../../utils/valid-email";
 import { useSelector } from "react-redux";
-import editImage from "../../images/edit.svg";
 import { useDispatch } from "react-redux";
 import { update } from "../../services/actions/user";
+import { useRef } from "react";
+import { ReactComponent as EditButton } from "../../images/edit.svg";
+import $api from "../../http";
+import defaultImage from "../../images/default-image.png";
+import { toast } from "react-toastify";
 
 const initialValues = {
     email: "",
     password: "",
-    currentPassword: "",
     name: "",
+    img: "",
 };
 
 const getUser = (store) => store.userReducer.user;
 
 const Profile = () => {
+    const fileRef = useRef(null);
     const dispatch = useDispatch();
     const user = useSelector(getUser);
+    const passwordRef = useRef(null);
     const handleSubmit = (e) => {
-        dispatch(update(values));
-
+        const form = {};
+        if (values.name !== user.name) {
+            form["name"] = values.name;
+        }
+        if (values.email !== user.email) {
+            form["email"] = values.email;
+        }
+        if (values.password && values.password.length > 6) {
+            form["password"] = values.password;
+            passwordRef.current.value = "";
+            setValues({ ...values, password: "" });
+        }
+        if (values.img !== user.img) {
+            form["img"] = values.img;
+        }
+        dispatch(update(form));
+        let inputs = document.querySelectorAll(".form__input--profile");
+        inputs.forEach((input) => {
+            input.disabled = true;
+            input.classList.remove(`${styles.form__input_active}`);
+        });
         e.preventDefault();
     };
     const { values, handleChange, setValues } = useForm({
         ...initialValues,
         name: user.name || "",
         email: user.email || "",
+        img: user.img,
     });
 
-    const handleDisable = () => {
-        setValues({ ...initialValues, name: user.name || "", email: user.email || "" });
+    const handleDisable = (e) => {
+        setValues({ ...initialValues, name: user.name || "", email: user.email || "", img: user.img || null });
+        let inputs = document.querySelectorAll(".form__input--profile");
+        inputs.forEach((input) => {
+            input.disabled = true;
+            input.classList.remove(`${styles.form__input_active}`);
+        });
+        e.preventDefault();
     };
 
+    const handleChangeFile = async (event) => {
+        try {
+            const formData = new FormData();
+            if (event.target.files && event.target.files.length > 0) {
+                const file = event.target.files[0];
+                formData.append("uploadedImg", file);
+                const { data } = await $api.post("/Authorize/addImgInProfile", formData);
+                setValues({ ...values, img: data });
+            }
+        } catch {
+            toast.error("Не удалось добавить картинку");
+            console.warn("Произошла ошибка");
+        }
+    };
     return (
         <div className={styles.profile__container}>
             <h2 className={styles.profile__title}>Профиль</h2>
             <div className={styles.profile__avatar_container}>
-                <div className={styles.profile__avatar}></div>
-                <button className={styles.profile__avatar_button}>Выбрать изображение</button>
+                <img src={values.img || defaultImage} alt="аватар" className={styles.profile__avatar} />
+                {values.img && (
+                    <button
+                        onClick={() => {
+                            setValues({ ...values, img: null });
+                        }}
+                        className={`${styles.profile__avatar_button} ${styles.profile__avatar_button_delete}`}
+                    >
+                        Удалить
+                    </button>
+                )}
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        fileRef.current?.click();
+                    }}
+                    className={styles.profile__avatar_button}
+                >
+                    Выбрать
+                </button>
+                <input ref={fileRef} accept="image/png, image/jpeg" type="file" onChange={handleChangeFile} hidden />
             </div>
-            <form className={styles.profile__form} onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
                 <div className={styles.input__container}>
                     <input
-                        className={styles.profile__input}
+                        className="form__input form__input--profile"
                         onChange={handleChange}
                         value={values.name}
                         placeholder="Имя"
@@ -52,20 +116,24 @@ const Profile = () => {
                         name="name"
                         disabled={true}
                     />
-                    <img
+                    <EditButton
                         onClick={(e) => {
                             const input = e.target.parentElement.children[0];
+                            if (input.classList.contains(`${styles.form__input_active}`)) {
+                                input.classList.remove(`${styles.form__input_active}`);
+                            } else {
+                                input.classList.add(`${styles.form__input_active}`);
+                            }
                             const disabled = input.disabled;
                             input.disabled = !disabled;
                         }}
                         className={styles.profile__edit_image}
-                        src={editImage}
                         alt="Отредактировать"
                     />
                 </div>
                 <div className={styles.input__container}>
                     <input
-                        className={styles.profile__input}
+                        className="form__input form__input--profile"
                         onChange={handleChange}
                         value={values.email}
                         placeholder="Почта"
@@ -73,41 +141,25 @@ const Profile = () => {
                         name="email"
                         disabled={true}
                     />
-                    <img
+                    <EditButton
                         onClick={(e) => {
                             const input = e.target.parentElement.children[0];
+                            if (input.classList.contains(`${styles.form__input_active}`)) {
+                                input.classList.remove(`${styles.form__input_active}`);
+                            } else {
+                                input.classList.add(`${styles.form__input_active}`);
+                            }
                             const disabled = input.disabled;
                             input.disabled = !disabled;
                         }}
                         className={styles.profile__edit_image}
-                        src={editImage}
                         alt="Отредактировать"
                     />
                 </div>
                 <div className={styles.input__container}>
                     <input
-                        className={styles.profile__input}
-                        onChange={handleChange}
-                        value={values.currentPassword}
-                        placeholder="Старый Пароль"
-                        type="password"
-                        name="currentPassword"
-                        disabled={true}
-                    />
-                    <img
-                        onClick={(e) => {
-                            const input = e.target.parentElement.children[0];
-                            const disabled = input.disabled;
-                            input.disabled = !disabled;
-                        }}
-                        className={styles.profile__edit_image}
-                        src={editImage}
-                        alt="Отредактировать"
-                    />
-                </div>
-                <div className={styles.input__container}>
-                    <input
-                        className={styles.profile__input}
+                        ref={passwordRef}
+                        className="form__input form__input--profile"
                         onChange={handleChange}
                         value={values.password}
                         placeholder="Новый Пароль"
@@ -115,23 +167,24 @@ const Profile = () => {
                         name="password"
                         disabled={true}
                     />
-                    <img
+                    <EditButton
                         onClick={(e) => {
                             const input = e.target.parentElement.children[0];
+                            if (input.classList.contains(`${styles.form__input_active}`)) {
+                                input.classList.remove(`${styles.form__input_active}`);
+                            } else {
+                                input.classList.add(`${styles.form__input_active}`);
+                            }
                             const disabled = input.disabled;
                             input.disabled = !disabled;
                         }}
                         className={styles.profile__edit_image}
-                        src={editImage}
                         alt="Отредактировать"
                     />
                 </div>
 
                 <div>
-                    <button
-                        onClick={handleDisable}
-                        className={`${styles.profile__button} ${styles.profile__button__exit}`}
-                    >
+                    <button type="button" onClick={handleDisable} className={`${styles.profile__button} ${styles.profile__button__exit}`}>
                         Отменить
                     </button>
                     <button
@@ -139,10 +192,24 @@ const Profile = () => {
                             values.email.length > 0 &&
                             values.name.length > 1 &&
                             isValidEmail(values.email) &&
-                            values.password.length > 6
+                            (values.email !== user.email ||
+                                values.password.length > 6 ||
+                                values.name !== user.name ||
+                                (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
                                 ? styles.profile__button_active
                                 : null
                         }`}
+                        disabled={
+                            !(
+                                values.email.length > 0 &&
+                                values.name.length > 1 &&
+                                isValidEmail(values.email) &&
+                                (values.email !== user.email ||
+                                    values.password.length > 6 ||
+                                    values.name !== user.name ||
+                                    (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
+                            )
+                        }
                         type="submit"
                     >
                         Сохранить

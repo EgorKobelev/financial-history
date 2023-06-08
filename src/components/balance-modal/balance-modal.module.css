@@ -6,7 +6,7 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 16px;
-    color: #9c9c9c;
+    color: #505050;
     border: none;
     font-family: "Montserrat", sans-serif;
     margin-bottom: 14px;
@@ -14,6 +14,7 @@
 
 .finance_card__input:focus {
     background-color: lightgray;
+    color: black;
 }
 
 .container {
@@ -41,4 +42,16 @@
 .finance_card__button_active {
     background-color: #0066ff;
     cursor: pointer;
+}
+
+.finance_card__button_active:focus {
+    outline: 2px solid #3c3c3c;
+}
+
+.finance_card__button_active:hover {
+    background-color: #1e90ff;
+}
+
+.finance_card__button_active:active {
+    background-color: #032861;
 }

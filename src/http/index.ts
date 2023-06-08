@@ -10,7 +10,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-    config.headers.Authorization = localStorage.getItem("accessToken")?.split(" ")[1];
+    config.headers.Authorization = localStorage.getItem("accessToken");
     return config;
 });
 
@@ -20,14 +20,16 @@ $api.interceptors.response.use(
     },
     async (error) => {
         const originalConfig = error.config;
-        try {
-            const response = await axios.post(`${API_URL}/Authorize/refreshAccessToken`, null, {
-                withCredentials: true,
-            });
-            localStorage.setItem("accessToken", response.data.accessToken);
-            return $api.request(originalConfig);
-        } catch {
-            console.log("Срок действия refresh истек");
+        if (error.response.status === 403) {
+            try {
+                const response = await $api.patch(`${API_URL}/Authorize/refreshAccessToken`, null, {
+                    withCredentials: true,
+                });
+                localStorage.setItem("accessToken", response.data.accessToken);
+                return $api.request(originalConfig);
+            } catch {
+                console.log("Срок действия refresh истек");
+            }
         }
     }
 );
