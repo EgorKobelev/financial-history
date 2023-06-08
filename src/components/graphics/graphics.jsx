@@ -57,7 +57,7 @@ const Graphics = ({
             {isLoading && isNotShowLoaderAfterDelay && <Loader height="300px" />}
             {!isLoading && data.length === 0 && (
                 <div className={styles.graphics__no_data_container}>
-                    <p>Нет данных</p>
+                    <p className={styles.graphics__no_data_container_text}>Нет данных</p>
                 </div>
             )}
             {data.length !== 0 && !isLoading && (

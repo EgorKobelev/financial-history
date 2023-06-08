@@ -61,6 +61,9 @@ export const SLIDER_PARAMS = {
         height: 8px;
         background-color: #A39797;
       }
+      .swiper-slide{
+        height: 100%;
+      }
   `,
     ],
 };

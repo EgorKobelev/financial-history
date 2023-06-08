@@ -10,12 +10,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-    <React.StrictMode>
-        <Router>
-            <Provider store={store}>
-                <ToastContainer position="top-center" />
-                <App />
-            </Provider>
-        </Router>
-    </React.StrictMode>
+    <Router>
+        <Provider store={store}>
+            <ToastContainer position="top-center" />
+            <App />
+        </Provider>
+    </Router>
 );

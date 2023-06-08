@@ -13,9 +13,6 @@
     font-size: 14px;
     line-height: 17px;
     transition: background-color 0.2s ease-in-out;
-}
-
-.operations__list_item_container:not(:last-child) {
     border-bottom: solid black 1px;
 }
 
@@ -30,18 +27,8 @@
     line-height: 13px;
 }
 
-.operations__list_item_container:last-child {
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
 .operations__list_item_container:hover {
     background-color: lightgray;
-}
-
-.operations__list_item_container:hover:last-child {
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 
 .list__images__first_image {

@@ -5,14 +5,13 @@ import styles from "./operation-card.module.css";
 import { ReactComponent as DeleteIcon } from "../../images/delete.svg";
 import { ReactComponent as EditButton } from "../../images/edit.svg";
 import moment from "moment";
-import icon from "../../images/categories/circle.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteOperaion } from "../../services/actions/operation";
 
 const getExpenses = (store) => store.categoryReducer.expenses;
 const getIncome = (store) => store.categoryReducer.income;
 
-const OperationCard = ({ element, type }) => {
+const OperationCard = ({ element, type, isStatistic }) => {
     const expenses = useSelector(getExpenses);
     const income = useSelector(getIncome);
     const dispatch = useDispatch();
@@ -23,7 +22,7 @@ const OperationCard = ({ element, type }) => {
     };
 
     const handleDeleteOperation = () => {
-        dispatch(deleteOperaion(element.id));
+        dispatch(deleteOperaion({ id: element.id, isStatistic }));
     };
 
     return (
@@ -39,9 +38,9 @@ const OperationCard = ({ element, type }) => {
             {activeModal && (
                 <Modal handleToggleModal={handleToggleModal} title={element.category}>
                     <CategoryOperationModal
+                        isStatistic={isStatistic}
                         type={type}
                         isCreateNewOperation={false}
-                        image={icon}
                         date={moment.utc(element.dateTime).format("YYYY-MM-DD")}
                         sum={element.price}
                         handleToggleModal={handleToggleModal}

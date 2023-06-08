@@ -26,8 +26,19 @@
     padding: 8px;
     margin-bottom: 50px;
     margin-right: 16px;
+    min-height: 680px;
 }
 
 .statistic__operations {
     width: 100%;
+}
+
+.global {
+    display: flex;
+}
+
+.operations__container {
+    width: 100%;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0;
 }

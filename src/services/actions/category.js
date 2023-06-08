@@ -31,7 +31,7 @@ export const updateCategory = createAsyncThunk("categoryReducer/updateCategory",
         dispatch(getBalance());
         dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
         dispatch(getSumByTypes({ type: "income", dateTime: date }));
-        dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
+        dispatch(getAllOperations({ dateTime: date, count: 5 }));
         toast.success("Категория обновлена", { autoClose: 3000 });
         return;
     } catch (e) {
@@ -48,7 +48,7 @@ export const deleteCategory = createAsyncThunk("categoryReducer/deleteCategory",
         dispatch(getBalance());
         dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
         dispatch(getSumByTypes({ type: "income", dateTime: date }));
-        dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
+        dispatch(getAllOperations({ dateTime: date, count: 5 }));
         toast.success("Категория удалена", { autoClose: 3000 });
         return data;
     } catch (e) {

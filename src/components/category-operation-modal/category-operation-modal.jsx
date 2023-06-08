@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./category-operation-modal.module.css";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +7,7 @@ const getBalance = (store) => store.operationReducer.sum.balance;
 const getExpenses = (store) => store.categoryReducer.expenses;
 const getIncome = (store) => store.categoryReducer.income;
 
-const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, isCreateNewOperation = true, sum = "", date = "", id }) => {
+const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, isStatistic, isCreateNewOperation = true, sum = "", date = "", id }) => {
     const dispatch = useDispatch();
     const balance = useSelector(getBalance);
     const expenses = useSelector(getExpenses);
@@ -36,16 +35,15 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                 price: values.sum,
                 categoryId: categoryId,
             };
-            console.log(form.dateTime);
             dispatch(createOperation(form));
         } else {
             const form = {
                 dateTime: new Date(formattedDate[0], formattedDate[1] - 1, formattedDate[2], 12).toISOString(),
-                price: values.sum,
+                price: parseInt(values.sum),
                 oldPrice: oldPrice,
                 id: id,
             };
-            dispatch(updateOperation(form));
+            dispatch(updateOperation({ form, isStatistic }));
         }
         handleToggleModal();
     };

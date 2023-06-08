@@ -32,6 +32,22 @@ export const getSumByTypes = createAsyncThunk("opearationReducer/getSumByTypes",
     }
 });
 
+export const getOperationsByTypeDynamically = createAsyncThunk(
+    "opearationReducer/getOperationsByTypeDynamically",
+    async function (type, { getState, rejectWithValue }) {
+        try {
+            const store = getState();
+            const isFailed = type === "expenses" ? store.operationReducer.statistStatus.isFailedExpenses : store.operationReducer.statistStatus.isFailedIncome;
+            const dates = type === "expenses" ? store.operationReducer.statisticExpensesInfo.dates : store.operationReducer.statisticIncomeInfo.dates;
+            const page = type === "expenses" ? store.operationReducer.statisticExpensesInfo.page : store.operationReducer.statisticIncomeInfo.page;
+            const { data } = !isFailed ? await OperationService.getOperationsByTypeDynamically({ type, to: dates.to, from: dates.from, page }) : null;
+            return { type, operations: data.operations || [] };
+        } catch (e) {
+            return rejectWithValue({ type });
+        }
+    }
+);
+
 export const getAllOperations = createAsyncThunk("opearationReducer/getLastFiveOperationsBothTypeAsync", async function (form, { rejectWithValue }) {
     try {
         const { data } = await OperationService.getOperationsByType(form);
@@ -53,7 +69,7 @@ export const createOperation = createAsyncThunk("opearationReducer/createOperati
         dispatch(getBalance());
         dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
         dispatch(getSumByTypes({ type: "income", dateTime: date }));
-        dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
+        dispatch(getAllOperations({ dateTime: date, count: 5 }));
         toast.success("Операция добавлена", { autoClose: 3000 });
         return;
     } catch (e) {
@@ -62,34 +78,40 @@ export const createOperation = createAsyncThunk("opearationReducer/createOperati
     }
 });
 
-export const updateOperation = createAsyncThunk("opearationReducer/updateOperation", async function (form, { rejectWithValue, dispatch }) {
+export const updateOperation = createAsyncThunk("opearationReducer/updateOperation", async function (info, { rejectWithValue, dispatch }) {
     try {
-        const { data } = await OperationService.updateOperaion(form);
+        const { data } = await OperationService.updateOperaion(info.form);
+        toast.success("Операция обновлена", { autoClose: 3000 });
+        if (info.isStatistic) {
+            return info;
+        }
         const date = new Date().toISOString();
         dispatch(getAllCategories());
         dispatch(getBalance());
         dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
         dispatch(getSumByTypes({ type: "income", dateTime: date }));
-        dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
-        toast.success("Операция обновлена", { autoClose: 3000 });
-        return data;
+        dispatch(getAllOperations({ dateTime: date, count: 5 }));
+        return info;
     } catch (e) {
         toast.error("Операция обновлена", { autoClose: 3000 });
         return rejectWithValue("Не удалось обновить операцию");
     }
 });
 
-export const deleteOperaion = createAsyncThunk("opearationReducer/deleteOperation", async function (id, { rejectWithValue, dispatch }) {
+export const deleteOperaion = createAsyncThunk("opearationReducer/deleteOperation", async function (form, { rejectWithValue, dispatch }) {
     try {
-        await OperationService.deleteOperaion(id);
+        await OperationService.deleteOperaion(form.id);
+        toast.success("Операция удалена", { autoClose: 3000 });
+        if (form.isStatistic) {
+            return { id: form.id, isStatistic: form.isStatistic };
+        }
         const date = new Date().toISOString();
         dispatch(getAllCategories());
         dispatch(getBalance());
         dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
         dispatch(getSumByTypes({ type: "income", dateTime: date }));
-        dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
-        toast.success("Операция удалена", { autoClose: 3000 });
-        return id;
+        dispatch(getAllOperations({ dateTime: date, count: 5 }));
+        return { id: form.id };
     } catch (e) {
         toast.error("Не удалось удалить операцию", { autoClose: 3000 });
         return rejectWithValue("Не удалось удалить операцию");

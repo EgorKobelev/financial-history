@@ -32,8 +32,19 @@ export class OperationService {
     static async getOperationsByType(form) {
         const params = {
             dateTime: form.dateTime,
-            quantity: form.quantity,
+            count: form.count,
         };
         return await $api.get("/Operation/getOperationsByType", { params });
+    }
+
+    static async getOperationsByTypeDynamically(form) {
+        const params = {
+            DateTimeFrom: form.from,
+            DateTimeTo: form.to,
+            Type: form.type,
+            Count: 13,
+            Page: form.page,
+        };
+        return await $api.get("/Operation/getOperationsByTypeDynamically", { params });
     }
 }

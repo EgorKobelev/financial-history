@@ -39,8 +39,8 @@ const Tabs = ({ activeTab, handleGetData, type }) => {
                 <li
                     onClick={() => {
                         setActiveCalendar(false);
-                        const toDate = new Date();
-                        const fromDate = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000 - 12 * 60 * 60 * 1000);
+                        const toDate = new Date().toISOString();
+                        const fromDate = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000 - 12 * 60 * 60 * 1000).toISOString();
                         handleGetData(TAB_YEAR, fromDate, toDate, type);
                     }}
                     className={`${styles.tabs__items} ${activeTab === TAB_YEAR ? styles.active_tab : null}`}
@@ -50,8 +50,8 @@ const Tabs = ({ activeTab, handleGetData, type }) => {
                 <li
                     onClick={() => {
                         setActiveCalendar(false);
-                        const toDate = new Date();
-                        const fromDate = new Date(Date.now() - 1000 * 365 * 24 * 60 * 60 * 1000 - 12 * 60 * 60 * 1000);
+                        const toDate = new Date().toISOString();
+                        const fromDate = new Date(Date.now() - 1000 * 365 * 24 * 60 * 60 * 1000 - 12 * 60 * 60 * 1000).toISOString();
                         handleGetData(TAB_ALL_TIME, fromDate, toDate, type);
                     }}
                     className={`${styles.tabs__items} ${activeTab === TAB_ALL_TIME ? styles.active_tab : null}`}

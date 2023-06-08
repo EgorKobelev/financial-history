@@ -17,11 +17,7 @@ const CustomTabCalender = ({ tab, type, handleGetData, setActiveCalendar }) => {
     useEffect(() => {
         if (values.firstDate && values.secondDate) {
             const fromDate = new Date(values.firstDate).toISOString();
-            if (new Date(values.firstDate).toISOString() < new Date(values.secondDate).toISOString()) {
-                const toDate = new Date(values.secondDate).toISOString();
-                handleGetData(tab, fromDate, toDate, type);
-                setActiveCalendar(false);
-            } else if (new Date(values.firstDate).toISOString() === new Date(values.secondDate).toISOString()) {
+            if (fromDate <= new Date(values.secondDate).toISOString()) {
                 const toDate = new Date(values.secondDate);
                 toDate.setDate(toDate.getDate() + 1);
                 handleGetData(tab, fromDate, toDate.toISOString(), type);

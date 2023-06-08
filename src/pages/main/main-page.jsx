@@ -24,11 +24,11 @@ const MainPage = () => {
     React.useEffect(() => {
         const date = new Date().toISOString();
         dispatch(getAllCategories());
+        dispatch(getImages());
         dispatch(getBalance());
         dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
         dispatch(getSumByTypes({ type: "income", dateTime: date }));
-        dispatch(getAllOperations({ dateTime: date, quantity: 5 }));
-        dispatch(getImages());
+        dispatch(getAllOperations({ dateTime: date, count: 5 }));
         const swiperContainer = swiperRef.current;
 
         Object.assign(swiperContainer, SLIDER_PARAMS);
@@ -38,11 +38,11 @@ const MainPage = () => {
         <div className="flex">
             <div className={styles.main_page__container}>
                 <Finance />
-                <swiper-container space-between={30} ref={swiperRef} init="false">
-                    <swiper-slide class="yellow-slide">
+                <swiper-container speed="500" space-between={30} ref={swiperRef} init="false">
+                    <swiper-slide>
                         <Categories data={expenses} title={"Категории расходов"} />
                     </swiper-slide>
-                    <swiper-slide class="blue-slide">
+                    <swiper-slide>
                         <Categories data={income} title={"Категории доходов"} />
                     </swiper-slide>
                 </swiper-container>

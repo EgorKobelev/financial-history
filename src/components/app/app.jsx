@@ -30,13 +30,6 @@ const App = () => {
                 <Route path="/login" element={<ProtectedRoute anonymous={true} element={<LoginPage />} />} />
                 <Route path="/recover" element={<ProtectedRoute anonymous={true} element={<RecoverPasswordPage />} />} />
                 <Route path="*" element={<NotFoundPage />} />
-                {/* <Route path="/" element={<Base />}>
-                    <Route index element={<MainPage />} />
-                    <Route path="profile" element={<Profile />} />
-                </Route>
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/statistics" element={<StatisticPage />} /> */}
             </Routes>
         </ErrorBoundary>
     );
