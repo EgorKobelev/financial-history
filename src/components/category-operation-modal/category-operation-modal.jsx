@@ -79,6 +79,7 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                     placeholder="Введите Дату"
                     type="date"
                     name="date"
+                    max={`${new Date().toISOString().substr(0, 10)}`}
                 />
                 <div className="flex">
                     <button onClick={handleDisable} className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}>

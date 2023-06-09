@@ -80,7 +80,7 @@ export const createOperation = createAsyncThunk("opearationReducer/createOperati
 
 export const updateOperation = createAsyncThunk("opearationReducer/updateOperation", async function (info, { rejectWithValue, dispatch }) {
     try {
-        const { data } = await OperationService.updateOperaion(info.form);
+        await OperationService.updateOperaion(info.form);
         toast.success("Операция обновлена", { autoClose: 3000 });
         if (info.isStatistic) {
             return info;
