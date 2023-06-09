@@ -1,0 +1,24 @@
+.logo {
+    padding: 16px;
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    border: var(--border);
+    border-radius: 12px;
+    width: 157px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    font-weight: 700;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.logo:hover {
+    background-color: lightgray;
+}
+.logo__text {
+    font-size: 16px;
+    line-height: 20px;
+    user-select: none;
+}

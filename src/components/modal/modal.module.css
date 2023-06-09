@@ -1,0 +1,45 @@
+.modal {
+    background-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    width: 340px;
+    padding: 8px 8px;
+}
+
+.title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    align-self: center;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 16px;
+}
+
+.button {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    align-self: center;
+}
+
+.button__container {
+    width: 14px;
+    height: 14px;
+    margin-left: auto;
+}
+
+.modal__close_icon {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    align-self: center;
+    stroke: black;
+    transition: stroke 0.2s ease-in-out;
+}
+
+.modal__close_icon:hover {
+    stroke: red;
+}

@@ -1,0 +1,39 @@
+.operations__container {
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    background-color: white;
+    border: var(--border);
+}
+
+.operations__container:not(:last-child) {
+    margin-bottom: 44px;
+}
+
+.operations__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-bottom: solid black 2px;
+}
+
+.operations__footer {
+    height: 36px;
+    width: 100%;
+}
+
+.operations__list {
+    max-height: 629px;
+    overflow-y: auto;
+}
+
+.operations__desc {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #767676;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: -14px;
+}

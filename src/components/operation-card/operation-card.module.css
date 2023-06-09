@@ -1,0 +1,51 @@
+.list__text {
+    display: block;
+    width: 75%;
+}
+
+.list__images {
+    cursor: pointer;
+}
+
+.operations__list_item_container {
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    transition: background-color 0.2s ease-in-out;
+    border-bottom: solid black 1px;
+}
+
+.operations__list_item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list_item__date {
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.operations__list_item_container:hover {
+    background-color: lightgray;
+}
+
+.list__images__first_image {
+    margin-right: 10px;
+    fill: black;
+    cursor: pointer;
+}
+
+.list__images__second_image {
+    cursor: pointer;
+    fill: black;
+}
+
+.operations__list_item_container:hover .list__images__second_image:hover {
+    fill: green;
+}
+
+.operations__list_item_container:hover .list__images__first_image:hover {
+    fill: red;
+}

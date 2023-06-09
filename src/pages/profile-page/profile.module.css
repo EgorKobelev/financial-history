@@ -1,0 +1,138 @@
+.profile__container {
+    width: 840px;
+    padding: 32px 0 130px 0;
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    border: var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.profile__avatar_container {
+    width: 265px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.profile__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile__avatar_button {
+    background-color: #0066ff;
+    padding: 8px;
+    cursor: pointer;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    width: 100px;
+    height: 30px;
+    transition: all 0.2s ease-in-out;
+}
+
+.profile__avatar_button:hover {
+    background-color: #1e90ff;
+}
+
+.profile__avatar_button_delete {
+    background-color: red;
+}
+
+.profile__avatar_button_delete:hover {
+    background-color: #f08080;
+}
+
+.profile__title {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    margin-bottom: 40px;
+}
+
+.profile__button {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #ffffff;
+    padding: 8px 24px;
+    background-color: lightgray;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.profile__button_active:focus {
+    outline: 2px solid #3c3c3c;
+}
+
+.profile__button_active:hover {
+    background-color: #1e90ff;
+}
+
+.profile__button_active:active {
+    background-color: #032861;
+}
+
+.profile__button_active {
+    background-color: #0066ff;
+    cursor: pointer;
+}
+
+.profile__button__exit {
+    color: black;
+    background-color: white;
+    cursor: pointer;
+}
+
+.profile__button__exit:hover {
+    background-color: white;
+}
+
+.profile__text_cocntainer {
+    width: 240px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile__link {
+    font-family: "Montserrat", sans-serif;
+    padding: 0;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.profile__edit_image {
+    position: absolute;
+    top: 25%;
+    cursor: pointer;
+    right: 5%;
+    fill: black;
+}
+
+.profile__edit_image:hover {
+    fill: green;
+}
+
+.input__container {
+    position: relative;
+}
+
+.form__input_active {
+    outline: solid 2px black;
+}

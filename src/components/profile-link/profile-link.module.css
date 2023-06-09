@@ -1,0 +1,37 @@
+.profile_link__container {
+    padding: 8px 12px;
+    box-shadow: var(--box-shadow);
+    background-color: white;
+    border: var(--border);
+    border-radius: 12px;
+    display: flex;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+    align-items: center;
+}
+
+.profile_link__container:hover {
+    background-color: lightgray;
+}
+
+.avatar__container {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    object-fit: cover;
+}
+
+.profile_link__user {
+    margin-right: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.profile_link__image {
+    fill: black;
+}
+
+.profile_link__image:hover {
+    fill: red;
+}

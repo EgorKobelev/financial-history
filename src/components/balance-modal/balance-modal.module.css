@@ -1,0 +1,57 @@
+.finance_card__input {
+    border-radius: 15px;
+    width: 100%;
+    background-color: #e7e7e7;
+    padding: 16px 16px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #505050;
+    border: none;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 14px;
+}
+
+.finance_card__input:focus {
+    background-color: lightgray;
+    color: black;
+}
+
+.container {
+    padding: 0 53px;
+    padding-bottom: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.finance_card__button {
+    width: 100%;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #ffffff;
+    padding: 8px 24px;
+    background-color: lightgray;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.finance_card__button_active {
+    background-color: #0066ff;
+    cursor: pointer;
+}
+
+.finance_card__button_active:focus {
+    outline: 2px solid #3c3c3c;
+}
+
+.finance_card__button_active:hover {
+    background-color: #1e90ff;
+}
+
+.finance_card__button_active:active {
+    background-color: #032861;
+}
