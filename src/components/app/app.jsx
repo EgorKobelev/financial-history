@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import ErrorBoundary from "../../hoc/error-boundary";
 import Base from "../base/base";
 import MainPage from "../../pages/main-page/main-page";
-import RegisterPage from "../../pages/register/register-page";
+import RegisterPage from "../../pages/register-page/register-page";
 import LoginPage from "../../pages/login-page/login-page";
 import Profile from "../../pages/profile-page/profile";
 import { useDispatch } from "react-redux";
