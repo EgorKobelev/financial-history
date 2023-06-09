@@ -7,7 +7,7 @@ import { update } from "../../services/actions/user";
 import { useRef } from "react";
 import { ReactComponent as EditButton } from "../../images/edit.svg";
 import $api from "../../http";
-import defaultImage from "../../images/default-image.png";
+import defaultImage from "../../images/avatar.svg";
 import { toast } from "react-toastify";
 
 const initialValues = {

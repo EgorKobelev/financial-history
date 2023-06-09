@@ -48,8 +48,12 @@ const MainPage = () => {
                 </swiper-container>
             </div>
             <div className={styles.main_page__operations}>
-                {lastOperations.income.length > 0 && <Operations title="Доходы" type="income" data={lastOperations.income} />}
-                {lastOperations.expenses.length > 0 && <Operations title="Расходы" type="expenses" data={lastOperations.expenses} />}
+                {lastOperations.income.length > 0 && (
+                    <Operations subtitle={"* Последние 5 операций"} title="Доходы" type="income" data={lastOperations.income} />
+                )}
+                {lastOperations.expenses.length > 0 && (
+                    <Operations subtitle={"* Последние 5 операций"} title="Расходы" type="expenses" data={lastOperations.expenses} />
+                )}
             </div>
         </div>
     );

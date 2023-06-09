@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./categories.module.css";
 import CategoriesCard from "../categories-card/categories-card";
-import icon from "../../images/categories/circle.svg";
 import Modal from "../modal/modal";
 import addButton from "../../images/add-button.svg";
 import AddingCategoryModal from "../adding-category-modal/adding-category-modal";
