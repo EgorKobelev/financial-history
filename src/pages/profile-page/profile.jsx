@@ -76,7 +76,6 @@ const Profile = () => {
             }
         } catch {
             toast.error("Не удалось добавить картинку");
-            console.warn("Произошла ошибка");
         }
     };
     return (
@@ -182,7 +181,9 @@ const Profile = () => {
                         alt="Отредактировать"
                     />
                 </div>
-
+                {!(/^[a-zA-Z0-9_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password) && values.password.length > 6) &&
+                    values.password.length !== 0 && <p className={styles.form__attention}>Неподходящий пароль</p>}
+                {!isValidEmail(values.email) && values.email.length > 0 && <p className={styles.form__attention}>Некорректная почта</p>}
                 <div>
                     <button type="button" onClick={handleDisable} className={`${styles.profile__button} ${styles.profile__button__exit}`}>
                         Отменить
@@ -193,7 +194,7 @@ const Profile = () => {
                             values.name.length > 1 &&
                             isValidEmail(values.email) &&
                             (values.email !== user.email ||
-                                values.password.length > 6 ||
+                                (/^[a-zA-Z0-9_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password) && values.password.length > 6) ||
                                 values.name !== user.name ||
                                 (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
                                 ? styles.profile__button_active
@@ -205,7 +206,7 @@ const Profile = () => {
                                 values.name.length > 1 &&
                                 isValidEmail(values.email) &&
                                 (values.email !== user.email ||
-                                    values.password.length > 6 ||
+                                    (/^[a-zA-Z0-9_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password) && values.password.length > 6) ||
                                     values.name !== user.name ||
                                     (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
                             )

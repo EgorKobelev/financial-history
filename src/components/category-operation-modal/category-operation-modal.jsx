@@ -47,7 +47,6 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
         }
         handleToggleModal();
     };
-
     return (
         <div className={styles.container}>
             <div className={styles.categories_card__image_container}>
@@ -63,7 +62,7 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                 />
             </div>
             <p className={styles.categories_card__balance}>{`₽ ${values.sum || 0}`}</p>
-            {type === "expenses" && balance <= values.sum && <p className={styles.categories_card__attention}>Введи или пополните баланс</p>}
+            {type === "expenses" && parseInt(sum + balance) < values.sum && <p className={styles.categories_card__attention}>Введи или пополните баланс</p>}
             <form onSubmit={onSubmit}>
                 <input
                     className={styles.categories_card__input}
@@ -91,7 +90,7 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                             /^\d+$/.test(values.sum) &&
                             parseInt(values.sum) > 0 &&
                             values.date !== "" &&
-                            ((type === "expenses" && balance >= values.sum) || type === "income")
+                            ((type === "expenses" && parseInt(sum + balance) >= values.sum) || type === "income")
                                 ? styles.categories_card__button_active
                                 : null
                         }`}
@@ -101,7 +100,7 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                                 /^\d+$/.test(values.sum) &&
                                 parseInt(values.sum) > 0 &&
                                 values.date !== "" &&
-                                ((type === "expenses" && balance >= values.sum) || type === "income")
+                                ((type === "expenses" && parseInt(sum + balance) >= values.sum) || type === "income")
                             )
                         }
                     >

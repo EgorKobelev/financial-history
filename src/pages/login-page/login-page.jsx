@@ -23,11 +23,23 @@ const LoginPage = () => {
                 <input className="form__input" onChange={handleChange} value={values.password} placeholder="Введите Пароль" type="password" name="password" />
                 <button
                     className={`form__button ${
-                        values.email.length > 0 && isValidEmail(values.email) && values.password.length > 6 && /[a-zA-Z]/.test(values.password)
+                        values.email.length > 0 &&
+                        isValidEmail(values.email) &&
+                        /^[a-zA-Z0-9_]+$/.test(values.password) &&
+                        /[a-zA-Z]/.test(values.password) &&
+                        values.password.length > 6
                             ? "form__button_active"
                             : null
                     }`}
-                    disabled={!(values.email.length > 0 && isValidEmail(values.email) && values.password.length > 6 && /[a-zA-Z]/.test(values.password))}
+                    disabled={
+                        !(
+                            values.email.length > 0 &&
+                            isValidEmail(values.email) &&
+                            /^[a-zA-Z0-9_]+$/.test(values.password) &&
+                            /[a-zA-Z]/.test(values.password) &&
+                            values.password.length > 6
+                        )
+                    }
                     type="submit"
                 >
                     Войти
