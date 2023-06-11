@@ -59,7 +59,15 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
                         type="text"
                         name="name"
                     />
-                    <select onChange={(e) => handleChange(e)} value={values.type} className={styles.categories_card__select} name="type">
+                    <select
+                        onChange={(e) => {
+                            e.target.blur();
+                            handleChange(e);
+                        }}
+                        value={values.type}
+                        className={styles.categories_card__select}
+                        name="type"
+                    >
                         <option value="" disabled selected hidden>
                             Выберите группу
                         </option>
