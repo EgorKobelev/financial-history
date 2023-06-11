@@ -43,7 +43,7 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                 oldPrice: oldPrice,
                 id: id,
             };
-            dispatch(updateOperation({ form, isStatistic }));
+            dispatch(updateOperation({ form, isStatistic, type }));
         }
         handleToggleModal();
     };
@@ -63,6 +63,7 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                 />
             </div>
             <p className={styles.categories_card__balance}>{`₽ ${values.sum || 0}`}</p>
+            {type === "expenses" && balance <= values.sum && <p className={styles.categories_card__attention}>Введи или пополните баланс</p>}
             <form onSubmit={onSubmit}>
                 <input
                     className={styles.categories_card__input}

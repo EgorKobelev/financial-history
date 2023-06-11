@@ -85,3 +85,11 @@
 .categories_card__button_active:active {
     background-color: #032861;
 }
+
+.categories_card__attention {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    margin-bottom: 4px;
+    color: red;
+}

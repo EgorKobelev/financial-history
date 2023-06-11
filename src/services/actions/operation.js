@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { OperationService } from "../../utils/operation-service";
-import { getAllCategories } from "./category";
+import { getAllCategories, getFromToCategories } from "./category";
 import { toast } from "react-toastify";
 
 export const createBalance = createAsyncThunk("opearationReducer/createBalance", async function (newBalance, { rejectWithValue }) {
@@ -78,11 +78,19 @@ export const createOperation = createAsyncThunk("opearationReducer/createOperati
     }
 });
 
-export const updateOperation = createAsyncThunk("opearationReducer/updateOperation", async function (info, { rejectWithValue, dispatch }) {
+export const updateOperation = createAsyncThunk("opearationReducer/updateOperation", async function (info, { getState, rejectWithValue, dispatch }) {
     try {
         await OperationService.updateOperaion(info.form);
         toast.success("Операция обновлена", { autoClose: 3000 });
         if (info.isStatistic) {
+            const store = getState();
+            const dates = info.type === "expenses" ? store.operationReducer.statisticExpensesInfo.dates : store.operationReducer.statisticIncomeInfo.dates;
+            const form = {
+                fromDate: dates.from,
+                toDate: dates.to,
+                type: info.type,
+            };
+            dispatch(getFromToCategories(form));
             return info;
         }
         const date = new Date().toISOString();
@@ -98,11 +106,19 @@ export const updateOperation = createAsyncThunk("opearationReducer/updateOperati
     }
 });
 
-export const deleteOperaion = createAsyncThunk("opearationReducer/deleteOperation", async function (form, { rejectWithValue, dispatch }) {
+export const deleteOperaion = createAsyncThunk("opearationReducer/deleteOperation", async function (form, { getState, rejectWithValue, dispatch }) {
     try {
         await OperationService.deleteOperaion(form.id);
         toast.success("Операция удалена", { autoClose: 3000 });
         if (form.isStatistic) {
+            const store = getState();
+            const dates = form.type === "expenses" ? store.operationReducer.statisticExpensesInfo.dates : store.operationReducer.statisticIncomeInfo.dates;
+            const data = {
+                fromDate: dates.from,
+                toDate: dates.to,
+                type: form.type,
+            };
+            dispatch(getFromToCategories(data));
             return { id: form.id, isStatistic: form.isStatistic };
         }
         const date = new Date().toISOString();

@@ -22,7 +22,7 @@ const OperationCard = ({ element, type, isStatistic }) => {
     };
 
     const handleDeleteOperation = () => {
-        dispatch(deleteOperaion({ id: element.id, isStatistic }));
+        dispatch(deleteOperaion({ id: element.id, isStatistic, type }));
     };
 
     return (

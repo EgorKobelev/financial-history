@@ -21,6 +21,7 @@ const RegisterPage = () => {
         repeatPassword: "",
         name: "",
     });
+    console.log(/[a-zA-Z]/.test(values.password));
     return (
         <div className="form__container">
             <h2 className="form__title">Регистрация</h2>
@@ -42,6 +43,7 @@ const RegisterPage = () => {
                         isValidEmail(values.email) &&
                         values.password.length > 6 &&
                         values.name.length > 1 &&
+                        /[a-zA-Z]/.test(values.password) &&
                         values.password === values.repeatPassword
                             ? "form__button_active"
                             : null
@@ -52,7 +54,8 @@ const RegisterPage = () => {
                             isValidEmail(values.email) &&
                             values.password.length > 6 &&
                             values.name.length > 1 &&
-                            values.password === values.repeatPassword
+                            values.password === values.repeatPassword &&
+                            /[a-zA-Z]/.test(values.password)
                         )
                     }
                     type="submit"
