@@ -19,12 +19,12 @@
 }
 
 .operations__footer {
-    height: 36px;
+    height: 40px;
     width: 100%;
 }
 
 .operations__list {
-    max-height: 629px;
+    max-height: 575px;
     overflow-y: auto;
 }
 

@@ -1,0 +1,11 @@
+.form__attention {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: red;
+    margin-bottom: 4px;
+}
+
+.form__attention:first {
+    margin-top: -8px;
+}
