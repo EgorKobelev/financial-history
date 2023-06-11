@@ -117,7 +117,7 @@ const operationSlice = createSlice({
                 state.status.isLoading = true;
             })
             .addCase(createBalance.fulfilled, (state, action) => {
-                state.sum.balance = action.payload;
+                state.sum.balance = parseInt(action.payload);
                 state.status.isLoading = false;
             })
             .addCase(createBalance.rejected, (state) => {
