@@ -49,10 +49,10 @@ const MainPage = () => {
             </div>
             <div className={styles.main_page__operations}>
                 {lastOperations.income.length > 0 && (
-                    <Operations subtitle={"* Последние 5 операций"} title="Доходы" type="income" data={lastOperations.income} />
+                    <Operations subtitle={"* Последние 5 операций за месяц"} title="Доходы" type="income" data={lastOperations.income} />
                 )}
                 {lastOperations.expenses.length > 0 && (
-                    <Operations subtitle={"* Последние 5 операций"} title="Расходы" type="expenses" data={lastOperations.expenses} />
+                    <Operations subtitle={"* Последние 5 операций за месяц"} title="Расходы" type="expenses" data={lastOperations.expenses} />
                 )}
             </div>
         </div>

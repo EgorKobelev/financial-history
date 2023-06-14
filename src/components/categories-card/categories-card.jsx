@@ -7,11 +7,18 @@ import { ReactComponent as CloseButton } from "../../images/close.svg";
 import AddingCategoryModal from "../adding-category-modal/adding-category-modal";
 import { useDispatch } from "react-redux";
 import { deleteCategory } from "../../services/actions/category";
+import ConfirmationModal from "../confirmation-modal/confirmation-modal";
 
 const CategoriesCard = ({ title, image, id, sum, type }) => {
     const dispatch = useDispatch();
     const [modalOparetionActive, setModalOparetionActive] = React.useState(false);
     const [modalCategoryActive, setModaCategoryActive] = React.useState(false);
+    const [confirmationActive, setConfirmationActive] = React.useState(false);
+
+    const handleToggleConf = () => {
+        setConfirmationActive(!confirmationActive);
+    };
+
     const handleToggleOperationModal = () => {
         setModalOparetionActive(!modalOparetionActive);
     };
@@ -42,7 +49,7 @@ const CategoriesCard = ({ title, image, id, sum, type }) => {
                     <CloseButton
                         onClick={(e) => {
                             e.stopPropagation();
-                            handleDeleteCategory();
+                            setConfirmationActive(!confirmationActive);
                         }}
                         className={`${styles.func__images} ${styles.func__images_close}`}
                     />
@@ -63,6 +70,9 @@ const CategoriesCard = ({ title, image, id, sum, type }) => {
                 <Modal title={"Отредактировать"} handleToggleModal={handleToggleCategoryModal}>
                     <AddingCategoryModal id={id} type={type} handleToggleModal={handleToggleCategoryModal} />
                 </Modal>
+            )}
+            {confirmationActive && (
+                <ConfirmationModal onClick={handleDeleteCategory} handleToggleModal={handleToggleConf} title="Вы точно хотите удалить?"></ConfirmationModal>
             )}
         </>
     );

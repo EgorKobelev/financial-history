@@ -23,7 +23,6 @@
 }
 
 .categories_card__container:hover {
-    /* transform: scale(1.05); */
     background-color: lightgray;
     transition: transform 0.2s ease-in-out;
 }
@@ -101,6 +100,9 @@
     font-weight: 500;
     font-size: 13px;
     line-height: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .categories_card__desc {

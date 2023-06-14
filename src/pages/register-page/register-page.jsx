@@ -26,9 +26,18 @@ const RegisterPage = () => {
         <div className="form__container">
             <h2 className="form__title">Регистрация</h2>
             <form className="form" onSubmit={handleSubmit}>
+                {values.name.length <= 1 && values.name.length > 0 && <p className="form__attention">Имя состоит минимум из 2 символов.</p>}
                 <input className="form__input" onChange={handleChange} value={values.name} placeholder="Введите Имя" type="text" name="name" />
+                {!isValidEmail(values.email) && values.email.length > 0 && <p className="form__attention">Некорректная почта.</p>}
                 <input className="form__input" onChange={handleChange} value={values.email} placeholder="Введите Почту" type="email" name="email" />
+                {values.password.length < 6 && values.password.length !== 0 && <p className="form__attention">Минимум 6 символов.</p>}
+                {!(/^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password)) && values.password.length !== 0 && (
+                    <p className="form__attention">Должны быть буквы латинского алфавита. Может включать цифры и символы.</p>
+                )}
                 <input className="form__input" onChange={handleChange} value={values.password} placeholder="Введите Пароль" type="password" name="password" />
+                {values.password.length > 0 && values.repeatPassword.length > 0 && values.password !== values.repeatPassword && (
+                    <p className="form__attention">Пароли не совпадают.</p>
+                )}
                 <input
                     className="form__input"
                     onChange={handleChange}
@@ -37,15 +46,12 @@ const RegisterPage = () => {
                     type="password"
                     name="repeatPassword"
                 />
-                {!(/^[a-zA-Z0-9_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password) && values.password.length > 6) &&
-                    values.password.length !== 0 && <p className={styles.form__attention}>Неподходящий пароль</p>}
-                {!isValidEmail(values.email) && values.email.length > 0 && <p className={styles.form__attention}>Некорректная почта</p>}
                 <button
                     className={`form__button ${
                         values.email.length > 0 &&
                         isValidEmail(values.email) &&
                         values.name.length > 1 &&
-                        /^[a-zA-Z0-9_]+$/.test(values.password) &&
+                        /^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) &&
                         /[a-zA-Z]/.test(values.password) &&
                         values.password.length > 6 &&
                         values.password === values.repeatPassword
@@ -56,7 +62,7 @@ const RegisterPage = () => {
                         !(
                             values.email.length > 0 &&
                             isValidEmail(values.email) &&
-                            /^[a-zA-Z0-9_]+$/.test(values.password) &&
+                            /^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) &&
                             /[a-zA-Z]/.test(values.password) &&
                             values.password.length > 6 &&
                             values.name.length > 1 &&

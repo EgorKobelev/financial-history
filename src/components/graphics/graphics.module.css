@@ -18,7 +18,7 @@
 }
 
 .doughnut__container {
-    width: 240px;
+    width: 228px;
     height: 228px;
     margin-left: auto;
     margin-right: auto;
@@ -33,7 +33,12 @@
     line-height: 24px;
     top: 50%;
     left: 50%;
-    transform: translate(-60%, -50%);
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 160px;
+    text-align: center;
 }
 
 .graphics__no_data_container {

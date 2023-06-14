@@ -2,12 +2,23 @@ import styles from "./category-operation-modal.module.css";
 import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { createOperation, updateOperation } from "../../services/actions/operation";
+import ToolTip from "../tooltip/tooltip";
 
 const getBalance = (store) => store.operationReducer.sum.balance;
 const getExpenses = (store) => store.categoryReducer.expenses;
 const getIncome = (store) => store.categoryReducer.income;
 
-const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, isStatistic, isCreateNewOperation = true, sum = "", date = "", id }) => {
+const CategoryOperationModal = ({
+    image,
+    handleToggleModal,
+    type,
+    categoryId,
+    isStatistic,
+    isCreateNewOperation = true,
+    sum = "",
+    date = new Date().toISOString().split("T")[0],
+    id,
+}) => {
     const dispatch = useDispatch();
     const balance = useSelector(getBalance);
     const expenses = useSelector(getExpenses);
@@ -17,14 +28,6 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
         date: date,
     });
     const oldPrice = sum;
-
-    const handleDisable = (e) => {
-        e.preventDefault();
-        setValues({
-            sum: sum,
-            date: date,
-        });
-    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -61,7 +64,11 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                     alt="Категория"
                 />
             </div>
-            <p className={styles.categories_card__balance}>{`₽ ${values.sum || 0}`}</p>
+            <div style={{ marginBottom: 20 }}>
+                <ToolTip tooltip={`${values.sum}`.length >= 24 ? `₽ ${values.sum || 0}` : null}>
+                    <p className={styles.categories_card__balance}>{`₽ ${values.sum || 0}`}</p>
+                </ToolTip>
+            </div>
             {type === "expenses" && parseInt(sum + balance) < values.sum && <p className={styles.categories_card__attention}>Введи или пополните баланс</p>}
             <form onSubmit={onSubmit}>
                 <input
@@ -82,7 +89,7 @@ const CategoryOperationModal = ({ image, handleToggleModal, type, categoryId, is
                     max={`${new Date().toISOString().substr(0, 10)}`}
                 />
                 <div className="flex">
-                    <button onClick={handleDisable} className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}>
+                    <button onClick={handleToggleModal} className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}>
                         Отменить
                     </button>
                     <button

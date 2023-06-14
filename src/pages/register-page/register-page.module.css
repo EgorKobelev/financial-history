@@ -3,9 +3,6 @@
     font-size: 13px;
     line-height: 16px;
     color: red;
+    /* margin-top: -12px; */
     margin-bottom: 4px;
-}
-
-.form__attention:first {
-    margin-top: -8px;
 }
