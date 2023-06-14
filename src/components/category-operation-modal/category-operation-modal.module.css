@@ -21,7 +21,11 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-    margin-bottom: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 240px;
+    text-align: center;
 }
 
 .categories_card__input {

@@ -4,6 +4,7 @@
     border-radius: 15px;
     width: 340px;
     padding: 8px 8px;
+    height: 120px;
 }
 
 .title {
@@ -15,14 +16,36 @@
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
-    width: 100%;
+    margin-bottom: 16px;
 }
 
-.button {
-    width: 24px;
-    height: 24px;
+.modal__button {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    padding: 8px 40px;
     cursor: pointer;
-    align-self: center;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.modal__button_yes {
+    background-color: red;
+    color: white;
+}
+
+.modal__button_yes:hover {
+    background-color: #f08080;
+}
+
+.modal__button_no {
+}
+
+.modal__actions_container {
+    display: flex;
+    justify-content: center;
 }
 
 .button__container {

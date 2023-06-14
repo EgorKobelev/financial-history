@@ -105,6 +105,7 @@ const Profile = () => {
                 <input ref={fileRef} accept="image/png, image/jpeg" type="file" onChange={handleChangeFile} hidden />
             </div>
             <form className="form" onSubmit={handleSubmit}>
+                {values.name.length <= 1 && values.name.length > 0 && <p className="form__attention">Имя состоит минимум из 2 символов.</p>}
                 <div className={styles.input__container}>
                     <input
                         className="form__input form__input--profile"
@@ -130,6 +131,7 @@ const Profile = () => {
                         alt="Отредактировать"
                     />
                 </div>
+                {!isValidEmail(values.email) && values.email.length > 0 && <p className="form__attention">Некорректная почта.</p>}
                 <div className={styles.input__container}>
                     <input
                         className="form__input form__input--profile"
@@ -155,6 +157,10 @@ const Profile = () => {
                         alt="Отредактировать"
                     />
                 </div>
+                {values.password.length < 6 && values.password.length !== 0 && <p className="form__attention">Минимум 6 символов.</p>}
+                {!(/^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password)) && values.password.length !== 0 && (
+                    <p className="form__attention">Должны быть буквы латинского алфавита. Может включать цифры и символы.</p>
+                )}
                 <div className={styles.input__container}>
                     <input
                         ref={passwordRef}
@@ -181,12 +187,10 @@ const Profile = () => {
                         alt="Отредактировать"
                     />
                 </div>
-                {!(/^[a-zA-Z0-9_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password) && values.password.length > 6) &&
-                    values.password.length !== 0 && <p className={styles.form__attention}>Неподходящий пароль</p>}
-                {!isValidEmail(values.email) && values.email.length > 0 && <p className={styles.form__attention}>Некорректная почта</p>}
+
                 <div>
                     <button type="button" onClick={handleDisable} className={`${styles.profile__button} ${styles.profile__button__exit}`}>
-                        Отменить
+                        Очистить
                     </button>
                     <button
                         className={`${styles.profile__button} ${

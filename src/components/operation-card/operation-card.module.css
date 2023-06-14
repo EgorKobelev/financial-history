@@ -1,6 +1,9 @@
 .list__text {
     display: block;
     width: 75%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .list__images {
@@ -13,7 +16,7 @@
     font-size: 14px;
     line-height: 17px;
     transition: background-color 0.2s ease-in-out;
-    border-bottom: solid black 1px;
+    border-bottom: solid #c7c7c7 1px;
 }
 
 .operations__list_item {

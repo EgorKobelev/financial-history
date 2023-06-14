@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./finance-card.module.css";
 import Modal from "../modal/modal";
 import BalanceModal from "../balance-modal/balance-modal";
+import ToolTip from "../tooltip/tooltip";
 
 const FinanceCard = ({ title, balance, desc }) => {
     const [activeInput, setActiveUnput] = React.useState(false);
@@ -16,7 +17,11 @@ const FinanceCard = ({ title, balance, desc }) => {
                 className={`${styles.card__container} ${title === "Баланс" ? styles.card__container_active : null}`}
             >
                 <h3 className={styles.card__title}>{title}</h3>
-                {<p className={styles.card__balance}>{`₽ ${balance}`}</p>}
+                {
+                    <ToolTip tooltip={`${balance}`.length >= 11 ? `₽ ${balance}` : null}>
+                        <p className={styles.card__balance}>{`₽ ${balance}`}</p>
+                    </ToolTip>
+                }
             </div>
             <p className={styles.card__desc}>{desc}</p>
             {activeInput && (

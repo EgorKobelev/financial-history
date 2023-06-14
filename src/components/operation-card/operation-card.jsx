@@ -7,6 +7,7 @@ import { ReactComponent as EditButton } from "../../images/edit.svg";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteOperaion } from "../../services/actions/operation";
+import ConfirmationModal from "../confirmation-modal/confirmation-modal";
 
 const getExpenses = (store) => store.categoryReducer.expenses;
 const getIncome = (store) => store.categoryReducer.income;
@@ -16,9 +17,14 @@ const OperationCard = ({ element, type, isStatistic }) => {
     const income = useSelector(getIncome);
     const dispatch = useDispatch();
     const [activeModal, setActiveModal] = React.useState(false);
+    const [confirmationActive, setConfirmationActive] = React.useState(false);
 
     const handleToggleModal = () => {
         setActiveModal(!activeModal);
+    };
+
+    const handleToggleConf = () => {
+        setConfirmationActive(!confirmationActive);
     };
 
     const handleDeleteOperation = () => {
@@ -29,9 +35,9 @@ const OperationCard = ({ element, type, isStatistic }) => {
         <div className={styles.operations__list_item_container}>
             <p className={styles.list_item__date}>{moment.utc(element.dateTime).format("DD-MM-YYYY")}</p>
             <li className={styles.operations__list_item}>
-                <p className={styles.list__text}>{`${element.nameCategory} - ${element.price} ₽`}</p>
+                <p className={styles.list__text}>{`${element.nameCategory}: ${element.price} ₽`}</p>
                 <div className={styles.list__images}>
-                    <DeleteIcon onClick={handleDeleteOperation} className={styles.list__images__first_image} alt="Удалить" />
+                    <DeleteIcon onClick={handleToggleConf} className={styles.list__images__first_image} alt="Удалить" />
                     <EditButton onClick={handleToggleModal} className={styles.list__images__second_image} alt="Отредактировать" />
                 </div>
             </li>
@@ -52,6 +58,9 @@ const OperationCard = ({ element, type, isStatistic }) => {
                         }
                     />
                 </Modal>
+            )}
+            {confirmationActive && (
+                <ConfirmationModal onClick={handleDeleteOperation} handleToggleModal={handleToggleConf} title="Вы точно хотите удалить?"></ConfirmationModal>
             )}
         </div>
     );

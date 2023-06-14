@@ -6,11 +6,19 @@ import { toast } from "react-toastify";
 
 const RecoverPasswordPage = () => {
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            $api.patch("Authorize/recoverPassword", values);
-            toast.success("Уведомление отправлено вам на почту", { autoClose: 3000 });
+            await $api
+                .patch("Authorize/recoverPassword", values)
+                .then((response) => {
+                    if (response) {
+                        toast.success("Уведомление отправлено вам на почту", { autoClose: 3000 });
+                    } else {
+                        toast.error("Не удалось отправить письмо для восстановления", { autoClose: 3000 });
+                    }
+                })
+                .catch(() => toast.error("Не удалось отправить письмо для восстановления", { autoClose: 3000 }));
         } catch (e) {
             toast.error("Не удалось отправить письмо для восстановления", { autoClose: 3000 });
         }
@@ -22,6 +30,7 @@ const RecoverPasswordPage = () => {
         <div className="form__container">
             <h2 className="form__title">Восстановление</h2>
             <form className="form" onSubmit={handleSubmit}>
+                {!isValidEmail(values.email) && values.email.length > 0 && <p className="form__attention">Некорректная почта.</p>}
                 <input className="form__input" onChange={handleChange} value={values.email} placeholder="Введите Почту" type="email" name="email" />
                 <button
                     disabled={!isValidEmail(values.email)}

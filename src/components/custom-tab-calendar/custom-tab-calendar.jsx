@@ -51,9 +51,9 @@ const CustomTabCalender = ({ tab, type, handleGetData, setActiveCalendar }) => {
                 }}
                 onChange={(e) => {
                     handleChange(e);
-                    const input = document.getElementById("stitistic-input--1");
-                    input.type = "text";
-                    input.blur();
+                    // const input = document.getElementById("stitistic-input--1");
+                    // input.type = "text";
+                    // input.blur();
                 }}
                 className={styles.tab__period_input}
             />
@@ -82,9 +82,9 @@ const CustomTabCalender = ({ tab, type, handleGetData, setActiveCalendar }) => {
                 name="secondDate"
                 onChange={(e) => {
                     handleChange(e);
-                    const input = document.getElementById("stitistic-input--2");
-                    input.type = "text";
-                    input.blur();
+                    // const input = document.getElementById("stitistic-input--2");
+                    // input.type = "text";
+                    // input.blur();
                 }}
                 id="stitistic-input--2"
                 type="text"

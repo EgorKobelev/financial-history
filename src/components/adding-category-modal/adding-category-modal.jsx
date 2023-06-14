@@ -17,17 +17,12 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
     const [isShowImages, setIsShowImages] = useState(false);
     const [img, setImg] = useState(category ? category.img : null);
 
-    const { values, handleChange, setValues } = useForm({
+    const { values, handleChange } = useForm({
         name: category ? category?.name : null,
         type: type || "",
     });
 
     const dispatch = useDispatch();
-
-    const handleDisable = (e) => {
-        e.preventDefault();
-        setValues({ name: category ? category?.name : null, type: type || "" });
-    };
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -75,7 +70,7 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
                         <option value="expenses">Расходы</option>
                     </select>
                     <div className="flex">
-                        <button onClick={handleDisable} className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}>
+                        <button onClick={handleToggleModal} className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}>
                             Отменить
                         </button>
                         <button
