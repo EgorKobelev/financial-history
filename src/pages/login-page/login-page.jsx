@@ -32,7 +32,7 @@ const LoginPage = () => {
                         isValidEmail(values.email) &&
                         /^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) &&
                         /[a-zA-Z]/.test(values.password) &&
-                        values.password.length > 6
+                        values.password.length >= 6
                             ? "form__button_active"
                             : null
                     }`}
@@ -42,7 +42,7 @@ const LoginPage = () => {
                             isValidEmail(values.email) &&
                             /^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) &&
                             /[a-zA-Z]/.test(values.password) &&
-                            values.password.length > 6
+                            values.password.length >= 6
                         )
                     }
                     type="submit"

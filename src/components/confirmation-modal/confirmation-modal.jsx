@@ -2,6 +2,7 @@ import { memo, useEffect } from "react";
 import ReactDOM from "react-dom";
 import styles from "./confirmation-modal.module.css";
 import { ReactComponent as CloseButton } from "../../images/close.svg";
+import { toast } from "react-toastify";
 
 const modalContainer = document.getElementById("modal-container");
 const body = document.body;
@@ -12,6 +13,7 @@ const ConfirmationModal = memo(({ onClick, handleToggleModal, ...props }) => {
         body.style.overflow = "hidden";
         modalContainer.classList.add("confirmation-container--active");
         document.addEventListener("keydown", handleEscPressed);
+        toast.dismiss();
         return () => {
             modalContainer.classList.remove("confirmation-container--active");
             body.style.overflow = "auto";

@@ -198,7 +198,7 @@ const Profile = () => {
                             values.name.length > 1 &&
                             isValidEmail(values.email) &&
                             (values.email !== user.email ||
-                                (/^[a-zA-Z0-9_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password) && values.password.length > 6) ||
+                                (/^[a-zA-Z0-9_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password) && values.password.length >= 6) ||
                                 values.name !== user.name ||
                                 (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
                                 ? styles.profile__button_active
@@ -210,7 +210,7 @@ const Profile = () => {
                                 values.name.length > 1 &&
                                 isValidEmail(values.email) &&
                                 (values.email !== user.email ||
-                                    (/^[a-zA-Z0-9_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password) && values.password.length > 6) ||
+                                    (/^[a-zA-Z0-9_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password) && values.password.length >= 6) ||
                                     values.name !== user.name ||
                                     (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
                             )
