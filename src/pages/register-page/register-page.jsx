@@ -53,7 +53,7 @@ const RegisterPage = () => {
                         values.name.length > 1 &&
                         /^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) &&
                         /[a-zA-Z]/.test(values.password) &&
-                        values.password.length > 6 &&
+                        values.password.length >= 6 &&
                         values.password === values.repeatPassword
                             ? "form__button_active"
                             : null
@@ -64,7 +64,7 @@ const RegisterPage = () => {
                             isValidEmail(values.email) &&
                             /^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) &&
                             /[a-zA-Z]/.test(values.password) &&
-                            values.password.length > 6 &&
+                            values.password.length >= 6 &&
                             values.name.length > 1 &&
                             values.password === values.repeatPassword
                         )
