@@ -8,6 +8,7 @@ import AddingCategoryModal from "../adding-category-modal/adding-category-modal"
 import { useDispatch } from "react-redux";
 import { deleteCategory } from "../../services/actions/category";
 import ConfirmationModal from "../confirmation-modal/confirmation-modal";
+import ToolTip from "../tooltip/tooltip";
 
 const CategoriesCard = ({ title, image, id, sum, type }) => {
     const dispatch = useDispatch();
@@ -33,7 +34,10 @@ const CategoriesCard = ({ title, image, id, sum, type }) => {
     return (
         <>
             <div onClick={handleToggleOperationModal} className={styles.categories_card__container}>
-                <h3 className={styles.categories_card__title}>{title}</h3>
+                {/* <h3 className={styles.categories_card__title}>{title}</h3> */}
+                <ToolTip tooltip={`${title}`.length >= 6 ? title : null}>
+                    <h3 className={styles.categories_card__title}>{title}</h3>
+                </ToolTip>
                 <div className={styles.categories_card__image_container}>
                     <img className={styles.categories_card__image} src={image} alt="Категория" />
                 </div>
@@ -72,7 +76,11 @@ const CategoriesCard = ({ title, image, id, sum, type }) => {
                 </Modal>
             )}
             {confirmationActive && (
-                <ConfirmationModal onClick={handleDeleteCategory} handleToggleModal={handleToggleConf} title="Вы точно хотите удалить?"></ConfirmationModal>
+                <ConfirmationModal
+                    onClick={handleDeleteCategory}
+                    handleToggleModal={handleToggleConf}
+                    title="Вы точно хотите удалить?"
+                ></ConfirmationModal>
             )}
         </>
     );
