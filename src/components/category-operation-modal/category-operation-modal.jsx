@@ -3,6 +3,7 @@ import { useForm } from "../../hooks/useForm";
 import { useDispatch, useSelector } from "react-redux";
 import { createOperation, updateOperation } from "../../services/actions/operation";
 import ToolTip from "../tooltip/tooltip";
+import defaultImage from "../../images/default-image.png";
 
 const getBalance = (store) => store.operationReducer.sum.balance;
 const getExpenses = (store) => store.categoryReducer.expenses;
@@ -23,7 +24,7 @@ const CategoryOperationModal = ({
     const balance = useSelector(getBalance);
     const expenses = useSelector(getExpenses);
     const income = useSelector(getIncome);
-    const { values, handleChange, setValues } = useForm({
+    const { values, handleChange } = useForm({
         sum: sum,
         date: date,
     });
@@ -57,6 +58,7 @@ const CategoryOperationModal = ({
                     className={styles.categories_card__image}
                     src={
                         image ||
+                        defaultImage ||
                         (type === "expenses"
                             ? expenses.find((operation) => operation.id === categoryId).img
                             : income.find((operation) => operation.id === categoryId).img)
@@ -69,7 +71,9 @@ const CategoryOperationModal = ({
                     <p className={styles.categories_card__balance}>{`₽ ${values.sum || 0}`}</p>
                 </ToolTip>
             </div>
-            {type === "expenses" && parseInt(sum + balance) < values.sum && <p className={styles.categories_card__attention}>Введи или пополните баланс</p>}
+            {type === "expenses" && parseInt(sum + balance) < values.sum && (
+                <p className={styles.categories_card__attention}>Введи или пополните баланс</p>
+            )}
             <form onSubmit={onSubmit}>
                 <input
                     className={styles.categories_card__input}
@@ -89,7 +93,10 @@ const CategoryOperationModal = ({
                     max={`${new Date().toISOString().substr(0, 10)}`}
                 />
                 <div className="flex">
-                    <button onClick={handleToggleModal} className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}>
+                    <button
+                        onClick={handleToggleModal}
+                        className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}
+                    >
                         Отменить
                     </button>
                     <button

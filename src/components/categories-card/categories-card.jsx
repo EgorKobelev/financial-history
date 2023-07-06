@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { deleteCategory } from "../../services/actions/category";
 import ConfirmationModal from "../confirmation-modal/confirmation-modal";
 import ToolTip from "../tooltip/tooltip";
+import defaultImage from "../../images/default-image.png";
 
 const CategoriesCard = ({ title, image, id, sum, type }) => {
     const dispatch = useDispatch();
@@ -34,12 +35,11 @@ const CategoriesCard = ({ title, image, id, sum, type }) => {
     return (
         <>
             <div onClick={handleToggleOperationModal} className={styles.categories_card__container}>
-                {/* <h3 className={styles.categories_card__title}>{title}</h3> */}
-                <ToolTip tooltip={`${title}`.length >= 6 ? title : null}>
+                <ToolTip tooltip={`${title}`.length >= 22 ? title : null}>
                     <h3 className={styles.categories_card__title}>{title}</h3>
                 </ToolTip>
                 <div className={styles.categories_card__image_container}>
-                    <img className={styles.categories_card__image} src={image} alt="Категория" />
+                    <img className={styles.categories_card__image} src={image || defaultImage} alt="Категория" />
                 </div>
                 <p className={styles.categories_card__balance}>{`₽ ${sum}`}</p>
                 <div className={styles.categories_card__func}>

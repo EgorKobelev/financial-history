@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import React from "react";
 import styles from "./tooltip.module.css";
 import ReactDOM from "react-dom";
 
@@ -13,11 +12,10 @@ const ToolTip = ({ children, tooltip }) => {
             <div
                 ref={container}
                 onMouseEnter={({ clientX, clientY }) => {
-                    console.log(document.documentElement.scrollHeight);
                     if (!container.current) return;
                     setCoords({
                         x: clientX + "px",
-                        y: window.pageYOffset + clientY + 10 + "px",
+                        y: window.scrollY + clientY + 5 + "px",
                     });
                 }}
                 onMouseLeave={() => {
@@ -31,9 +29,9 @@ const ToolTip = ({ children, tooltip }) => {
             </div>
             {tooltip && coords
                 ? ReactDOM.createPortal(
-                      <div id="tooltip" style={{ top: coords.y, left: coords.x }} className={styles.tooltip__text_container}>
+                      <p id="tooltip" style={{ top: coords.y, left: coords.x }} className={styles.tooltip__text_container}>
                           {tooltip}
-                      </div>,
+                      </p>,
                       modalContainer
                   )
                 : null}

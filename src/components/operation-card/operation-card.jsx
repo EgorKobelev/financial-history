@@ -8,6 +8,7 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteOperaion } from "../../services/actions/operation";
 import ConfirmationModal from "../confirmation-modal/confirmation-modal";
+import ToolTip from "../tooltip/tooltip";
 
 const getExpenses = (store) => store.categoryReducer.expenses;
 const getIncome = (store) => store.categoryReducer.income;
@@ -35,7 +36,13 @@ const OperationCard = ({ element, type, isStatistic }) => {
         <div className={styles.operations__list_item_container}>
             <p className={styles.list_item__date}>{moment.utc(element.dateTime).format("DD-MM-YYYY")}</p>
             <li className={styles.operations__list_item}>
-                <p className={styles.list__text}>{`${element.nameCategory}: ${element.price} ₽`}</p>
+                <ToolTip
+                    tooltip={
+                        `${element.nameCategory}: ${element.price} ₽`.length >= 31 ? `${element.nameCategory}: ${element.price} ₽` : null
+                    }
+                >
+                    <p className={styles.list__text}>{`${element.nameCategory}: ${element.price} ₽`}</p>
+                </ToolTip>
                 <div className={styles.list__images}>
                     <DeleteIcon onClick={handleToggleConf} className={styles.list__images__first_image} alt="Удалить" />
                     <EditButton onClick={handleToggleModal} className={styles.list__images__second_image} alt="Отредактировать" />
@@ -60,7 +67,11 @@ const OperationCard = ({ element, type, isStatistic }) => {
                 </Modal>
             )}
             {confirmationActive && (
-                <ConfirmationModal onClick={handleDeleteOperation} handleToggleModal={handleToggleConf} title="Вы точно хотите удалить?"></ConfirmationModal>
+                <ConfirmationModal
+                    onClick={handleDeleteOperation}
+                    handleToggleModal={handleToggleConf}
+                    title="Вы точно хотите удалить?"
+                ></ConfirmationModal>
             )}
         </div>
     );

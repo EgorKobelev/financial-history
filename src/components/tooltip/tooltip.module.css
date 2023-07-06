@@ -1,6 +1,7 @@
 .tooltip__container {
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
+    align-self: start;
     width: 100%;
 }
 

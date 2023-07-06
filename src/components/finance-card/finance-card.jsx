@@ -17,7 +17,7 @@ const FinanceCard = ({ title, balance, desc }) => {
                 className={`${styles.card__container} ${title === "Баланс" ? styles.card__container_active : null}`}
             >
                 <h3 className={styles.card__title}>{title}</h3>
-                <ToolTip tooltip={`${balance}`.length >= 6 ? `₽ ${balance}` : null}>
+                <ToolTip tooltip={`${balance}`.length >= 12 ? `₽ ${balance}` : null}>
                     <p className={styles.card__balance}>{`₽ ${balance}`}</p>
                 </ToolTip>
             </div>

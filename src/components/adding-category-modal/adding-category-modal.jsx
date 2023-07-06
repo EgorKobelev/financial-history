@@ -13,10 +13,10 @@ const getIncome = (store) => store.categoryReducer.income;
 const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
     const income = useSelector(getIncome);
     const expenses = useSelector(getExpenses);
-    const category = type === "expenses" ? expenses.find((operation) => operation.id === id) : income.find((operation) => operation.id === id);
+    const category =
+        type === "expenses" ? expenses.find((operation) => operation.id === id) : income.find((operation) => operation.id === id);
     const [isShowImages, setIsShowImages] = useState(false);
     const [img, setImg] = useState(category ? category.img : null);
-
     const { values, handleChange } = useForm({
         name: category ? category?.name : null,
         type: type || "",
@@ -33,7 +33,6 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
         }
         handleToggleModal();
     };
-
     return (
         <>
             <div className={styles.container}>
@@ -66,11 +65,18 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
                         <option value="" disabled selected hidden>
                             Выберите группу
                         </option>
-                        <option value="income">Доходы</option>
-                        <option value="expenses">Расходы</option>
+                        <option selected={type === "income"} value="income">
+                            Доходы
+                        </option>
+                        <option selected={type === "expenses"} value="expenses">
+                            Расходы
+                        </option>
                     </select>
                     <div className="flex">
-                        <button onClick={handleToggleModal} className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}>
+                        <button
+                            onClick={handleToggleModal}
+                            className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}
+                        >
                             Отменить
                         </button>
                         <button
@@ -78,12 +84,13 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
                                 (values.type === "income" || values.type === "expenses") &&
                                 values.name !== "" &&
                                 values.type !== "" &&
-                                img &&
                                 (id ? category.name !== values.name || category.img !== img || category.type !== values.type : true)
                                     ? styles.categories_card__button_active
                                     : null
                             }`}
-                            disabled={!((values.type === "income" || values.type === "expenses") && values.name !== "" && values.type !== "" && img)}
+                            disabled={
+                                !((values.type === "income" || values.type === "expenses") && values.name !== "" && values.type !== "")
+                            }
                             type="submit"
                         >
                             {id ? "Изменить" : "Сохранить"}

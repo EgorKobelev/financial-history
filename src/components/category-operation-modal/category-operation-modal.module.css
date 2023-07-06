@@ -41,6 +41,12 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.categories_card__image {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
 .categories_card__input:focus {
     background-color: lightgray;
     color: black;

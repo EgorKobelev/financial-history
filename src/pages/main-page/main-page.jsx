@@ -40,10 +40,10 @@ const MainPage = () => {
                 <Finance />
                 <swiper-container speed="500" space-between={30} ref={swiperRef} init="false">
                     <swiper-slide>
-                        <Categories data={expenses} title={"Категории расходов"} />
+                        <Categories type={"expenses"} data={expenses} title={"Категории расходов"} />
                     </swiper-slide>
                     <swiper-slide>
-                        <Categories data={income} title={"Категории доходов"} />
+                        <Categories type={"income"} data={income} title={"Категории доходов"} />
                     </swiper-slide>
                 </swiper-container>
             </div>
@@ -52,7 +52,12 @@ const MainPage = () => {
                     <Operations subtitle={"* Последние 5 операций за месяц"} title="Доходы" type="income" data={lastOperations.income} />
                 )}
                 {lastOperations.expenses.length > 0 && (
-                    <Operations subtitle={"* Последние 5 операций за месяц"} title="Расходы" type="expenses" data={lastOperations.expenses} />
+                    <Operations
+                        subtitle={"* Последние 5 операций за месяц"}
+                        title="Расходы"
+                        type="expenses"
+                        data={lastOperations.expenses}
+                    />
                 )}
             </div>
         </div>
