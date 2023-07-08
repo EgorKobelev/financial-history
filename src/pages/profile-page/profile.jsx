@@ -79,162 +79,171 @@ const Profile = () => {
         }
     };
     return (
-        <div className={styles.profile__container}>
-            <h2 className={styles.profile__title}>Профиль</h2>
-            <div className={styles.profile__avatar_container}>
-                <img src={values.img || defaultImage} alt="аватар" className={styles.profile__avatar} />
-                {values.img && (
+        <div className={styles.profile_cover}>
+            <div className={styles.profile__container}>
+                <h2 className={styles.profile__title}>Профиль</h2>
+                <div className={styles.profile__avatar_container}>
+                    <img src={values.img || defaultImage} alt="аватар" className={styles.profile__avatar} />
+                    {values.img && (
+                        <button
+                            onClick={() => {
+                                setValues({ ...values, img: null });
+                            }}
+                            className={`${styles.profile__avatar_button} ${styles.profile__avatar_button_delete}`}
+                        >
+                            Удалить
+                        </button>
+                    )}
                     <button
-                        onClick={() => {
-                            setValues({ ...values, img: null });
+                        onClick={(e) => {
+                            e.preventDefault();
+                            fileRef.current?.click();
                         }}
-                        className={`${styles.profile__avatar_button} ${styles.profile__avatar_button_delete}`}
+                        className={styles.profile__avatar_button}
                     >
-                        Удалить
+                        Выбрать
                     </button>
-                )}
-                <button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        fileRef.current?.click();
-                    }}
-                    className={styles.profile__avatar_button}
-                >
-                    Выбрать
-                </button>
-                <input ref={fileRef} accept="image/png, image/jpeg" type="file" onChange={handleChangeFile} hidden />
-            </div>
-            <form className="form" onSubmit={handleSubmit}>
-                {values.name.length <= 1 && values.name.length > 0 && <p className="form__attention">Имя состоит минимум из 2 символов.</p>}
-                {values.name && values.name.length > 30 && <p className="form__attention">Максимум 30 символов.</p>}
-                {values.name && !(/^[a-zA-Zа-яА-ЯёЁ0-9-]+$/.test(values.name) && /[a-zA-Zа-яА-ЯёЁ]/.test(values.name)) && (
-                    <p className="form__attention">Должен содержать буквы. Может включать цифры и тире.</p>
-                )}
-                <div className={styles.input__container}>
-                    <input
-                        className="form__input form__input--profile"
-                        onChange={handleChange}
-                        value={values.name}
-                        placeholder="Имя"
-                        type="text"
-                        name="name"
-                        disabled={true}
-                    />
-                    <EditButton
-                        onClick={(e) => {
-                            const input = e.target.parentElement.children[0];
-                            if (input.classList.contains(`${styles.form__input_active}`)) {
-                                input.classList.remove(`${styles.form__input_active}`);
-                            } else {
-                                input.classList.add(`${styles.form__input_active}`);
-                            }
-                            const disabled = input.disabled;
-                            input.disabled = !disabled;
-                        }}
-                        className={styles.profile__edit_image}
-                        alt="Отредактировать"
-                    />
+                    <input ref={fileRef} accept="image/png, image/jpeg" type="file" onChange={handleChangeFile} hidden />
                 </div>
-                {!isValidEmail(values.email) && values.email.length > 0 && <p className="form__attention">Некорректная почта.</p>}
-                <div className={styles.input__container}>
-                    <input
-                        className="form__input form__input--profile"
-                        onChange={handleChange}
-                        value={values.email}
-                        placeholder="Почта"
-                        type="email"
-                        name="email"
-                        disabled={true}
-                    />
-                    <EditButton
-                        onClick={(e) => {
-                            const input = e.target.parentElement.children[0];
-                            if (input.classList.contains(`${styles.form__input_active}`)) {
-                                input.classList.remove(`${styles.form__input_active}`);
-                            } else {
-                                input.classList.add(`${styles.form__input_active}`);
-                            }
-                            const disabled = input.disabled;
-                            input.disabled = !disabled;
-                        }}
-                        className={styles.profile__edit_image}
-                        alt="Отредактировать"
-                    />
-                </div>
-                {values.password.length < 6 && values.password.length !== 0 && <p className="form__attention">Минимум 6 символов.</p>}
-                {!(/^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password)) && values.password.length !== 0 && (
-                    <p className="form__attention">Должны быть буквы латинского алфавита. Может включать цифры и символы.</p>
-                )}
-                <div className={styles.input__container}>
-                    <input
-                        ref={passwordRef}
-                        className="form__input form__input--profile"
-                        onChange={handleChange}
-                        value={values.password}
-                        placeholder="Новый Пароль"
-                        type="password"
-                        name="password"
-                        disabled={true}
-                    />
-                    <EditButton
-                        onClick={(e) => {
-                            const input = e.target.parentElement.children[0];
-                            if (input.classList.contains(`${styles.form__input_active}`)) {
-                                input.classList.remove(`${styles.form__input_active}`);
-                            } else {
-                                input.classList.add(`${styles.form__input_active}`);
-                            }
-                            const disabled = input.disabled;
-                            input.disabled = !disabled;
-                        }}
-                        className={styles.profile__edit_image}
-                        alt="Отредактировать"
-                    />
-                </div>
+                <form className="form" onSubmit={handleSubmit}>
+                    {values.name.length <= 1 && values.name.length > 0 && (
+                        <p className="form__attention">Имя состоит минимум из 2 символов.</p>
+                    )}
+                    {values.name && values.name.length > 30 && <p className="form__attention">Максимум 30 символов.</p>}
+                    {values.name && !(/^[a-zA-Zа-яА-ЯёЁ0-9-]+$/.test(values.name) && /[a-zA-Zа-яА-ЯёЁ]/.test(values.name)) && (
+                        <p className="form__attention">Должен содержать буквы. Может включать цифры и тире.</p>
+                    )}
+                    <div className={styles.input__container}>
+                        <input
+                            className="form__input form__input--profile"
+                            onChange={handleChange}
+                            value={values.name}
+                            placeholder="Имя"
+                            type="text"
+                            name="name"
+                            disabled={true}
+                        />
+                        <EditButton
+                            onClick={(e) => {
+                                const input = e.target.parentElement.children[0];
+                                if (input.classList.contains(`${styles.form__input_active}`)) {
+                                    input.classList.remove(`${styles.form__input_active}`);
+                                } else {
+                                    input.classList.add(`${styles.form__input_active}`);
+                                }
+                                const disabled = input.disabled;
+                                input.disabled = !disabled;
+                            }}
+                            className={styles.profile__edit_image}
+                            alt="Отредактировать"
+                        />
+                    </div>
+                    {!isValidEmail(values.email) && values.email.length > 0 && <p className="form__attention">Некорректная почта.</p>}
+                    <div className={styles.input__container}>
+                        <input
+                            className="form__input form__input--profile"
+                            onChange={handleChange}
+                            value={values.email}
+                            placeholder="Почта"
+                            type="email"
+                            name="email"
+                            disabled={true}
+                        />
+                        <EditButton
+                            onClick={(e) => {
+                                const input = e.target.parentElement.children[0];
+                                if (input.classList.contains(`${styles.form__input_active}`)) {
+                                    input.classList.remove(`${styles.form__input_active}`);
+                                } else {
+                                    input.classList.add(`${styles.form__input_active}`);
+                                }
+                                const disabled = input.disabled;
+                                input.disabled = !disabled;
+                            }}
+                            className={styles.profile__edit_image}
+                            alt="Отредактировать"
+                        />
+                    </div>
+                    {values.password.length < 6 && values.password.length !== 0 && <p className="form__attention">Минимум 6 символов.</p>}
+                    {!(/^[a-zA-Z0-9.,!?:;"-_]+$/.test(values.password) && /[a-zA-Z]/.test(values.password)) &&
+                        values.password.length !== 0 && (
+                            <p className="form__attention">Должны быть буквы латинского алфавита. Может включать цифры и символы.</p>
+                        )}
+                    <div className={styles.input__container}>
+                        <input
+                            ref={passwordRef}
+                            className="form__input form__input--profile"
+                            onChange={handleChange}
+                            value={values.password}
+                            placeholder="Новый Пароль"
+                            type="password"
+                            name="password"
+                            disabled={true}
+                        />
+                        <EditButton
+                            onClick={(e) => {
+                                const input = e.target.parentElement.children[0];
+                                if (input.classList.contains(`${styles.form__input_active}`)) {
+                                    input.classList.remove(`${styles.form__input_active}`);
+                                } else {
+                                    input.classList.add(`${styles.form__input_active}`);
+                                }
+                                const disabled = input.disabled;
+                                input.disabled = !disabled;
+                            }}
+                            className={styles.profile__edit_image}
+                            alt="Отредактировать"
+                        />
+                    </div>
 
-                <div>
-                    <button type="button" onClick={handleDisable} className={`${styles.profile__button} ${styles.profile__button__exit}`}>
-                        Очистить
-                    </button>
-                    <button
-                        className={`${styles.profile__button} ${
-                            values.email.length > 0 &&
-                            values.name.length > 1 &&
-                            values.name.length <= 30 &&
-                            /^[a-zA-Zа-яА-ЯёЁ0-9-]+$/.test(values.name) &&
-                            /[a-zA-Zа-яА-ЯёЁ]/.test(values.name) &&
-                            isValidEmail(values.email) &&
-                            (values.email !== user.email ||
-                                (/^[a-zA-Z0-9_]+$/.test(values.password) &&
-                                    /[a-zA-Z]/.test(values.password) &&
-                                    values.password.length >= 6) ||
-                                values.name !== user.name ||
-                                (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
-                                ? styles.profile__button_active
-                                : null
-                        }`}
-                        disabled={
-                            !(
+                    <div>
+                        <button
+                            type="button"
+                            onClick={handleDisable}
+                            className={`${styles.profile__button} ${styles.profile__button__exit}`}
+                        >
+                            Очистить
+                        </button>
+                        <button
+                            className={`${styles.profile__button} ${
                                 values.email.length > 0 &&
                                 values.name.length > 1 &&
                                 values.name.length <= 30 &&
-                                isValidEmail(values.email) &&
                                 /^[a-zA-Zа-яА-ЯёЁ0-9-]+$/.test(values.name) &&
                                 /[a-zA-Zа-яА-ЯёЁ]/.test(values.name) &&
+                                isValidEmail(values.email) &&
                                 (values.email !== user.email ||
                                     (/^[a-zA-Z0-9_]+$/.test(values.password) &&
                                         /[a-zA-Z]/.test(values.password) &&
                                         values.password.length >= 6) ||
                                     values.name !== user.name ||
                                     (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
-                            )
-                        }
-                        type="submit"
-                    >
-                        Сохранить
-                    </button>
-                </div>
-            </form>
+                                    ? styles.profile__button_active
+                                    : null
+                            }`}
+                            disabled={
+                                !(
+                                    values.email.length > 0 &&
+                                    values.name.length > 1 &&
+                                    values.name.length <= 30 &&
+                                    isValidEmail(values.email) &&
+                                    /^[a-zA-Zа-яА-ЯёЁ0-9-]+$/.test(values.name) &&
+                                    /[a-zA-Zа-яА-ЯёЁ]/.test(values.name) &&
+                                    (values.email !== user.email ||
+                                        (/^[a-zA-Z0-9_]+$/.test(values.password) &&
+                                            /[a-zA-Z]/.test(values.password) &&
+                                            values.password.length >= 6) ||
+                                        values.name !== user.name ||
+                                        (values.img !== user.img && (typeof user.img !== "undefined" || values.img)))
+                                )
+                            }
+                            type="submit"
+                        >
+                            Сохранить
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };

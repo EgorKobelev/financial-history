@@ -12,6 +12,7 @@ import { loginWithToken } from "../../services/actions/user";
 import StatisticPage from "../../pages/statistic-page/statistic-page";
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import RecoverPasswordPage from "../../pages/recover-password-page/recover-password-page";
+import HistoryPage from "../../pages/history-page/history-page";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const App = () => {
                     <Route index element={<MainPage />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="/statistics" element={<StatisticPage />} />
+                    <Route path="/history" element={<HistoryPage />} />
                 </Route>
                 <Route path="/register" element={<ProtectedRoute anonymous={true} element={<RegisterPage />} />} />
                 <Route path="/login" element={<ProtectedRoute anonymous={true} element={<LoginPage />} />} />
