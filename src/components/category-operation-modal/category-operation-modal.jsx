@@ -43,7 +43,7 @@ const CategoryOperationModal = ({
         } else {
             const form = {
                 dateTime: new Date(formattedDate[0], formattedDate[1] - 1, formattedDate[2], 12).toISOString(),
-                price: parseInt(values.sum),
+                price: values.sum,
                 oldPrice: oldPrice,
                 id: id,
             };
@@ -101,7 +101,6 @@ const CategoryOperationModal = ({
                     </button>
                     <button
                         className={`${styles.categories_card__button} ${
-                            /^\d+$/.test(values.sum) &&
                             parseInt(values.sum) > 0 &&
                             values.date !== "" &&
                             ((type === "expenses" && parseInt(sum + balance) >= values.sum) || type === "income")
@@ -111,7 +110,6 @@ const CategoryOperationModal = ({
                         type="submit"
                         disabled={
                             !(
-                                /^\d+$/.test(values.sum) &&
                                 parseInt(values.sum) > 0 &&
                                 values.date !== "" &&
                                 ((type === "expenses" && parseInt(sum + balance) >= values.sum) || type === "income")
