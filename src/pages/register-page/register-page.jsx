@@ -28,7 +28,7 @@ const RegisterPage = () => {
                 {values.name.length <= 1 && values.name.length > 0 && <p className="form__attention">Имя состоит минимум из 2 символов.</p>}
                 {values.name && values.name.length > 30 && <p className="form__attention">Максимум 30 символов.</p>}
                 {values.name && !(/^[a-zA-Zа-яА-ЯёЁ0-9-]+$/.test(values.name) && /[a-zA-Zа-яА-ЯёЁ]/.test(values.name)) && (
-                    <p className="form__attention">Должен содержать буквы. Может включать цифры и тире</p>
+                    <p className="form__attention">Должен содержать буквы. Может включать цифры и тире.</p>
                 )}
                 <input
                     className="form__input"

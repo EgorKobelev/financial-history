@@ -107,6 +107,9 @@ const Profile = () => {
             <form className="form" onSubmit={handleSubmit}>
                 {values.name.length <= 1 && values.name.length > 0 && <p className="form__attention">Имя состоит минимум из 2 символов.</p>}
                 {values.name && values.name.length > 30 && <p className="form__attention">Максимум 30 символов.</p>}
+                {values.name && !(/^[a-zA-Zа-яА-ЯёЁ0-9-]+$/.test(values.name) && /[a-zA-Zа-яА-ЯёЁ]/.test(values.name)) && (
+                    <p className="form__attention">Должен содержать буквы. Может включать цифры и тире.</p>
+                )}
                 <div className={styles.input__container}>
                     <input
                         className="form__input form__input--profile"
@@ -198,6 +201,8 @@ const Profile = () => {
                             values.email.length > 0 &&
                             values.name.length > 1 &&
                             values.name.length <= 30 &&
+                            /^[a-zA-Zа-яА-ЯёЁ0-9-]+$/.test(values.name) &&
+                            /[a-zA-Zа-яА-ЯёЁ]/.test(values.name) &&
                             isValidEmail(values.email) &&
                             (values.email !== user.email ||
                                 (/^[a-zA-Z0-9_]+$/.test(values.password) &&
@@ -214,6 +219,8 @@ const Profile = () => {
                                 values.name.length > 1 &&
                                 values.name.length <= 30 &&
                                 isValidEmail(values.email) &&
+                                /^[a-zA-Zа-яА-ЯёЁ0-9-]+$/.test(values.name) &&
+                                /[a-zA-Zа-яА-ЯёЁ]/.test(values.name) &&
                                 (values.email !== user.email ||
                                     (/^[a-zA-Z0-9_]+$/.test(values.password) &&
                                         /[a-zA-Z]/.test(values.password) &&
