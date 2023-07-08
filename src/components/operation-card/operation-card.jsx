@@ -39,7 +39,7 @@ const OperationCard = ({ element, type, isStatistic }) => {
                 <ToolTip
                     width={200}
                     tooltip={
-                        `${element.nameCategory}: ${element.price} ₽`.length >= 12
+                        `${element.nameCategory}: ${element.price} ₽`.length >= 30
                             ? `${`${element.nameCategory}: ${element.price} ₽`}`
                             : null
                     }

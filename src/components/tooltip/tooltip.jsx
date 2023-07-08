@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 
 const modalContainer = document.getElementById("root");
 
-const ToolTip = ({ children, tooltip, width }) => {
+const ToolTip = ({ children, tooltip, width, className }) => {
     const container = useRef(null);
     const [coords, setCoords] = useState(null);
     return (
@@ -24,7 +24,7 @@ const ToolTip = ({ children, tooltip, width }) => {
                         setCoords(null);
                     }
                 }}
-                className={styles.tooltip__container}
+                className={`${styles.tooltip__container} ${className}`}
             >
                 {children}
             </div>

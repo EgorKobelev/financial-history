@@ -5,6 +5,7 @@ import { COLORS, OPTIONS_CHART } from "../../utils/constants";
 import { useEffect, useState } from "react";
 import FooterStatistic from "../footer-statistic/footer-statistic";
 import Loader from "../loader/loader";
+import ToolTip from "../tooltip/tooltip";
 
 const Graphics = ({
     title,
@@ -64,7 +65,9 @@ const Graphics = ({
                 <>
                     <div className={styles.doughnut__container}>
                         <Doughnut options={OPTIONS_CHART} data={graphicData} />
-                        <div className={styles.doughnut__sum}>{`₽ ${sum}`}</div>
+                        <ToolTip className={styles.center_tooltip} tooltip={`₽ ${sum}`.length >= 14 ? `₽ ${sum}` : null}>
+                            <div className={styles.doughnut__sum}>{`₽ ${sum}`}</div>
+                        </ToolTip>
                     </div>
                     <FooterStatistic labels={labels} data={data} />
                 </>

@@ -6,7 +6,6 @@
 
 .tooltip__text_container {
     position: absolute;
-    /* white-space: pre; */
     word-break: break-all;
     color: white;
     background-color: rgba(0, 0, 0, 0.8);
@@ -14,5 +13,5 @@
     border-radius: 8px;
     margin-top: 8px;
     z-index: 1000;
-    width: 200px;
+    max-width: 240px;
 }

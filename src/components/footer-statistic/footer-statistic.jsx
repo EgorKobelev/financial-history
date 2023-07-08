@@ -9,7 +9,7 @@ const FooterStatistic = ({ labels, data }) => {
                 return (
                     <div key={index} className={styles.footer__item}>
                         <div className={styles.item__circle} style={{ backgroundColor: COLORS[index] }}></div>
-                        <ToolTip tooltip={`${label}: ${data[index]}₽`.length >= 24 ? `${label}: ${data[index]}₽` : null}>
+                        <ToolTip width={148} tooltip={`${label}: ${data[index]}₽`.length >= 21 ? `${label}: ${data[index]}₽` : null}>
                             <p className={styles.item__text}>{`${label}: ${data[index]}₽`}</p>
                         </ToolTip>
                     </div>

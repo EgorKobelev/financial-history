@@ -35,7 +35,7 @@ const CategoriesCard = ({ title, image, id, sum, type }) => {
     return (
         <>
             <div onClick={handleToggleOperationModal} className={styles.categories_card__container}>
-                <ToolTip tooltip={`${title}`.length >= 22 ? title : null}>
+                <ToolTip tooltip={`${title}`.length >= 19 ? title : null}>
                     <h3 className={styles.categories_card__title}>{title}</h3>
                 </ToolTip>
                 <div className={styles.categories_card__image_container}>
