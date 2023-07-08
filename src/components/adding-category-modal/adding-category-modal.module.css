@@ -144,3 +144,19 @@
     outline: 1px solid black;
     transition: opacity 0.2s ease-in-out;
 }
+
+.warning {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: orange;
+    margin-bottom: 4px;
+}
+
+.error {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: red;
+    margin-bottom: 4px;
+}

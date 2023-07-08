@@ -126,6 +126,7 @@
     cursor: pointer;
     right: 5%;
     fill: black;
+    background-color: #e7e7e7;
 }
 
 .profile__edit_image:hover {

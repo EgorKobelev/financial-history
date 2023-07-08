@@ -45,6 +45,12 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
                     </button>
                 </div>
                 <form onSubmit={onSubmit}>
+                    {!id &&
+                        (expenses.find((operation) => operation.name === values.name) ||
+                            income.find((operation) => operation.name === values.name)) && (
+                            <p className={styles.warning}>Такая категория уже существует.</p>
+                        )}
+                    {values.name && values.name.length >= 35 && <p className={styles.error}>Слишком длинное название</p>}
                     <input
                         className={styles.categories_card__input}
                         onChange={handleChange}
@@ -82,14 +88,22 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
                         <button
                             className={`${styles.categories_card__button} ${
                                 (values.type === "income" || values.type === "expenses") &&
+                                values.name !== null &&
                                 values.name !== "" &&
+                                values.name.length < 35 &&
                                 values.type !== "" &&
                                 (id ? category.name !== values.name || category.img !== img || category.type !== values.type : true)
                                     ? styles.categories_card__button_active
                                     : null
                             }`}
                             disabled={
-                                !((values.type === "income" || values.type === "expenses") && values.name !== "" && values.type !== "")
+                                !(
+                                    (values.type === "income" || values.type === "expenses") &&
+                                    values.name !== "" &&
+                                    values.name !== null &&
+                                    values.name.length < 35 &&
+                                    values.type !== ""
+                                )
                             }
                             type="submit"
                         >
