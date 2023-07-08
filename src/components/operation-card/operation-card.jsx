@@ -37,8 +37,11 @@ const OperationCard = ({ element, type, isStatistic }) => {
             <p className={styles.list_item__date}>{moment.utc(element.dateTime).format("DD-MM-YYYY")}</p>
             <li className={styles.operations__list_item}>
                 <ToolTip
+                    width={200}
                     tooltip={
-                        `${element.nameCategory}: ${element.price} ₽`.length >= 31 ? `${element.nameCategory}: ${element.price} ₽` : null
+                        `${element.nameCategory}: ${element.price} ₽`.length >= 12
+                            ? `${`${element.nameCategory}: ${element.price} ₽`}`
+                            : null
                     }
                 >
                     <p className={styles.list__text}>{`${element.nameCategory}: ${element.price} ₽`}</p>

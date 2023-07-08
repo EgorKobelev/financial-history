@@ -4,12 +4,13 @@ import ReactDOM from "react-dom";
 
 const modalContainer = document.getElementById("root");
 
-const ToolTip = ({ children, tooltip }) => {
+const ToolTip = ({ children, tooltip, width }) => {
     const container = useRef(null);
     const [coords, setCoords] = useState(null);
     return (
         <>
             <div
+                style={{ width: width }}
                 ref={container}
                 onMouseEnter={({ clientX, clientY }) => {
                     if (!container.current) return;

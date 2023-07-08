@@ -1,6 +1,6 @@
 .list__text {
     display: block;
-    width: 95%;
+    width: 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -18,12 +18,12 @@
     line-height: 17px;
     transition: background-color 0.2s ease-in-out;
     border-bottom: solid #c7c7c7 1px;
+    width: 291px;
 }
 
 .operations__list_item {
     display: flex;
     justify-content: space-between;
-    width: 100%;
 }
 
 .list_item__date {
