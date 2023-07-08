@@ -106,6 +106,7 @@ const Profile = () => {
             </div>
             <form className="form" onSubmit={handleSubmit}>
                 {values.name.length <= 1 && values.name.length > 0 && <p className="form__attention">Имя состоит минимум из 2 символов.</p>}
+                {values.name && values.name.length > 30 && <p className="form__attention">Максимум 30 символов.</p>}
                 <div className={styles.input__container}>
                     <input
                         className="form__input form__input--profile"
@@ -196,6 +197,7 @@ const Profile = () => {
                         className={`${styles.profile__button} ${
                             values.email.length > 0 &&
                             values.name.length > 1 &&
+                            values.name.length <= 30 &&
                             isValidEmail(values.email) &&
                             (values.email !== user.email ||
                                 (/^[a-zA-Z0-9_]+$/.test(values.password) &&
@@ -210,6 +212,7 @@ const Profile = () => {
                             !(
                                 values.email.length > 0 &&
                                 values.name.length > 1 &&
+                                values.name.length <= 30 &&
                                 isValidEmail(values.email) &&
                                 (values.email !== user.email ||
                                     (/^[a-zA-Z0-9_]+$/.test(values.password) &&
