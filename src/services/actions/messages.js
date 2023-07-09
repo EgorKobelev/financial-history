@@ -7,10 +7,8 @@ export const getHistory = createAsyncThunk("messagesReducer/getHistory", async f
         const isFailed = store.messagesReducer.isFailed;
         const page = store.messagesReducer.page;
         const { data } = isFailed ? [] : await MessagesService.getHistory({ page });
-        // toast.success("Баланс обновлен", { autoClose: 3000 });
-        return data;
+        return data.categories;
     } catch (e) {
-        // toast.error("Не удалось обновить баланс", { autoClose: 3000 });
         return rejectWithValue("Не удалось получить историю");
     }
 });

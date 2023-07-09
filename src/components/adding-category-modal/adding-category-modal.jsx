@@ -11,6 +11,7 @@ const getExpenses = (store) => store.categoryReducer.expenses;
 const getIncome = (store) => store.categoryReducer.income;
 
 const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
+    const oldType = type;
     const income = useSelector(getIncome);
     const expenses = useSelector(getExpenses);
     const category =
@@ -27,7 +28,7 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
     const onSubmit = (e) => {
         e.preventDefault();
         if (id) {
-            dispatch(updateCategory({ ...values, img: img, categoryId: id }));
+            dispatch(updateCategory({ ...values, img: img, oldType, categoryId: id }));
         } else {
             dispatch(createCategory({ ...values, img: img }));
         }

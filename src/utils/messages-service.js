@@ -3,9 +3,9 @@ import $api from "../http";
 export class MessagesService {
     static async getHistory({ page }) {
         const params = {
-            Count: 10,
             Page: page,
+            Count: 14,
         };
-        return await $api.post("/Message/getMessages", { params });
+        return await $api.get("/Message/getMessages", { params });
     }
 }

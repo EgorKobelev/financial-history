@@ -10,19 +10,28 @@ const initialState = {
 const messaegsSlice = createSlice({
     name: "messagesSlice",
     initialState,
-    reducers: {},
+    reducers: {
+        increaseMessagePage(state) {
+            state.page = state.page + 1;
+        },
+        clearMessagesState(state) {
+            state.page = 1;
+            state.isFailed = false;
+            state.messages = [];
+        },
+    },
 
     extraReducers: (builder) => {
         builder
-
             .addCase(getHistory.fulfilled, (state, action) => {
-                state.messages = [...state.messages, ...action.payload.messages];
-                state.page = state.page + 1;
+                state.messages = [...state.messages, ...action.payload];
             })
             .addCase(getHistory.rejected, (state) => {
-                state.status.isFailed = true;
+                state.isFailed = true;
             });
     },
 });
+
+export const { increaseMessagePage, clearMessagesState } = messaegsSlice.actions;
 
 export default messaegsSlice.reducer;
