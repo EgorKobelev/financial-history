@@ -12,10 +12,10 @@ const Navbar = () => {
                 <NavbarItem to="/statistics" name={"Статистика"} />
             </div>
             <div className={styles.navbar__item}>
-                <NavbarItem to="/profile" name={"Профиль"} />
+                <NavbarItem to="/history" name={"История"} />
             </div>
             <div className={styles.navbar__item}>
-                <NavbarItem to="/history" name={"История"} />
+                <NavbarItem to="/profile" name={"Профиль"} />
             </div>
         </div>
     );

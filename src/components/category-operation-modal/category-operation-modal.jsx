@@ -71,10 +71,19 @@ const CategoryOperationModal = ({
                     <p className={styles.categories_card__balance}>{`₽ ${values.sum || 0}`}</p>
                 </ToolTip>
             </div>
-            {type === "expenses" && parseInt(sum + balance) < values.sum && (
-                <p className={styles.categories_card__attention}>Введи или пополните баланс</p>
-            )}
+
             <form onSubmit={onSubmit}>
+                {type === "expenses" && parseInt(sum + balance) < values.sum && (
+                    <p className={styles.categories_card__attention}>Введи или пополните баланс.</p>
+                )}
+                {values.sum &&
+                    /^\d+\.?\d*$/.test(values.sum) &&
+                    values.sum.split(".").length > 1 &&
+                    values.sum.split(".")[1].length > 2 && (
+                        <p className={styles.categories_card__attention}>Дробная часть только до сотых.</p>
+                    )}
+                {values.sum && !Number(values.sum) && <p className={styles.categories_card__attention}>Только числа.</p>}
+                {values.sum && Number(values.sum) < 0 && <p className={styles.categories_card__attention}>Только положительные числа.</p>}
                 <input
                     className={styles.categories_card__input}
                     onChange={handleChange}
@@ -101,7 +110,10 @@ const CategoryOperationModal = ({
                     </button>
                     <button
                         className={`${styles.categories_card__button} ${
-                            parseInt(values.sum) > 0 &&
+                            Number(values.sum) >= 0 &&
+                            /^\d+\.?\d*$/.test(values.sum) &&
+                            ((values.sum.split(".").length > 1 && values.sum.split(".")[1].length <= 2) ||
+                                values.sum.split(".").length === 1) &&
                             values.date !== "" &&
                             ((type === "expenses" && parseInt(sum + balance) >= values.sum) || type === "income")
                                 ? styles.categories_card__button_active
@@ -110,7 +122,10 @@ const CategoryOperationModal = ({
                         type="submit"
                         disabled={
                             !(
-                                parseInt(values.sum) > 0 &&
+                                Number(values.sum) >= 0 &&
+                                /^\d+\.?\d*$/.test(values.sum) &&
+                                ((values.sum.split(".").length > 1 && values.sum.split(".")[1].length <= 2) ||
+                                    values.sum.split(".").length === 1) &&
                                 values.date !== "" &&
                                 ((type === "expenses" && parseInt(sum + balance) >= values.sum) || type === "income")
                             )
