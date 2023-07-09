@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 export const createBalance = createAsyncThunk("opearationReducer/createBalance", async function (newBalance, { rejectWithValue }) {
     try {
+        console.log(newBalance);
         await OperationService.createBalance(newBalance);
         toast.success("Баланс обновлен", { autoClose: 3000 });
         return newBalance;
@@ -37,10 +38,17 @@ export const getOperationsByTypeDynamically = createAsyncThunk(
     async function (type, { getState, rejectWithValue }) {
         try {
             const store = getState();
-            const isFailed = type === "expenses" ? store.operationReducer.statistStatus.isFailedExpenses : store.operationReducer.statistStatus.isFailedIncome;
-            const dates = type === "expenses" ? store.operationReducer.statisticExpensesInfo.dates : store.operationReducer.statisticIncomeInfo.dates;
-            const page = type === "expenses" ? store.operationReducer.statisticExpensesInfo.page : store.operationReducer.statisticIncomeInfo.page;
-            const { data } = !isFailed ? await OperationService.getOperationsByTypeDynamically({ type, to: dates.to, from: dates.from, page }) : null;
+            const isFailed =
+                type === "expenses"
+                    ? store.operationReducer.statistStatus.isFailedExpenses
+                    : store.operationReducer.statistStatus.isFailedIncome;
+            const dates =
+                type === "expenses" ? store.operationReducer.statisticExpensesInfo.dates : store.operationReducer.statisticIncomeInfo.dates;
+            const page =
+                type === "expenses" ? store.operationReducer.statisticExpensesInfo.page : store.operationReducer.statisticIncomeInfo.page;
+            const { data } = !isFailed
+                ? await OperationService.getOperationsByTypeDynamically({ type, to: dates.to, from: dates.from, page })
+                : null;
             return { type, operations: data.operations || [] };
         } catch (e) {
             return rejectWithValue({ type });
@@ -48,18 +56,21 @@ export const getOperationsByTypeDynamically = createAsyncThunk(
     }
 );
 
-export const getAllOperations = createAsyncThunk("opearationReducer/getLastFiveOperationsBothTypeAsync", async function (form, { rejectWithValue }) {
-    try {
-        const { data } = await OperationService.getOperationsByType(form);
+export const getAllOperations = createAsyncThunk(
+    "opearationReducer/getLastFiveOperationsBothTypeAsync",
+    async function (form, { rejectWithValue }) {
+        try {
+            const { data } = await OperationService.getOperationsByType(form);
 
-        return {
-            expenses: data.operationsExpenses.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)),
-            income: data.operationsIncome.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)),
-        };
-    } catch (e) {
-        return rejectWithValue("Не удалось получить операции");
+            return {
+                expenses: data.operationsExpenses.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)),
+                income: data.operationsIncome.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime)),
+            };
+        } catch (e) {
+            return rejectWithValue("Не удалось получить операции");
+        }
     }
-});
+);
 
 export const createOperation = createAsyncThunk("opearationReducer/createOperation", async function (form, { rejectWithValue, dispatch }) {
     try {
@@ -78,58 +89,70 @@ export const createOperation = createAsyncThunk("opearationReducer/createOperati
     }
 });
 
-export const updateOperation = createAsyncThunk("opearationReducer/updateOperation", async function (info, { getState, rejectWithValue, dispatch }) {
-    try {
-        await OperationService.updateOperaion(info.form);
-        toast.success("Операция обновлена", { autoClose: 3000 });
-        if (info.isStatistic) {
-            const store = getState();
-            const dates = info.type === "expenses" ? store.operationReducer.statisticExpensesInfo.dates : store.operationReducer.statisticIncomeInfo.dates;
-            const form = {
-                fromDate: dates.from,
-                toDate: dates.to,
-                type: info.type,
-            };
-            dispatch(getFromToCategories(form));
+export const updateOperation = createAsyncThunk(
+    "opearationReducer/updateOperation",
+    async function (info, { getState, rejectWithValue, dispatch }) {
+        try {
+            await OperationService.updateOperaion(info.form);
+            toast.success("Операция обновлена", { autoClose: 3000 });
+            if (info.isStatistic) {
+                const store = getState();
+                const dates =
+                    info.type === "expenses"
+                        ? store.operationReducer.statisticExpensesInfo.dates
+                        : store.operationReducer.statisticIncomeInfo.dates;
+                const form = {
+                    fromDate: dates.from,
+                    toDate: dates.to,
+                    type: info.type,
+                };
+                dispatch(getFromToCategories(form));
+                return info;
+            }
+            const date = new Date().toISOString();
+            dispatch(getAllCategories());
+            dispatch(getBalance());
+            dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
+            dispatch(getSumByTypes({ type: "income", dateTime: date }));
+            dispatch(getAllOperations({ dateTime: date, count: 5 }));
             return info;
+        } catch (e) {
+            toast.error("Операция обновлена", { autoClose: 3000 });
+            return rejectWithValue("Не удалось обновить операцию");
         }
-        const date = new Date().toISOString();
-        dispatch(getAllCategories());
-        dispatch(getBalance());
-        dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
-        dispatch(getSumByTypes({ type: "income", dateTime: date }));
-        dispatch(getAllOperations({ dateTime: date, count: 5 }));
-        return info;
-    } catch (e) {
-        toast.error("Операция обновлена", { autoClose: 3000 });
-        return rejectWithValue("Не удалось обновить операцию");
     }
-});
+);
 
-export const deleteOperaion = createAsyncThunk("opearationReducer/deleteOperation", async function (form, { getState, rejectWithValue, dispatch }) {
-    try {
-        await OperationService.deleteOperaion(form.id);
-        toast.success("Операция удалена", { autoClose: 3000 });
-        if (form.isStatistic) {
-            const store = getState();
-            const dates = form.type === "expenses" ? store.operationReducer.statisticExpensesInfo.dates : store.operationReducer.statisticIncomeInfo.dates;
-            const data = {
-                fromDate: dates.from,
-                toDate: dates.to,
-                type: form.type,
-            };
-            dispatch(getFromToCategories(data));
-            return { id: form.id, isStatistic: form.isStatistic };
+export const deleteOperaion = createAsyncThunk(
+    "opearationReducer/deleteOperation",
+    async function (form, { getState, rejectWithValue, dispatch }) {
+        try {
+            await OperationService.deleteOperaion(form.id);
+            toast.success("Операция удалена", { autoClose: 3000 });
+            if (form.isStatistic) {
+                const store = getState();
+                const dates =
+                    form.type === "expenses"
+                        ? store.operationReducer.statisticExpensesInfo.dates
+                        : store.operationReducer.statisticIncomeInfo.dates;
+                const data = {
+                    fromDate: dates.from,
+                    toDate: dates.to,
+                    type: form.type,
+                };
+                dispatch(getFromToCategories(data));
+                return { id: form.id, isStatistic: form.isStatistic };
+            }
+            const date = new Date().toISOString();
+            dispatch(getAllCategories());
+            dispatch(getBalance());
+            dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
+            dispatch(getSumByTypes({ type: "income", dateTime: date }));
+            dispatch(getAllOperations({ dateTime: date, count: 5 }));
+            return { id: form.id };
+        } catch (e) {
+            toast.error("Не удалось удалить операцию", { autoClose: 3000 });
+            return rejectWithValue("Не удалось удалить операцию");
         }
-        const date = new Date().toISOString();
-        dispatch(getAllCategories());
-        dispatch(getBalance());
-        dispatch(getSumByTypes({ type: "expenses", dateTime: date }));
-        dispatch(getSumByTypes({ type: "income", dateTime: date }));
-        dispatch(getAllOperations({ dateTime: date, count: 5 }));
-        return { id: form.id };
-    } catch (e) {
-        toast.error("Не удалось удалить операцию", { autoClose: 3000 });
-        return rejectWithValue("Не удалось удалить операцию");
     }
-});
+);

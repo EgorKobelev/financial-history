@@ -33,6 +33,7 @@
 }
 
 .history__operations_container {
+    width: 100%;
     padding: 0 35px;
     display: flex;
     justify-content: space-between;

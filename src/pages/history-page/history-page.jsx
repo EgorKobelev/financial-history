@@ -7,11 +7,13 @@ import { clearMessagesState, increaseMessagePage } from "../../services/reducers
 
 const getMessages = (store) => store.messagesReducer.messages;
 const getPage = (store) => store.messagesReducer.page;
+const getIsLoading = (store) => store.messagesReducer.isLoading;
 
 const HistoryPage = () => {
     const dispatch = useDispatch();
     const messages = useSelector(getMessages);
     const page = useSelector(getPage);
+    const isLoading = useSelector(getIsLoading);
 
     const listRef = useRef(null);
     useEffect(() => {
@@ -26,7 +28,7 @@ const HistoryPage = () => {
     };
 
     useEffect(() => {
-        if (listRef) {
+        if (listRef && listRef.current) {
             listRef.current.addEventListener("scroll", scrollHandler);
         }
         dispatch(getHistory());
@@ -44,6 +46,7 @@ const HistoryPage = () => {
             <div className={styles.history__container}>
                 <h2 className={styles.history__title}>История операций</h2>
                 <ul ref={listRef} className={styles.history__operations_container}>
+                    {messages && messages.length === 0 && page >= 2 && !isLoading && <p>Вы еще не совершали никаких действий.</p>}
                     {messages.map((operation, index) => {
                         return (
                             <li key={index} className={styles.history__operation}>

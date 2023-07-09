@@ -5,6 +5,7 @@ const initialState = {
     messages: [],
     page: 1,
     isFailed: false,
+    isLoading: false,
 };
 
 const messaegsSlice = createSlice({
@@ -23,11 +24,16 @@ const messaegsSlice = createSlice({
 
     extraReducers: (builder) => {
         builder
+            .addCase(getHistory.pending, (state, action) => {
+                state.isLoading = true;
+            })
             .addCase(getHistory.fulfilled, (state, action) => {
                 state.messages = [...state.messages, ...action.payload];
+                state.isLoading = false;
             })
             .addCase(getHistory.rejected, (state) => {
                 state.isFailed = true;
+                state.isLoading = false;
             });
     },
 });

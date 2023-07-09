@@ -117,7 +117,7 @@ const operationSlice = createSlice({
                 state.status.isLoading = true;
             })
             .addCase(createBalance.fulfilled, (state, action) => {
-                state.sum.balance = parseInt(action.payload);
+                state.sum.balance = action.payload;
                 state.status.isLoading = false;
             })
             .addCase(createBalance.rejected, (state) => {
@@ -189,8 +189,12 @@ const operationSlice = createSlice({
             })
             .addCase(deleteOperaion.fulfilled, (state, action) => {
                 if (action.payload.isStatistic) {
-                    state.statisticOperations.expenses = state.statisticOperations.expenses.filter((element) => element.id !== action.payload.id);
-                    state.statisticOperations.income = state.statisticOperations.income.filter((element) => element.id !== action.payload.id);
+                    state.statisticOperations.expenses = state.statisticOperations.expenses.filter(
+                        (element) => element.id !== action.payload.id
+                    );
+                    state.statisticOperations.income = state.statisticOperations.income.filter(
+                        (element) => element.id !== action.payload.id
+                    );
                 } else {
                     state.lastOperations.expenses = state.lastOperations.expenses.filter((element) => element !== action.payload.id);
                     state.lastOperations.income = state.lastOperations.income.filter((element) => element !== action.payload.id);
