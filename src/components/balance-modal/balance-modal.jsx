@@ -6,7 +6,7 @@ import { createBalance } from "../../services/actions/operation";
 const BalanceModal = ({ balance, handleToggleModal }) => {
     const dispatch = useDispatch();
     const { values, handleChange } = useForm({
-        balance: balance,
+        balance: String(balance),
     });
 
     const handleSubmit = (e) => {
@@ -18,6 +18,12 @@ const BalanceModal = ({ balance, handleToggleModal }) => {
     return (
         <div className={styles.container}>
             <form onSubmit={handleSubmit}>
+                {values.balance &&
+                    /^\d+\.?\d*$/.test(values.balance) &&
+                    values.balance.split(".").length > 1 &&
+                    values.balance.split(".")[1].length > 2 && <p className={styles.error}>Дробная часть только до сотых.</p>}
+                {values.balance && !Number(values.balance) && <p className={styles.error}>Только числа.</p>}
+                {values.balance && Number(values.balance) < 0 && <p className={styles.error}>Только положительные числа.</p>}
                 <input
                     className={styles.finance_card__input}
                     onChange={handleChange}
@@ -27,8 +33,22 @@ const BalanceModal = ({ balance, handleToggleModal }) => {
                     name="balance"
                 />
                 <button
-                    className={`${styles.finance_card__button} ${Number(values.balance) >= 0 ? styles.finance_card__button_active : null}`}
-                    disabled={!(Number(values.balance) >= 0)}
+                    className={`${styles.finance_card__button} ${
+                        Number(values.balance) >= 0 &&
+                        /^\d+\.?\d*$/.test(values.balance) &&
+                        ((values.balance.split(".").length > 1 && values.balance.split(".")[1].length <= 2) ||
+                            values.balance.split(".").length === 1)
+                            ? styles.finance_card__button_active
+                            : null
+                    }`}
+                    disabled={
+                        !(
+                            Number(values.balance) >= 0 &&
+                            /^\d+\.?\d*$/.test(values.balance) &&
+                            ((values.balance.split(".").length > 1 && values.balance.split(".")[1].length <= 2) ||
+                                values.balance.split(".").length === 1)
+                        )
+                    }
                     type="submit"
                 >
                     Сохранить
