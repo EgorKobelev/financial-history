@@ -25,7 +25,7 @@ export const createCategory = createAsyncThunk("categoryReducer/createCategory",
 
 export const updateCategory = createAsyncThunk("categoryReducer/updateCategory", async function (form, { rejectWithValue, dispatch }) {
     try {
-        await CategoryService.updateCategory(form);
+        const { data } = await CategoryService.updateCategory(form);
         const date = new Date().toISOString();
         dispatch(getAllCategories());
         dispatch(getBalance());

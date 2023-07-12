@@ -28,7 +28,7 @@ const messaegsSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(getHistory.fulfilled, (state, action) => {
-                state.messages = [...state.messages, ...action.payload];
+                state.messages = [...action.payload, ...state.messages];
                 state.isLoading = false;
             })
             .addCase(getHistory.rejected, (state) => {

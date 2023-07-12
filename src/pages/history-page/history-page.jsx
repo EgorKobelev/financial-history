@@ -46,7 +46,7 @@ const HistoryPage = () => {
             <div className={styles.history__container}>
                 <h2 className={styles.history__title}>История операций</h2>
                 <ul ref={listRef} className={styles.history__operations_container}>
-                    {messages && messages.length === 0 && page >= 2 && !isLoading && <p>Вы еще не совершали никаких действий.</p>}
+                    {messages && messages.length === 0 && page >= 2 && !isLoading && <p className={styles.history__warning}>Вы еще не совершали никаких действий.</p>}
                     {messages.map((operation, index) => {
                         return (
                             <li key={index} className={styles.history__operation}>

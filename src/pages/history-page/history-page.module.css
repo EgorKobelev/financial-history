@@ -49,3 +49,7 @@
     font-weight: 500;
     line-height: normal;
 }
+
+.history__warning {
+    margin: 0 auto;
+}

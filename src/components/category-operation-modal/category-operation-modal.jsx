@@ -25,7 +25,7 @@ const CategoryOperationModal = ({
     const expenses = useSelector(getExpenses);
     const income = useSelector(getIncome);
     const { values, handleChange } = useForm({
-        sum: sum,
+        sum: String(sum),
         date: date,
     });
     const oldPrice = sum;
@@ -82,7 +82,9 @@ const CategoryOperationModal = ({
                     values.sum.split(".")[1].length > 2 && (
                         <p className={styles.categories_card__attention}>Дробная часть только до сотых.</p>
                     )}
-                {values.sum && !Number(values.sum) && <p className={styles.categories_card__attention}>Только числа.</p>}
+                {values.sum && !Number(values.sum) && values.sum !== "0" && (
+                    <p className={styles.categories_card__attention}>Только числа.</p>
+                )}
                 {values.sum && Number(values.sum) < 0 && <p className={styles.categories_card__attention}>Только положительные числа.</p>}
                 <input
                     className={styles.categories_card__input}

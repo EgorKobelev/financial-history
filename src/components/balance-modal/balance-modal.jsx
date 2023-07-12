@@ -22,7 +22,7 @@ const BalanceModal = ({ balance, handleToggleModal }) => {
                     /^\d+\.?\d*$/.test(values.balance) &&
                     values.balance.split(".").length > 1 &&
                     values.balance.split(".")[1].length > 2 && <p className={styles.error}>Дробная часть только до сотых.</p>}
-                {values.balance && !Number(values.balance) && <p className={styles.error}>Только числа.</p>}
+                {values.balance && !Number(values.balance) && values.balance !== "0" && <p className={styles.error}>Только числа.</p>}
                 {values.balance && Number(values.balance) < 0 && <p className={styles.error}>Только положительные числа.</p>}
                 <input
                     className={styles.finance_card__input}
