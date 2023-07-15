@@ -5,8 +5,7 @@ export default defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
     baseUrl: "http://localhost:3000",
-    video: false,
-    videosFolder: undefined,
+    // video: false,
     // screenshotOnRunFailure: false,
   },
 });

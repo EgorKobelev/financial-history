@@ -43,6 +43,7 @@ const LoginPage = () => {
           data-test-id="password"
         />
         <button
+          data-test-id="login-button"
           className={`form__button ${
             values.email.length > 0 &&
             isValidEmail(values.email) &&
@@ -74,7 +75,7 @@ const LoginPage = () => {
       </div>
       <div className="form__text_container">
         <p>Нет аккаунта? </p>
-        <button data-test-id="login-button" onClick={() => navigate("/register")} className="form__link">
+        <button onClick={() => navigate("/register")} className="form__link">
           Создать
         </button>
       </div>

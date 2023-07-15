@@ -6,6 +6,6 @@ describe("login", () => {
   });
   it("should get message that email is incorrect", () => {
     cy.get('[data-test-id="email"]').type("test");
-    cy.findByText("Некорректная почта.").should("exist");
+    cy.contains("Некорректная почта.");
   });
 });
