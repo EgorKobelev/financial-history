@@ -75,7 +75,6 @@ const RegisterPage = () => {
           name="repeatPassword"
         />
         <button
-          data-test-id="repeatPassword"
           className={`form__button ${
             values.email.length > 0 &&
             isValidEmail(values.email) &&
