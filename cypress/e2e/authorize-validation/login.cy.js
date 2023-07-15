@@ -1,5 +1,11 @@
+/// <reference types="cypress" />
+
 describe("login", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("/login");
+  });
+  it("should get message that email is incorrect", () => {
+    cy.get('[data-test-id="email"]').type("test");
+    cy.findByText("Некорректная почта.").should("exist");
   });
 });
