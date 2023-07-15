@@ -24,6 +24,7 @@ const BalanceModal = ({ balance, handleToggleModal }) => {
         {values.balance && Number(values.balance) < 0 && <p className={styles.error}>Только положительные числа.</p>}
         {((values.balance && !Number(values.balance) && values.balance !== "0") ||
           (values.balance && !/^[0-9 -]+$/.test(values.balance[0]))) && <p className={styles.error}>Только числа.</p>}
+        {values.balance && values.balance.length > 15 && <p className={styles.error}>Максимум 15 символов.</p>}
         <input
           className={styles.finance_card__input}
           onChange={handleChange}
@@ -36,6 +37,7 @@ const BalanceModal = ({ balance, handleToggleModal }) => {
           className={`${styles.finance_card__button} ${
             Number(values.balance) >= 0 &&
             /^\d+\.?\d*$/.test(values.balance) &&
+            values.balance.length <= 15 &&
             ((values.balance.split(".").length > 1 && values.balance.split(".")[1].length <= 2) || values.balance.split(".").length === 1)
               ? styles.finance_card__button_active
               : null
@@ -43,6 +45,7 @@ const BalanceModal = ({ balance, handleToggleModal }) => {
           disabled={
             !(
               Number(values.balance) >= 0 &&
+              values.balance.length <= 15 &&
               /^\d+\.?\d*$/.test(values.balance) &&
               ((values.balance.split(".").length > 1 && values.balance.split(".")[1].length <= 2) || values.balance.split(".").length === 1)
             )

@@ -67,7 +67,7 @@ const CategoryOperationModal = ({
         />
       </div>
       <div style={{ marginBottom: 20 }}>
-        <ToolTip tooltip={`${values.sum}`.length >= 24 ? `₽ ${values.sum || 0}` : null}>
+        <ToolTip tooltip={`${values.sum}`.length >= 38 ? `₽ ${values.sum || 0}` : null}>
           <p className={styles.categories_card__balance}>{`₽ ${values.sum || 0}`}</p>
         </ToolTip>
       </div>
@@ -82,6 +82,7 @@ const CategoryOperationModal = ({
         {((values.sum && !Number(values.sum) && values.sum !== "0") || (values.sum && !/^[0-9 -]+$/.test(values.sum[0]))) && (
           <p className={styles.categories_card__attention}>Только числа.</p>
         )}
+        {values.sum && values.sum.length > 15 && <p className={styles.categories_card__attention}>Максимум 15 символов.</p>}
         {values.sum && Number(values.sum) < 0 && <p className={styles.categories_card__attention}>Только положительные числа.</p>}
         <input
           className={styles.categories_card__input}
@@ -107,6 +108,7 @@ const CategoryOperationModal = ({
           <button
             className={`${styles.categories_card__button} ${
               Number(values.sum) >= 0 &&
+              values.sum.length <= 15 &&
               /^\d+\.?\d*$/.test(values.sum) &&
               ((values.sum.split(".").length > 1 && values.sum.split(".")[1].length <= 2) || values.sum.split(".").length === 1) &&
               values.date !== "" &&
@@ -118,6 +120,7 @@ const CategoryOperationModal = ({
             disabled={
               !(
                 Number(values.sum) >= 0 &&
+                values.sum.length <= 15 &&
                 /^\d+\.?\d*$/.test(values.sum) &&
                 ((values.sum.split(".").length > 1 && values.sum.split(".")[1].length <= 2) || values.sum.split(".").length === 1) &&
                 values.date !== "" &&
