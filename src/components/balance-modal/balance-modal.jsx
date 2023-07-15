@@ -34,6 +34,7 @@ const BalanceModal = ({ balance, handleToggleModal }) => {
           name="balance"
         />
         <button
+          data-test-id="balance-modal"
           className={`${styles.finance_card__button} ${
             Number(values.balance) >= 0 &&
             /^\d+\.?\d*$/.test(values.balance) &&

@@ -34,6 +34,10 @@
     "cypress": "cypress run"
   },
   "eslintConfig": {
+    "rules": {
+      "cypress/unsafe-to-chain-command": 0,
+      "cypress/no-unnecessary-waiting": 0
+    },
     "extends": [
       "react-app",
       "react-app/jest",

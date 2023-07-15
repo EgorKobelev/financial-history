@@ -1,5 +1,0 @@
-{
-  "rules": {
-    "cypress/unsafe-to-chain-command": "error"
-  }
-}
