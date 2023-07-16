@@ -41,7 +41,7 @@ const CategoriesCard = ({ title, image, id, sum, type }) => {
         <div className={styles.categories_card__image_container}>
           <img className={styles.categories_card__image} src={image || defaultImage} alt="Категория" />
         </div>
-        <p className={styles.categories_card__balance}>{`₽ ${sum}`}</p>
+        <p data-test-id="categories-card-value" className={styles.categories_card__balance}>{`₽ ${sum}`}</p>
         <div className={styles.categories_card__func}>
           <EditButton
             onClick={e => {

@@ -11,14 +11,19 @@ const FinanceCard = ({ title, balance, desc }) => {
     setActiveUnput(!activeInput);
   };
   return (
-    <div data-test-id={title === "Баланс" ? "balance" : "finance-card"}>
+    <div>
       <div
+        data-test-id={title === "Баланс" ? "balance" : "finance-card"}
         onClick={title === "Баланс" ? handleToggleModal : null}
         className={`${styles.card__container} ${title === "Баланс" ? styles.card__container_active : null}`}
       >
         <h3 className={styles.card__title}>{title}</h3>
+
         <ToolTip tooltip={`${balance}`.length >= 12 ? `₽ ${balance}` : null}>
-          <p className={styles.card__balance}>{`₽ ${balance}`}</p>
+          <p
+            data-test-id={title === "Баланс" ? "balance-value" : "finance-card-value"}
+            className={styles.card__balance}
+          >{`₽ ${balance}`}</p>
         </ToolTip>
       </div>
       <p className={styles.card__desc}>{desc}</p>
