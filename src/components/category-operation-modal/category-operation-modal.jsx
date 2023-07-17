@@ -73,6 +73,9 @@ const CategoryOperationModal = ({
       </div>
 
       <form onSubmit={onSubmit}>
+        {values.sum && type === "expenses" && String(Number(balance) - Number(values.sum)).length > 15 && (
+          <p className={styles.categories_card__attention}>Баланс не более 15 символов.</p>
+        )}
         {values.sum && type === "income" && String(Number(values.sum) + Number(balance)).length > 15 && (
           <p className={styles.categories_card__attention}>Баланс не более 15 символов.</p>
         )}
@@ -86,9 +89,9 @@ const CategoryOperationModal = ({
           (values.sum && !/^[0-9 -]+$/.test(values.sum[0])) ||
           (values.sum && String(Number(values.sum)).length !== values.sum.length)) &&
           values.sum.length <= 15 && <p className={styles.categories_card__attention}>Только числа.</p>}
-        {values.sum && type === "expenses" && values.sum.length > 15 && (
+        {/* {values.sum && type === "expenses" && values.sum.length > 15 && (
           <p className={styles.categories_card__attention}>Максимум 15 символов.</p>
-        )}
+        )} */}
         {values.sum && Number(values.sum) <= 0 && <p className={styles.categories_card__attention}>Только положительные числа.</p>}
         <input
           className={styles.categories_card__input}
