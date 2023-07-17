@@ -41,7 +41,9 @@ const CategoriesCard = ({ title, image, id, sum, type }) => {
         <div className={styles.categories_card__image_container}>
           <img className={styles.categories_card__image} src={image || defaultImage} alt="Категория" />
         </div>
-        <p data-test-id="categories-card-value" className={styles.categories_card__balance}>{`₽ ${sum}`}</p>
+        <ToolTip tooltip={`₽ ${sum}`.length >= 15 ? `₽ ${sum}` : null}>
+          <p data-test-id="categories-card-value" className={styles.categories_card__balance}>{`₽ ${sum}`}</p>
+        </ToolTip>
         <div className={styles.categories_card__func}>
           <EditButton
             onClick={e => {

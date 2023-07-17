@@ -38,7 +38,7 @@ const OperationCard = ({ element, type, isStatistic }) => {
       <li className={styles.operations__list_item}>
         <ToolTip
           width={200}
-          tooltip={`${element.nameCategory}: ${element.price} ₽`.length >= 30 ? `${`${element.nameCategory}: ${element.price} ₽`}` : null}
+          tooltip={`${element.nameCategory}: ${element.price} ₽`.length >= 24 ? `${`${element.nameCategory}: ${element.price} ₽`}` : null}
         >
           <p className={styles.list__text}>{`${element.nameCategory}: ${element.price} ₽`}</p>
         </ToolTip>
