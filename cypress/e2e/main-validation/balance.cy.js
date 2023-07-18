@@ -38,7 +38,7 @@ describe("balance", () => {
     cy.get("input[type='text']").clear().type("{}[]:><&*").should("have.value", "{}[]:><&*");
     cy.contains("Только числа.");
   });
-  it("not number", () => {
+  it("long number", () => {
     cy.get('[data-test-id="balance"]').click();
     cy.get("input[type='text']").clear().type("1234567891234567").should("have.value", "1234567891234567");
     cy.contains("Максимум 15 символов.");
