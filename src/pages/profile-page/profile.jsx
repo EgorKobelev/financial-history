@@ -46,6 +46,7 @@ const Profile = () => {
       input.disabled = true;
       input.classList.remove(`${styles.form__input_active}`);
     });
+    setValues({ ...values, password: "" });
     e.preventDefault();
   };
   const { values, handleChange, setValues } = useForm({

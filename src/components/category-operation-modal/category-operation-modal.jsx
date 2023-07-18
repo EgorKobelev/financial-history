@@ -73,10 +73,10 @@ const CategoryOperationModal = ({
       </div>
 
       <form onSubmit={onSubmit}>
-        {values.sum && type === "expenses" && String(Number(balance) - Number(values.sum)).length > 15 && (
+        {values.sum && type === "expenses" && String(Number(Math.round(Number(balance) - Number(values.sum)).toFixed(2))).length > 15 && (
           <p className={styles.categories_card__attention}>Баланс не более 15 символов.</p>
         )}
-        {values.sum && type === "income" && String(Number(values.sum) + Number(balance)).length > 15 && (
+        {values.sum && type === "income" && String(Number(Math.round(Number(balance) + Number(values.sum)).toFixed(2))).length > 15 && (
           <p className={styles.categories_card__attention}>Баланс не более 15 символов.</p>
         )}
         {type === "expenses" && parseInt(sum + balance) < values.sum && /^[0-9 -]+$/.test(values.sum[0]) && (
@@ -85,7 +85,7 @@ const CategoryOperationModal = ({
         {values.sum && /^\d+\.?\d*$/.test(values.sum) && values.sum.split(".").length > 1 && values.sum.split(".")[1].length > 2 && (
           <p className={styles.categories_card__attention}>Дробная часть только до сотых.</p>
         )}
-        {((values.sum && !values.sum && values.sum !== "0") ||
+        {((values.sum && !Number(values.sum) && values.sum !== "0") ||
           (values.sum && !/^[0-9 -]+$/.test(values.sum[0])) ||
           (values.sum && String(Number(values.sum)).length !== values.sum.length)) &&
           values.sum.length <= 15 && <p className={styles.categories_card__attention}>Только числа.</p>}
