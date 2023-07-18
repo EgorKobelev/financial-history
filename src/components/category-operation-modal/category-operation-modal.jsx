@@ -29,7 +29,6 @@ const CategoryOperationModal = ({
     date: date,
   });
   const oldPrice = sum;
-
   const onSubmit = e => {
     e.preventDefault();
     const formattedDate = values.date.split("-");
@@ -51,6 +50,7 @@ const CategoryOperationModal = ({
     }
     handleToggleModal();
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.categories_card__image_container}>
@@ -71,12 +71,11 @@ const CategoryOperationModal = ({
           <p data-test-id="categories-card-open-value" className={styles.categories_card__balance}>{`₽ ${values.sum || 0}`}</p>
         </ToolTip>
       </div>
-
       <form onSubmit={onSubmit}>
-        {values.sum && type === "expenses" && String(Number(Math.round(Number(balance) - Number(values.sum)).toFixed(2))).length > 15 && (
+        {values.sum && type === "expenses" && String(Number((Number(balance) - Number(values.sum)).toFixed(2))).length > 15 && (
           <p className={styles.categories_card__attention}>Баланс не более 15 символов.</p>
         )}
-        {values.sum && type === "income" && String(Number(Math.round(Number(balance) + Number(values.sum)).toFixed(2))).length > 15 && (
+        {values.sum && type === "income" && String(Number((Number(balance) + Number(values.sum)).toFixed(2))).length > 15 && (
           <p className={styles.categories_card__attention}>Баланс не более 15 символов.</p>
         )}
         {type === "expenses" && parseInt(sum + balance) < values.sum && /^[0-9 -]+$/.test(values.sum[0]) && (
@@ -89,9 +88,6 @@ const CategoryOperationModal = ({
           (values.sum && !/^[0-9 -]+$/.test(values.sum[0])) ||
           (values.sum && String(Number(values.sum)).length !== values.sum.length)) &&
           values.sum.length <= 15 && <p className={styles.categories_card__attention}>Только числа.</p>}
-        {/* {values.sum && type === "expenses" && values.sum.length > 15 && (
-          <p className={styles.categories_card__attention}>Максимум 15 символов.</p>
-        )} */}
         {values.sum && Number(values.sum) <= 0 && <p className={styles.categories_card__attention}>Только положительные числа.</p>}
         <input
           className={styles.categories_card__input}
@@ -123,7 +119,7 @@ const CategoryOperationModal = ({
               ((values.sum.split(".").length > 1 && values.sum.split(".")[1].length <= 2) || values.sum.split(".").length === 1) &&
               values.date !== "" &&
               ((type === "expenses" && parseInt(sum + Number(balance)) >= values.sum) ||
-                (type === "income" && String(Number(values.sum) + Number(balance)).length <= 15))
+                (type === "income" && String((Number(values.sum) + Number(balance)).toFixed(2)).length <= 15))
                 ? styles.categories_card__button_active
                 : null
             }`}
@@ -137,7 +133,7 @@ const CategoryOperationModal = ({
                 ((values.sum.split(".").length > 1 && values.sum.split(".")[1].length <= 2) || values.sum.split(".").length === 1) &&
                 values.date !== "" &&
                 ((type === "expenses" && parseInt(sum + balance) >= values.sum) ||
-                  (type === "income" && String(Number(values.sum) + Number(balance)).length <= 15))
+                  (type === "income" && String((Number(values.sum) + Number(balance)).toFixed(2)).length <= 15))
               )
             }
           >
