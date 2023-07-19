@@ -134,8 +134,10 @@ const CategoryOperationModal = ({
                 /^\d+\.?\d*$/.test(values.sum) &&
                 ((values.sum.split(".").length > 1 && values.sum.split(".")[1].length <= 2) || values.sum.split(".").length === 1) &&
                 values.date !== "" &&
-                ((type === "expenses" && parseInt(sum + balance) >= values.sum) ||
-                  (type === "income" && String((Number(values.sum) + Number(balance)).toFixed(2)).length <= 15))
+                ((type === "expenses" &&
+                  parseInt(sum + Number(balance)) >= values.sum &&
+                  String(Number((Number(balance) - Number(values.sum)).toFixed(2))).length <= 15) ||
+                  (type === "income" && String(Number((Number(balance) + Number(values.sum)).toFixed(2))).length <= 15))
               )
             }
           >
