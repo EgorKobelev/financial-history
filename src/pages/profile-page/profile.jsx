@@ -32,7 +32,7 @@ const Profile = () => {
     if (values.email !== user.email) {
       form["email"] = values.email;
     }
-    if (values.password && values.password.length > 6) {
+    if (values.password && values.password.length >= 6) {
       form["password"] = values.password;
       passwordRef.current.value = "";
       setValues({ ...values, password: "" });
