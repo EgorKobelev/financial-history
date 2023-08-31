@@ -61,7 +61,6 @@ const userSlice = createSlice({
                 state.status.isLoading = true;
             })
             .addCase(update.fulfilled, (state, action) => {
-                console.log(action.payload);
                 if (action.payload.name) {
                     state.user.name = action.payload.name;
                 }

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import ErrorBoundary from "../../hoc/error-boundary";
 import Base from "../base/base";
@@ -12,27 +12,29 @@ import { loginWithToken } from "../../services/actions/user";
 import StatisticPage from "../../pages/statistic-page/statistic-page";
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import RecoverPasswordPage from "../../pages/recover-password-page/recover-password-page";
+import HistoryPage from "../../pages/history-page/history-page";
 
 const App = () => {
-    const dispatch = useDispatch();
-    React.useEffect(() => {
-        dispatch(loginWithToken());
-    }, []);
-    return (
-        <ErrorBoundary>
-            <Routes>
-                <Route path="/" element={<ProtectedRoute anonymous={false} element={<Base />} />}>
-                    <Route index element={<MainPage />} />
-                    <Route path="profile" element={<Profile />} />
-                    <Route path="/statistics" element={<StatisticPage />} />
-                </Route>
-                <Route path="/register" element={<ProtectedRoute anonymous={true} element={<RegisterPage />} />} />
-                <Route path="/login" element={<ProtectedRoute anonymous={true} element={<LoginPage />} />} />
-                <Route path="/recover" element={<ProtectedRoute anonymous={true} element={<RecoverPasswordPage />} />} />
-                <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-        </ErrorBoundary>
-    );
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(loginWithToken());
+  }, []);
+  return (
+    <ErrorBoundary>
+      <Routes>
+        <Route path="/" element={<ProtectedRoute anonymous={false} element={<Base />} />}>
+          <Route index element={<MainPage />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="/statistics" element={<StatisticPage />} />
+          <Route path="/history" element={<HistoryPage />} />
+        </Route>
+        <Route path="/register" element={<ProtectedRoute anonymous={true} element={<RegisterPage />} />} />
+        <Route path="/login" element={<ProtectedRoute anonymous={true} element={<LoginPage />} />} />
+        <Route path="/recover" element={<ProtectedRoute anonymous={true} element={<RecoverPasswordPage />} />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </ErrorBoundary>
+  );
 };
 
 export default App;

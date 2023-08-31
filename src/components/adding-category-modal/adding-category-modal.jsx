@@ -11,12 +11,13 @@ const getExpenses = (store) => store.categoryReducer.expenses;
 const getIncome = (store) => store.categoryReducer.income;
 
 const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
+    const oldType = type;
     const income = useSelector(getIncome);
     const expenses = useSelector(getExpenses);
-    const category = type === "expenses" ? expenses.find((operation) => operation.id === id) : income.find((operation) => operation.id === id);
+    const category =
+        type === "expenses" ? expenses.find((operation) => operation.id === id) : income.find((operation) => operation.id === id);
     const [isShowImages, setIsShowImages] = useState(false);
     const [img, setImg] = useState(category ? category.img : null);
-
     const { values, handleChange } = useForm({
         name: category ? category?.name : null,
         type: type || "",
@@ -27,13 +28,12 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
     const onSubmit = (e) => {
         e.preventDefault();
         if (id) {
-            dispatch(updateCategory({ ...values, img: img, categoryId: id }));
+            dispatch(updateCategory({ ...values, img: img, oldType, categoryId: id }));
         } else {
             dispatch(createCategory({ ...values, img: img }));
         }
         handleToggleModal();
     };
-
     return (
         <>
             <div className={styles.container}>
@@ -46,6 +46,12 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
                     </button>
                 </div>
                 <form onSubmit={onSubmit}>
+                    {!id &&
+                        (expenses.find((operation) => operation.name === values.name) ||
+                            income.find((operation) => operation.name === values.name)) && (
+                            <p className={styles.warning}>Такая категория уже существует.</p>
+                        )}
+                    {values.name && values.name.length >= 35 && <p className={styles.error}>Слишком длинное название</p>}
                     <input
                         className={styles.categories_card__input}
                         onChange={handleChange}
@@ -66,24 +72,40 @@ const AddingCategoryModal = ({ handleToggleModal, id, type }) => {
                         <option value="" disabled selected hidden>
                             Выберите группу
                         </option>
-                        <option value="income">Доходы</option>
-                        <option value="expenses">Расходы</option>
+                        <option selected={type === "income"} value="income">
+                            Доходы
+                        </option>
+                        <option selected={type === "expenses"} value="expenses">
+                            Расходы
+                        </option>
                     </select>
                     <div className="flex">
-                        <button onClick={handleToggleModal} className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}>
+                        <button
+                            onClick={handleToggleModal}
+                            className={`${styles.categories_card__button} ${styles.categories_card__button__exit}`}
+                        >
                             Отменить
                         </button>
                         <button
                             className={`${styles.categories_card__button} ${
                                 (values.type === "income" || values.type === "expenses") &&
+                                values.name !== null &&
                                 values.name !== "" &&
+                                values.name.length < 35 &&
                                 values.type !== "" &&
-                                img &&
                                 (id ? category.name !== values.name || category.img !== img || category.type !== values.type : true)
                                     ? styles.categories_card__button_active
                                     : null
                             }`}
-                            disabled={!((values.type === "income" || values.type === "expenses") && values.name !== "" && values.type !== "" && img)}
+                            disabled={
+                                !(
+                                    (values.type === "income" || values.type === "expenses") &&
+                                    values.name !== "" &&
+                                    values.name !== null &&
+                                    values.name.length < 35 &&
+                                    values.type !== ""
+                                )
+                            }
                             type="submit"
                         >
                             {id ? "Изменить" : "Сохранить"}

@@ -8,74 +8,84 @@ import AddingCategoryModal from "../adding-category-modal/adding-category-modal"
 import { useDispatch } from "react-redux";
 import { deleteCategory } from "../../services/actions/category";
 import ConfirmationModal from "../confirmation-modal/confirmation-modal";
+import ToolTip from "../tooltip/tooltip";
+import defaultImage from "../../images/default-image.png";
 
 const CategoriesCard = ({ title, image, id, sum, type }) => {
-    const dispatch = useDispatch();
-    const [modalOparetionActive, setModalOparetionActive] = React.useState(false);
-    const [modalCategoryActive, setModaCategoryActive] = React.useState(false);
-    const [confirmationActive, setConfirmationActive] = React.useState(false);
+  const dispatch = useDispatch();
+  const [modalOparetionActive, setModalOparetionActive] = React.useState(false);
+  const [modalCategoryActive, setModaCategoryActive] = React.useState(false);
+  const [confirmationActive, setConfirmationActive] = React.useState(false);
 
-    const handleToggleConf = () => {
-        setConfirmationActive(!confirmationActive);
-    };
+  const handleToggleConf = () => {
+    setConfirmationActive(!confirmationActive);
+  };
 
-    const handleToggleOperationModal = () => {
-        setModalOparetionActive(!modalOparetionActive);
-    };
-    const handleToggleCategoryModal = () => {
-        setModaCategoryActive(!modalCategoryActive);
-    };
+  const handleToggleOperationModal = () => {
+    setModalOparetionActive(!modalOparetionActive);
+  };
+  const handleToggleCategoryModal = () => {
+    setModaCategoryActive(!modalCategoryActive);
+  };
 
-    const handleDeleteCategory = () => {
-        dispatch(deleteCategory(id));
-    };
+  const handleDeleteCategory = () => {
+    dispatch(deleteCategory(id));
+  };
 
-    return (
-        <>
-            <div onClick={handleToggleOperationModal} className={styles.categories_card__container}>
-                <h3 className={styles.categories_card__title}>{title}</h3>
-                <div className={styles.categories_card__image_container}>
-                    <img className={styles.categories_card__image} src={image} alt="Категория" />
-                </div>
-                <p className={styles.categories_card__balance}>{`₽ ${sum}`}</p>
-                <div className={styles.categories_card__func}>
-                    <EditButton
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setModaCategoryActive(!modalCategoryActive);
-                        }}
-                        className={`${styles.func__images} ${styles.func__images_edit}`}
-                    />
-                    <CloseButton
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setConfirmationActive(!confirmationActive);
-                        }}
-                        className={`${styles.func__images} ${styles.func__images_close}`}
-                    />
-                </div>
-            </div>
-            {modalOparetionActive && (
-                <Modal title={title} handleToggleModal={handleToggleOperationModal}>
-                    <CategoryOperationModal
-                        handleToggleModal={handleToggleOperationModal}
-                        isCreateNewCategory={true}
-                        categoryId={id}
-                        image={image}
-                        type={type}
-                    />
-                </Modal>
-            )}
-            {modalCategoryActive && (
-                <Modal title={"Отредактировать"} handleToggleModal={handleToggleCategoryModal}>
-                    <AddingCategoryModal id={id} type={type} handleToggleModal={handleToggleCategoryModal} />
-                </Modal>
-            )}
-            {confirmationActive && (
-                <ConfirmationModal onClick={handleDeleteCategory} handleToggleModal={handleToggleConf} title="Вы точно хотите удалить?"></ConfirmationModal>
-            )}
-        </>
-    );
+  return (
+    <>
+      <div data-test-id="categories-card" onClick={handleToggleOperationModal} className={styles.categories_card__container}>
+        <ToolTip tooltip={`${title}`.length >= 19 ? title : null}>
+          <h3 className={styles.categories_card__title}>{title}</h3>
+        </ToolTip>
+        <div className={styles.categories_card__image_container}>
+          <img className={styles.categories_card__image} src={image || defaultImage} alt="Категория" />
+        </div>
+        <ToolTip tooltip={`₽ ${sum}`.length >= 15 ? `₽ ${sum}` : null}>
+          <p data-test-id="categories-card-value" className={styles.categories_card__balance}>{`₽ ${sum}`}</p>
+        </ToolTip>
+        <div className={styles.categories_card__func}>
+          <EditButton
+            onClick={e => {
+              e.stopPropagation();
+              setModaCategoryActive(!modalCategoryActive);
+            }}
+            className={`${styles.func__images} ${styles.func__images_edit}`}
+          />
+          <CloseButton
+            onClick={e => {
+              e.stopPropagation();
+              setConfirmationActive(!confirmationActive);
+            }}
+            className={`${styles.func__images} ${styles.func__images_close}`}
+          />
+        </div>
+      </div>
+      {modalOparetionActive && (
+        <Modal title={title} handleToggleModal={handleToggleOperationModal}>
+          <CategoryOperationModal
+            handleToggleModal={handleToggleOperationModal}
+            isCreateNewCategory={true}
+            categoryId={id}
+            image={image}
+            type={type}
+          />
+        </Modal>
+      )}
+      {modalCategoryActive && (
+        <Modal title={"Отредактировать"} handleToggleModal={handleToggleCategoryModal}>
+          <AddingCategoryModal id={id} type={type} handleToggleModal={handleToggleCategoryModal} />
+        </Modal>
+      )}
+      {confirmationActive && (
+        <ConfirmationModal
+          onClick={handleDeleteCategory}
+          handleToggleModal={handleToggleConf}
+          title="Вы точно хотите удалить?"
+        ></ConfirmationModal>
+      )}
+    </>
+  );
 };
 
 export default CategoriesCard;

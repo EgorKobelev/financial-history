@@ -1,5 +1,13 @@
-.profile__container {
+.profile_cover {
     width: 840px;
+    background-color: #99bcff;
+    padding: 8px;
+    margin-bottom: 25px;
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+}
+
+.profile__container {
     padding: 32px 0 130px 0;
     background-color: white;
     box-shadow: var(--box-shadow);
@@ -8,7 +16,6 @@
     flex-direction: column;
     align-items: center;
     border-radius: 15px;
-    margin-bottom: 25px;
 }
 
 .profile__avatar_container {
@@ -126,6 +133,7 @@
     cursor: pointer;
     right: 5%;
     fill: black;
+    background-color: #e7e7e7;
 }
 
 .profile__edit_image:hover {

@@ -1,20 +1,17 @@
 .tooltip__container {
     position: relative;
-    display: inline-block;
-    width: 100%;
+    align-self: start;
+    width: 95%;
 }
 
 .tooltip__text_container {
     position: absolute;
-    visibility: hidden;
-    white-space: nowrap;
+    word-break: break-all;
     color: white;
     background-color: rgba(0, 0, 0, 0.8);
     padding: 8px;
     border-radius: 8px;
     margin-top: 8px;
-}
-
-.tooltip__container:hover .tooltip__text_container {
-    visibility: visible;
+    z-index: 1000;
+    max-width: 240px;
 }
